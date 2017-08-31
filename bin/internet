@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Never ask if you want to restore old session, you can't use keyboard there.
+shopt -s extglob
+sed -i \
+    's,"exit_type":\s*"Crashed","exit_type":"Normal",g' \
+    ~/.config/{google-chrome,chromium}/@(Profile\ ?|Default)/Preferences
+exec "$@"

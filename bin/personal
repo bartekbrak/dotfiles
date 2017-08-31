@@ -1,0 +1,9 @@
+#!/bin/bash
+bash ~/dmenu.personal \
+    | rofi -dmenu -i -matching fuzzy \
+        -p personal: \
+        -font 'JetBrains Mono 32' \
+        -theme sidebar -theme-str "#window { location: east; anchor: east; }" \
+    | sed 's,.*::\s*,,g' \
+    | xargs echo -n \
+    | xargs -0 xdotool getactivewindow type --delay 50

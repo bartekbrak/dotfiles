@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+[ -z ${1+x} ] && {
+    echo provide text
+} || {
+    date +%s > /dev/shm/focus
+    /usr/bin/i3-msg bar mode dock
+    gcalcli add --title "$*" --duration 25 --when $(date +%H:%M:%S) --noprompt
+}

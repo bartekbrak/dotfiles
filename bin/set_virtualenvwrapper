@@ -1,0 +1,6 @@
+# virtualenv
+export WORKON_HOME=~/.virtualenvs
+export PROJECT_HOME=~/workspace
+export VIRTUALENVWRAPPER_SCRIPT=/home/bartek/.local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_VIRTUALENV=/home/bartek/.local/bin/virtualenv
+source /home/bartek/.local/bin/virtualenvwrapper_lazy.sh

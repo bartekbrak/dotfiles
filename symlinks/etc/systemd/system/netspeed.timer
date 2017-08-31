@@ -1,0 +1,10 @@
+[Unit]
+Description=test
+
+[Timer]
+OnUnitActiveSec=5s
+Persistent=true
+AccuracySec=1us
+
+[Install]
+WantedBy=timers.target

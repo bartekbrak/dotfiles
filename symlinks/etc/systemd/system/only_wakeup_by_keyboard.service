@@ -1,0 +1,8 @@
+[Unit]
+Description="Make suspend ignore USB wake up."
+
+[Service]
+ExecStart=/bin/bash /usr/bin/only_wakeup_by_keyboard
+
+[Install]
+WantedBy=multi-user.target

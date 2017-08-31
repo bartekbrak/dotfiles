@@ -1,0 +1,10 @@
+tmp
+bartek.py
+.pytest_cache
+.~lock*
+*.egg-info/
+.envrc
+
+*.swp
+.vimrc
+tags

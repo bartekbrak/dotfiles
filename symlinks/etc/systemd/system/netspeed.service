@@ -1,0 +1,9 @@
+[Unit]
+Description=Write netspeed to a /tmp/netspeed file
+
+[Service]
+Type=oneshot
+ExecStart=/home/bartek/bin/net-speed.sh
+
+[Install]
+WantedBy=multi-user.target

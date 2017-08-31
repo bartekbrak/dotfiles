@@ -1,0 +1,49 @@
+# also remove
+# apt purge vim nano
+wmctrl rofi tmux
+# pyenv
+make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev
+arandr moreutils p7zip-full unrar tree powertop imagemagick sshfs
+htop mc numlockx most httpie nethogs silversearcher-ag
+git gitk
+gimp libreoffice vlc filezilla gparted sqlitebrowser meld
+build-essential cmake linux-headers-generic gcc
+apt-file
+libxcb-util-dev libxcb-keysyms1-dev
+
+# news
+newsboat
+# wifi/eth
+ethtool wavemon wicd-curses
+cmake
+redshift
+# pack
+atool xz-utils unrar rar p7zip-full lzma lzip
+
+# i3 deps
+xbacklight
+
+maim
+pinentry-qt
+
+neovim
+direnv
+ack fd-find xdotool
+pm-utils
+tig
+mesa-utils  # check which vga is used via glxinfo|egrep "OpenGL vendor|OpenGL renderer"
+nginx
+expect-lite  # not sure
+ffmpeg  # convert audio and video
+detox  # file name cleaning
+jq
+
+encfs pdfgrep fdupes  # scan_store
+pavucontrol
+
+lm-sensors
+ranger
+apt-transport-https gnupg-agent  # docker
+autossh
+ncdu
+compton

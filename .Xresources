@@ -1,0 +1,25 @@
+! Im using UXTerm so some of the below are just in case I change in the future
+! fonts
+
+! xterm: /usr/bin/uxterm
+
+XTerm*renderFont: true
+XTerm*faceName: DejaVu Sans Mono
+XTerm*faceSize: 14
+
+UXTerm*renderFont: true
+UXTerm*faceName: DejaVu Sans Mono
+UXTerm*faceSize: 14
+
+! alt backspace works as expected
+XTerm*eightBitInput:        false
+UXTerm*eightBitInput:        false
+
+
+! Paste by ctrl-v
+xterm*VT100.Translations: #override \
+                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD)
+
+! funny stuff
+UXTerm*pointerShape: pirate
+Xcursor.size: 32

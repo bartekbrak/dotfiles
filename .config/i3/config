@@ -1,0 +1,225 @@
+# $PATH is available
+# .bashrc was not read when i3 was started though, so put
+# things like TERMINAL=st in /etc/profile
+#
+# Mod4 - Win
+# mod1 - alt
+# Win as mod key
+set $mod Mod4
+floating_modifier $mod
+focus_follows_mouse no
+
+# keys that will rather not change, system and window mgmt
+bindsym $mod+Return       exec /usr/local/bin/st
+bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
+bindsym $mod+backslash    exec /home/bartek/bin/internet google-chrome
+bindsym $mod+l            exec i3lock
+bindsym mod1+F4           kill
+bindsym $mod+Shift+c      reload
+bindsym $mod+t            exec --no-startup-id "\
+    killall compton; \
+    maim --nokeyboard --bordersize=10 --select /home/bartek/tmp/last.png; \
+    xclip -selection clipboard -t image/png /home/bartek/tmp/last.png; \
+    cp /home/bartek/tmp/last.png /home/bartek/tmp/screen/$(date +%Y%m%d_%H%M%S).png;\
+    nohup compton &>/dev/null & \
+"
+bindsym $mod+Shift+t            exec --no-startup-id "\
+    killall compton; \
+    maim --nokeyboard --bordersize=10 --delay 2 --select /home/bartek/tmp/last.png; \
+    xclip -selection clipboard -t image/png /home/bartek/tmp/last.png; \
+    cp /home/bartek/tmp/last.png /home/bartek/tmp/screen/$(date +%Y%m%d_%H%M%S).png;\
+    nohup compton &>/dev/null & \
+"
+bindsym $mod+s            exec "\
+    rofi \
+        -modi 'clipboard:~/bin/greenclip print' \
+        -show clipboard -run-command '{cmd}' \
+        -theme gruvbox-light -font 'JetBrains Mono 32'; \
+"
+bindsym $mod+o            exec /home/bartek/bin/trans_clip
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r      restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec 'i3-msg exit'
+
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+
+# menus
+bindsym $mod+d       exec "rofi -show run -lines 10 -columns 4 -matching regex -font 'JetBrains Mono 32' -theme blue -p 'run:'"
+bindsym $mod+Shift+d exec "rofi -show drun"
+bindsym $mod+Tab     exec "rofi -show window -show-icons -font 'JetBrains Mono 32'"
+bindsym $mod+j       exec "\
+    ls -1 ~/.i3/clip_scripts/ \
+    | rofi -dmenu -p 'Affect clipoboard with:' -font 'JetBrains Mono 32' -theme Indego \
+    | xargs -I{} bash ~/.i3/clip_scripts/{} \
+"
+bindsym $mod+x       exec --no-startup-id ~/bin/personal
+bindsym $mod+p       exec --no-startup-id ~/bin/passmenu --type-user-tab-pass
+bindsym $mod+Shift+p exec --no-startup-id ~/bin/passmenu --type-pass
+bindsym $mod+Shift+x exec --no-startup-id ~/bin/emoji
+
+# moves
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# layout, splits
+bindsym $mod+h           split h
+bindsym $mod+v           split v
+bindsym $mod+f           fullscreen
+#bindsym $mod+s           layout stacking
+bindsym $mod+w           layout tabbed
+bindsym $mod+e           layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space       focus mode_toggle
+
+# switch to custom workspace
+bindsym KP_Add      workspace terminal
+bindsym KP_Multiply workspace www
+bindsym KP_Subtract workspace code
+bindsym KP_Divide   workspace subl
+bindsym KP_Enter    workspace chat
+bindsym Pause       workspace zoom
+bindsym $mod+KP_Add workspace jupyter
+# switch to standard workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+
+# use numpad to switch workspaces, when NUMLOCK is on
+bindsym $mod+Mod2+KP_1 workspace 1
+bindsym $mod+Mod2+KP_2 workspace 2
+bindsym $mod+Mod2+KP_3 workspace 3
+# and OFF, does not work :?
+bindsym $mod+KP_1 workspace 1
+bindsym $mod+KP_2 workspace 2
+bindsym $mod+KP_3 workspace 3
+
+# move focused container to workspace
+bindsym $mod+Shift+KP_Add      move container to workspace terminal
+bindsym $mod+Shift+KP_Multiply move container to workspace www
+bindsym $mod+Shift+KP_Subtract move container to workspace code
+bindsym $mod+Shift+KP_Divide   move container to workspace subl
+bindsym $mod+Shift+KP_Enter    move container to workspace chat
+bindsym $mod+Shift+Pause       move container to workspace zoom
+
+bindsym $mod+Shift+1    move container to workspace 1
+bindsym $mod+Shift+2    move container to workspace 2
+bindsym $mod+Shift+3    move container to workspace 3
+bindsym $mod+Shift+4    move container to workspace 4
+bindsym $mod+Shift+5    move container to workspace 5
+bindsym $mod+Shift+6    move container to workspace 6
+bindsym $mod+Shift+KP_1 move container to workspace 1
+bindsym $mod+Shift+KP_2 move container to workspace 2
+bindsym $mod+Shift+KP_3 move container to workspace 3
+bindsym $mod+Shift+KP_4 move container to workspace 4
+bindsym $mod+Shift+KP_5 move container to workspace 5
+bindsym $mod+Shift+KP_6 move container to workspace 6
+
+# multi monitor
+bindsym $mod+bracketleft        move container to output left
+bindsym $mod+Shift+bracketleft  move workspace to output left
+bindsym $mod+Shift+bracketright move workspace to output right
+bar {
+#    status_command exec /home/bartek/bin/net-speed.sh
+    status_command i3status
+    font pango:JetBrains Mono ExtraBold 14
+}
+
+
+# Custome section below
+
+# Volume control, note `--`, ref: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=686667
+bindsym XF86AudioLowerVolume  exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '-5%'
+bindsym XF86AudioRaiseVolume  exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '+5%'
+bindsym XF86AudioMute         exec /usr/bin/pactl -- set-sink-mute   @DEFAULT_SINK@ toggle
+
+bindsym $mod+F9               exec /usr/bin/pactl -- set-sink-mute   @DEFAULT_SINK@ toggle
+bindsym $mod+F10              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '-5%'
+bindsym $mod+F11              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '+5%'
+
+bindsym $mod+XF86AudioMute    exec pavucontrol
+bindsym $mod+F12              exec pavucontrol
+
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 20 # increase screen brightness
+bindsym $mod+F4               exec xbacklight -dec 20 # decrease screen brightness
+bindsym $mod+F5               exec xbacklight -inc 20 # increase screen brightness
+
+# default layout
+# workspace_layout tabbed
+workspace_layout default
+
+hide_edge_borders smart
+
+# Application workspace preferences.
+assign [class="Jupyter-qtconsole"] jupyter
+assign [class="jupyter-qtconsole"] jupyter
+assign [class="google-chrome"]     www
+assign [class="Chromium-browser"]  www
+assign [class="firefox"]           www
+assign [class="pycharm"]           code
+assign [class="Sublime_text"]      subl
+assign [class="Slack"]             chat
+assign [class="zoom"]             zoom
+
+# exec /home/bartek/bin/internet google-chrome
+exec subl
+exec charm
+exec /home/bartek/.pyenv/versions/jupyter-qtconsole/bin/jupyter-qtconsole
+# compton dimms unused windows for me
+exec compton -b
+
+
+#### Experiments Section
+
+set $Locker i3lock && sleep 1
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+k mode "$mode_system"
+
+
+bindsym $mod+b border toggle
+# https://i3wm.org/docs/userguide.html#_changing_colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #ffffff #ffffff #000000 #00ffff   #285577
+client.focused_inactive #000000 #000000 #ffffff #484e50   #5f676f
+client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
+# disable titlebars completely
+new_window pixel
+# Pulse Audio controls
+for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating enable
+# THINK: the default behaviour is ok, and the below is not helpful
+# so commented out
+# The only way I can solve popup windows hiding under fullscreen windows
+# (when the software does not set right X hints)
+popup_during_fullscreen leave_fullscreen
+exec --no-startup-id ~/bin/greenclip daemon

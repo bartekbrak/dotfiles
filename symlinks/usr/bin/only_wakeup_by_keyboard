@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# grep enabled /proc/acpi/wakeup
+echo EHC1 >> /proc/acpi/wakeup
+echo EHC2 >> /proc/acpi/wakeup
+echo XHC  >> /proc/acpi/wakeup
+
