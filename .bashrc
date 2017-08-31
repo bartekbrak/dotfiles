@@ -1,0 +1,96 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# TMUX needs this, I understand very little about the reasons but changing it to 'screen' caused total havoc 
+# in how Ctrl-Left/Right worked in vim so this
+export TERM='xterm-256color'
+
+# Start tmux on every login shell
+# Don't start tmux if it's already on. tmux takes care of that itself so this might be unnecessary
+[[ -z "$TMUX" ]] && exec tmux -2
+
+# Ignore space-prepende commands and duplicates
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend 
+HISTSIZE='infinite'
+HISTFILESIZE='infinite'
+
+# update LINES COLUMNS after widnow resize
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Make local-site python bin available, ~/bin is useful
+# . is bold, it allows you to stop prepending ./ to command from the current dir,
+# that is not enabled by default in linux as it is huge security risk
+export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:."
+
+eval "$(pip --disable-pip-version-check completion --bash)"
+
+# Map keypad del inserts a dot, useful for IPs
+xmodmap -e "keycode 91 mod2 = KP_Delete period"
+# Map PrtSc to Menu
+xmodmap -e "keycode 107 = Menu"
+
+# git-bash-prompt
+export GIT_SHOW_UNTRACKED_FILES=normal
+GIT_PROMPT_END='\n$ '
+source /opt/bash-git-prompt/gitprompt.sh
+
+export MOST_SWITCHES='-c'
+# make usre to have it installed
+export PAGER=vimpager
+
+export BROWSER=chromium-browser
+
+# I prefer ^C for copying to clipboard (set in terminal emulator), so interrupting
+# a process needs another key, I choose B as in break
+# stty intr ^B
+# Disabled for now, breaks in tmux, I went back to standard ^C and started copying using only keyboard
+
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f ~/.bash_completion ] && source ~/.bash_completion
+
+numlockx on
+
+# IPYTHON like history
+bind '"\e[A": history-search-backward';bind '"\e[B": history-search-forward'
+
+source ~/.bash/set_pyenv
+# source ~/.bash/set_virtualenvwrapper
+
+source ~/.bash_secrets
+
+# highlighter, this is awesome
+[ -f ~/.bash/h.sh ] && source ~/.bash/h.sh
+
+# cat will use this
+tabs -4
+
+source ~/.bash/tag.bash
+source ~/.bash/paths.bash
+
+# disable caps lock
+setxkbmap -option caps:none
+
+export EDITOR=vim
+export DJANGO_USER_SETTINGS=bartek
+export BRAT_EDITOR=charm
+export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/.brat_sourceme"
+export GITLAB_USER=bartek.rychlicki@gmail.com
+
+# work projects
+export RB_VENV_DIR=~/.pyenv/versions/rarebets/bin
+export RB_DIR=~/workspace/sh/rarebets
+#export RB_GIT_HOOK_DEBUG=True
+source /home/bartek/workspace/sh/rarebets/backend/source.me
+
+export OH_VENV_DIR=~/.pyenv/versions/rfp/bin
+export OH_DIR=~/workspace/sh/rfp
+source /home/bartek/workspace/sh/rfp/backend/source.me
+#export OH_GIT_HOOK_DEBUG=True
+cdrb
+#workon mobter/bmproxy

@@ -1,0 +1,43 @@
+[user]
+    email = bartek.rychlicki@gmail.com
+    name = Bartek Rychlicki
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    slog = log --pretty=oneline --abbrev-commit
+    lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    authors = log --format='%h| %<(25,trunc)%aN| %ae'
+    pu = pull -pr
+    pullchanged = ! git whatchanged ..origin && git pull
+    rmlocalbranches = ! git branch | grep -v "master" | xargs echo git branch -D
+    rmremotebranches = ! git branch -r --merged | grep origin | grep -v '>' | grep -v master | xargs -L1 | cut -d"/" -f2- | xargs echo git push origin --delete
+    ignored = status --ignored
+    hard = ! git fetch && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
+[color]
+    ui = auto
+[push]
+    default = current ; http://stackoverflow.com/a/13148313/1472229
+[core]
+    editor = vim
+    excludesfile = ~/.globalgitignore
+    whitespace = trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
+[merge]
+    ff = only
+[advice]
+    statusHints = false
+[credential]
+    helper = cache
+[rebase]
+    autosquash = true
+    autoStash = true
+[include]
+    path = .gitconfig.local
+[color "diff"]
+    whitespace = red reverse
+[pull]
+    rebase = true
+[commit]
+	verbose = true

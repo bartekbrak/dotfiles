@@ -1,0 +1,7 @@
+/.idea
+.python-version
+/.cache
+tmp
+bartek.py
+.pytest_cache
+log.py

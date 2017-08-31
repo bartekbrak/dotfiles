@@ -1,0 +1,67 @@
+[ui]
+username = Bartek Rychlicki <bartek.rychlicki@gmail.com>
+ignore = ~/.hgignore
+askusername = True
+# https://selenic.com/hg/help/merge-tools:
+#    Uses the internal non-interactive simple merge algorithm for merging files. It
+#    will fail if there are any conflicts and leave markers in the partially merged
+#    file. Markers will have two sections, one for each side of merge.
+# Find out why just setting priority of this tool isn't enough.
+merge=:merge
+
+[extensions]
+graphlog =
+color =
+fetch =
+progress =
+shelve = 
+record =
+# hgcodesmell = ~/hgcodesmell.py
+purge =
+#prompt = ~/opt/hg-prompt/prompt.py
+transplant =
+hgk =
+rebase = 
+histedit = 
+strip = 
+
+[diff]
+git = True
+nodates = False
+ignorews = False
+ignorewsamount = False
+ignoreblanklines = False
+
+[alias]
+# Prevent leaving .orig files
+revert = revert --no-backup
+update = update -v
+up = up -v
+pull = pull --rebase
+grep = grep --all
+
+[extdiff]
+cmd.vdiff =
+#cmd.diff = kdiff3
+
+# This was an attempt to use pycharm for merging, couldn't make it work with multiple files 
+# First file will go well, second will break
+[merge-tools]
+merge.priority=10
+#charm.args = merge $local $other $base $output 
+#charm.priority = 100
+#charm.premerge = False
+#charm.executable = /usr/local/bin/charm
+#charm.gui = True
+
+[tortoisehg]
+closeci = False
+refreshwdstatus = always
+confirmaddfiles = True
+confirmdeletefiles = True
+vdiff = meld
+fontcomment = Monospace,12,-1,5,50,0,0,0,0,0
+fontdiff = Monospace,12,-1,5,50,0,0,0,0,0
+fontlist = Sans Serif,12,-1,5,50,0,0,0,0,0
+fontlog = Monospace,12,-1,5,50,0,0,0,0,0
+fontoutputlog = Sans Serif,12,-1,5,50,0,0,0,0,0
