@@ -216,6 +216,7 @@ f() {
     shift
     find -name "*$part" $@
 }
+alias notmine='find . \! -user bartek -print'
 
 #### WIP section
 is_tmux() { [ -n "$TMUX" ] && echo You\'re in tmux || echo You are not in tmux; }
