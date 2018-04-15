@@ -1,0 +1,54 @@
+# alias docker logs as dcl and automcomplete
+alias dcl='docker-compose logs -f'
+alias d='docker-compose'
+findup() {
+    # find a file named $1 somewhere up in path
+    # usage:
+    #   ~/workspace/sh/rarebets/backend $ x=$(findup .bashrc)
+    #   ~/workspace/sh/rarebets/backend $ echo $x
+    #   /home/bartek/.bashrc
+    #   ~/workspace/sh/rarebets/backend $ x=$(findup whatever)
+    #   ~/workspace/sh/rarebets/backend $ echo $x
+    #   NOT_FOUND
+
+    cur=$(pwd)
+    while [ "$cur" != "/" ]
+    do
+        # echo trying "$cur/$1"
+        if [ -f "$cur/$1" ]
+        then
+            # https://stackoverflow.com/a/3236940/1472229
+            echo "$cur/$1"
+            return 0
+        fi
+        cur=$(dirname "$cur")
+    done
+    echo "NOT_FOUND"
+    return 1
+}
+
+_dc_services() {
+    # provides docker-compose container names, with caching and recursive docker-compose.yml finding
+    docker_compose_file=$(findup docker-compose.yml)
+    if [ $docker_compose_file == "NOT_FOUND" ]
+    then
+        (>&2 echo docker-compose.yml $docker_compose_file)
+        return 1
+    fi
+    cache_file=/dev/shm/$(echo $docker_compose_file | tr / _).cache
+    if [ -f $cache_file ]; then
+        local opts=$(cat $cache_file)
+    else
+        local opts=$(cd $(dirname $docker_compose_file); docker-compose config --services| tr '\n' ' ' | tee $cache_file)
+        (>&2 echo "$docker_compose_file services (${opts}) cached in $cache_file.")
+    fi
+    # only complete once, the problem is that adding flags like -v also counts
+    if [ $COMP_CWORD -eq 1 ]
+    then
+        COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
+    else
+        COMPREPLY=()
+    fi
+    return 0
+}
+complete -F _dc_services dcl

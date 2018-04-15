@@ -251,3 +251,6 @@ where_defined() {
 link_etc() {
     sudo cp -vrs /home/bartek/etc /
 }
+gpg.reload_agent() {
+    gpg-connect-agent reloadagent /bye
+}
