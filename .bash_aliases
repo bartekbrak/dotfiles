@@ -136,11 +136,11 @@ alias e=vim
 _e()
 {
   local opts="
-      ~/.gitconfig 
-      ~/.hgrc 
-      ~/.bashrc 
+      ~/.gitconfig
+      ~/.hgrc
+      ~/.bashrc
       ~/.i3status.conf
-      ~/.vimrc 
+      ~/.vimrc
       ~/.config/sxhkd/sxhkdrc
       ~/workspace/ls/default/.hg/hgrc
       ~/.ipython/profile_default/startup/00-first.py
@@ -150,6 +150,7 @@ _e()
       ~/.pypirc
       ~/.bash_secrets
       ~/.ssh/config
+      ~/packages
   "
   COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
   return 0
@@ -246,4 +247,7 @@ cycle='unblock; termdown -v pl 1500; i3-msg "workspace www"; block'
 where_defined() {
   # where is a function definded, WIP, doesn't catch all
   bash --debugger -lxic 'PS4='"'"'CATCHME ${BASH_SOURCE[0]} '"'"'; '$1'' |& grep '^CATCHME /'
+}
+link_etc() {
+    sudo cp -vrs /home/bartek/etc /
 }

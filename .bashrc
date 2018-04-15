@@ -41,8 +41,6 @@ GIT_PROMPT_END='\n$ '
 source /opt/bash-git-prompt/gitprompt.sh
 
 export MOST_SWITCHES='-c'
-# make usre to have it installed
-export PAGER=vimpager
 
 export BROWSER=chromium-browser
 
@@ -77,6 +75,7 @@ source ~/.bash/paths.bash
 setxkbmap -option caps:none
 
 export EDITOR=vim
+export WINEDEBUG=-all
 export DJANGO_USER_SETTINGS=bartek
 export BRAT_EDITOR=charm
 export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/.brat_sourceme"
