@@ -24,6 +24,7 @@ reload_aliases() {
   source ~/.bash_aliases
 }
 alias edit_aliases='vim ~/.bash_aliases -c "set syntax=sh"; reload_aliases; echo aliases reloaded'
+alias edit_aliases_subl='subl ~/.bash_aliases'
 
 
 alias ll='ls -Alh --group-directories-first'
@@ -151,6 +152,7 @@ _e()
       ~/.bash_secrets
       ~/.ssh/config
       ~/packages
+      ~/.Xresources
   "
   COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
   return 0
@@ -248,9 +250,30 @@ where_defined() {
   # where is a function definded, WIP, doesn't catch all
   bash --debugger -lxic 'PS4='"'"'CATCHME ${BASH_SOURCE[0]} '"'"'; '$1'' |& grep '^CATCHME /'
 }
-link_etc() {
-    sudo cp -vrs /home/bartek/etc /
+link_symlinks() {
+    # sudo find /etc/ -xtype l -print -delete
+    sudo cp -vrs /home/bartek/symlinks/* /
 }
 gpg.reload_agent() {
     gpg-connect-agent reloadagent /bye
 }
+x.load() {
+  xrdb -load $1
+}
+x.merge() {
+  xrdb -merge $1
+}
+x.theme() {
+  xrdb -merge ~/iTerm2-Color-Schemes/Xresources/$1 
+}
+_x()
+{
+  local opts="$(ls ~/iTerm2-Color-Schemes/Xresources/)"
+  COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
+  return 0
+}
+complete -F _x x.theme
+apt.up () {
+    apt-get install $(grep -vE "^\s*#" ~/packages  | tr "\n" " ")
+}
+

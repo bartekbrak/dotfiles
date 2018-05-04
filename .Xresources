@@ -5,23 +5,20 @@
 
 XTerm*renderFont: true
 XTerm*faceName: DejaVu Sans Mono
-XTerm*faceSize: 16
+XTerm*faceSize: 14
 
 UXTerm*renderFont: true
 UXTerm*faceName: DejaVu Sans Mono
-UXTerm*faceSize: 16
-
-UXTerm*Background:	black
-UXTerm*Foreground:	white
+UXTerm*faceSize: 14
 
 ! alt backspace works as expected
 XTerm*eightBitInput:        false
 UXTerm*eightBitInput:        false
 
-! Selected text available in standard clipboard
-UXTerm*selectToClipboard: true
-
 
 ! Paste by ctrl-v
 xterm*VT100.Translations: #override \
                  Ctrl Shift <Key>V:    insert-selection(CLIPBOARD)
+
+! funny stuff
+UXTerm*pointerShape: pirate

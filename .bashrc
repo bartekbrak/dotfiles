@@ -82,14 +82,13 @@ export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/.brat_sourceme"
 export GITLAB_USER=bartek.rychlicki@gmail.com
 
 # work projects
-export RB_VENV_DIR=~/.pyenv/versions/rarebets/bin
-export RB_DIR=~/workspace/sh/rarebets
-#export RB_GIT_HOOK_DEBUG=True
-source /home/bartek/workspace/sh/rarebets/backend/source.me
+export RB_VENV_BIN=~/.pyenv/versions/rarebets/bin
+source /home/bartek/workspace/sh/rarebets/source.me
 
-export OH_VENV_DIR=~/.pyenv/versions/rfp/bin
-export OH_DIR=~/workspace/sh/rfp
-source /home/bartek/workspace/sh/rfp/backend/source.me
-#export OH_GIT_HOOK_DEBUG=True
-cdrb
+export OH_VENV_BIN=~/.pyenv/versions/oh/bin
+source /home/bartek/workspace/sh/rfp/source.me
+
+export WS_VENV_BIN=~/.pyenv/versions/ws/bin
+source /home/bartek/workspace/sh/ws/source.me
+cdws
 #workon mobter/bmproxy

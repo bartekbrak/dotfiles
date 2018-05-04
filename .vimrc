@@ -31,7 +31,7 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " don't reindent anything while pasting
 set paste
-colorscheme pablo
+" colorscheme pablo
 " http://vi.stackexchange.com/a/357
 set colorcolumn=74,79,100
 

@@ -49,8 +49,3 @@ def snake_case(name):
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
 
-def c(out=None):
-    source = out or _ or None
-    if isinstance(source, str):
-        pyperclip.copy(source)
-        print(source, 'copied')

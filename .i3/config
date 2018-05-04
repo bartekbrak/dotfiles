@@ -14,7 +14,7 @@ workspace subl output $out
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# 
+#
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
@@ -151,14 +151,14 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    status_command i3status
-    mode hide 
-    hidden_state hide
-    tray_output $out
-    # bottom covers often-used last ine of the terminal
-    position bottom
-}
+#bar {
+#    status_command i3status
+#    mode hide
+#    hidden_state hide
+#    tray_output $out
+#    # bottom covers often-used last ine of the terminal
+#    position bottom
+#}
 
 # Custome section below
 
@@ -169,7 +169,7 @@ bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ 
 bindsym $mod+F10 exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'
 bindsym XF86AudioMute        exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+F11        exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym $mod+Shift+p exec pavucontrol
+#bindsym $mod+Shift+r exec pavucontrol
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 bindsym $mod+F4 exec xbacklight -dec 20 # decrease screen brightness
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -180,10 +180,12 @@ bindsym $mod+t exec --no-startup-id "sleep 0.2; scrot -s /home/bartek/tmp/screen
 bindsym $mod+Shift+t exec --no-startup-id "sleep 0.2; scrot -s /home/bartek/tmp/screenshots/`date +%s`.png"
 bindsym $mod+Shift+y exec --no-startup-id "sleep 0.2; scrot ~/tmp/screenshots/`date +%s`.png"
 
-# default layout 
-workspace_layout tabbed
+# default layout
+# workspace_layout tabbed
+workspace_layout default
 
-new_window normal
+#default_border none
+#default_floating_border none
 hide_edge_borders both
 
 # Application workspace preferences.
@@ -212,7 +214,8 @@ exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 
 #### Experiments Section
 bindsym $mod+x exec --no-startup-id bash ~/dmenu.personal | rofi -dmenu -i | xargs echo -n | xargs -0 xdotool getactivewindow type --delay 50
-bindsym $mod+p exec --no-startup-id passmenu --type
+bindsym $mod+p exec --no-startup-id passmenu --type-user-tab-pass
+bindsym $mod+Shift+p exec --no-startup-id passmenu --type-pass
 
 set $Locker i3lock && sleep 1
 
@@ -223,7 +226,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -233,6 +236,9 @@ mode "$mode_system" {
 bindsym $mod+k mode "$mode_system"
 bindsym $mod+b border toggle
 # Don't decorate new windows at all
-new_window 1pixel
 focus_follows_mouse no
-
+# https://i3wm.org/docs/userguide.html#_changing_colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #832e31 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676f
+client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
