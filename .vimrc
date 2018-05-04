@@ -33,7 +33,7 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 set paste
 " colorscheme pablo
 " http://vi.stackexchange.com/a/357
-set colorcolumn=74,79,100
+set colorcolumn=50,72
 
 " http://vignette3.wikia.nocookie.net/vim/images/1/16/Xterm-color-table.png/revision/latest?cb=20110121055231
 highlight ColorColumn ctermbg=8

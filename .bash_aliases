@@ -151,6 +151,7 @@ _e()
       ~/.pypirc
       ~/.bash_secrets
       ~/.ssh/config
+      ~/.config/greenclip.cfg
       ~/packages
       ~/.Xresources
   "
@@ -254,6 +255,21 @@ link_symlinks() {
     # sudo find /etc/ -xtype l -print -delete
     sudo cp -vrs /home/bartek/symlinks/* /
 }
+bedit() {
+    editor $(which $1)
+}
+function _executables {
+    local exclude=$(compgen -abkA function | sort)
+    local executables=$(compgen -c)
+    COMPREPLY=( $(compgen -W "$executables" -- ${COMP_WORDS[COMP_CWORD]}) )
+}
+complete -F _executables bedit
+complete -F _executables which_many
+
+link_etc() {
+    sudo cp -vrs /home/bartek/etc /
+}
+
 gpg.reload_agent() {
     gpg-connect-agent reloadagent /bye
 }
@@ -277,3 +293,14 @@ apt.up () {
     apt-get install $(grep -vE "^\s*#" ~/packages  | tr "\n" " ")
 }
 
+packages() {
+    cat ~/packages | xargs sudo apt-get -y install
+}
+clean_pip() {
+    # https://stackoverflow.com/a/11250821/1472229
+    pip freeze | grep -v "^-e" | xargs pip uninstall -y
+    pip freeze
+}
+trailing_ws() {
+    find "$@" -type f -exec egrep -l " +$" {} \;
+}

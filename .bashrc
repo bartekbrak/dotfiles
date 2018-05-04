@@ -81,14 +81,15 @@ export BRAT_EDITOR=charm
 export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/.brat_sourceme"
 export GITLAB_USER=bartek.rychlicki@gmail.com
 
-# work projects
-export RB_VENV_BIN=~/.pyenv/versions/rarebets/bin
+export RB_VENV_BIN=/home/bartek/.pyenv/versions/rarebets/bin
 source /home/bartek/workspace/sh/rarebets/source.me
 
-export OH_VENV_BIN=~/.pyenv/versions/oh/bin
+export KI_VENV_BIN=~/.pyenv/versions/kinro/bin/
+
+export WS_VENV_BIN=/home/bartek/.pyenv/versions/ws/bin
+source /home/bartek/workspace/sh/ws/source.me
+
+export OH_VENV_BIN=/home/bartek/.pyenv/versions/rfp/bin
 source /home/bartek/workspace/sh/rfp/source.me
 
-export WS_VENV_BIN=~/.pyenv/versions/ws/bin
-source /home/bartek/workspace/sh/ws/source.me
 cdws
-#workon mobter/bmproxy

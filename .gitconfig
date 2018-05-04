@@ -1,6 +1,7 @@
 [user]
     email = bartek.rychlicki@gmail.com
     name = Bartek Rychlicki
+    signingkey = 9949A5D1
 [alias]
     co = checkout
     ci = commit
@@ -42,4 +43,5 @@
 [pull]
     rebase = true
 [commit]
-	verbose = true
+    verbose = true
+    #gpgsign = true
