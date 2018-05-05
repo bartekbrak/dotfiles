@@ -52,3 +52,6 @@ set listchars=tab:T>
 " highlight trailing whitespace
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
+
+" trim trailing whitespace in extensions
+autocmd BufWritePre {*.html,*.py} :%s/\s\+$//e
