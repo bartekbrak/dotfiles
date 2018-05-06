@@ -253,6 +253,7 @@ where_defined() {
 }
 link_symlinks() {
     # sudo find /etc/ -xtype l -print -delete
+    find symlinks -type f | sed -e "s/symlinks/ /" | xargs sudo rm
     sudo cp -vrs /home/bartek/symlinks/* /
 }
 bedit() {
@@ -265,10 +266,6 @@ function _executables {
 }
 complete -F _executables bedit
 complete -F _executables which_many
-
-link_etc() {
-    sudo cp -vrs /home/bartek/etc /
-}
 
 gpg.reload_agent() {
     gpg-connect-agent reloadagent /bye

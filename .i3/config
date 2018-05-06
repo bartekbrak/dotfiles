@@ -176,9 +176,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym $mod+F5 exec xbacklight -inc 20 # increase screen brightness
 
 # screenshot
-bindsym $mod+t exec --no-startup-id "sleep 0.2; scrot -s /home/bartek/tmp/screenshots/last.png;"
-bindsym $mod+Shift+t exec --no-startup-id "sleep 0.2; scrot -s /home/bartek/tmp/screenshots/`date +%s`.png"
-bindsym $mod+Shift+y exec --no-startup-id "sleep 0.2; scrot ~/tmp/screenshots/`date +%s`.png"
+bindsym $mod+t exec --no-startup-id "maim -s /home/bartek/tmp/last.png ; xclip -selection clipboard -t image/png /home/bartek/tmp/last.png"
 
 # default layout
 # workspace_layout tabbed

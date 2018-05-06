@@ -54,4 +54,4 @@ set listchars=tab:T>
 :match ExtraWhitespace /\s\+$/
 
 " trim trailing whitespace in extensions
-autocmd BufWritePre {*.html,*.py} :%s/\s\+$//e
+autocmd BufWritePre {*.html,*.py,*.md} :%s/\s\+$//e
