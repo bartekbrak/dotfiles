@@ -89,7 +89,7 @@ export KI_VENV_BIN=~/.pyenv/versions/kinro/bin/
 export WS_VENV_BIN=/home/bartek/.pyenv/versions/ws/bin
 source /home/bartek/workspace/sh/ws/source.me
 
-export OH_VENV_BIN=/home/bartek/.pyenv/versions/rfp/bin
-source /home/bartek/workspace/sh/rfp/source.me
+export OH_VENV_BIN=/home/bartek/.pyenv/versions/oh/bin
+source /home/bartek/workspace/sh/oh/source.me
 
 cdws
