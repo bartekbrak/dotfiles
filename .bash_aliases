@@ -34,7 +34,7 @@ alias ls='ls --color=auto'
 
 # git/mercurial abstraction layer
 # make this a separate library
-st() {
+s() {
   git status "$@"
 }
 dif() {
@@ -207,7 +207,7 @@ alias cont='git rebase --continue'
 fixup() {
     sha=${1:-HEAD}
     shift
-    git ci --fixup $sha $@
+    git ci --fixup $sha "$@"
 }
 alias add='git add .'
 alias rebase='git fetch;git rebase -i origin/master'
@@ -301,3 +301,7 @@ clean_pip() {
 trailing_ws() {
     find "$@" -type f -exec egrep -l " +$" {} \;
 }
+resolve_ssh() {
+    ssh -v $1 echo |& grep Authenticating | sed -n "s/.*\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\):\([0-9]\+\) as '\(.*\)'.*/ssh \3@\1 -p \2/1p"
+}
+complete -F _known_hosts resolve_ssh

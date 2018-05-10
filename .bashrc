@@ -7,13 +7,14 @@ export TERM='xterm-256color'
 
 # Start tmux on every login shell
 # Don't start tmux if it's already on. tmux takes care of that itself so this might be unnecessary
-[[ -z "$TMUX" ]] && exec tmux -2
+export TERMINAL='st'
+[[ -z "$TMUX" && -n $DISPLAY ]] && { echo starting tmux; exec tmux;  }
 
 # Ignore space-prepende commands and duplicates
 HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
-shopt -s histappend 
+shopt -s histappend
 HISTSIZE='infinite'
 HISTFILESIZE='infinite'
 
@@ -28,12 +29,12 @@ shopt -s checkwinsize
 # that is not enabled by default in linux as it is huge security risk
 export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:."
 
-eval "$(pip --disable-pip-version-check completion --bash)"
+#eval "$(pip --disable-pip-version-check completion --bash)"
 
 # Map keypad del inserts a dot, useful for IPs
-xmodmap -e "keycode 91 mod2 = KP_Delete period"
+[[ -n $DISPLAY ]] && xmodmap -e "keycode 91 mod2 = KP_Delete period"
 # Map PrtSc to Menu
-xmodmap -e "keycode 107 = Menu"
+[[ -n $DISPLAY ]] && xmodmap -e "keycode 107 = Menu"
 
 # git-bash-prompt
 export GIT_SHOW_UNTRACKED_FILES=normal
@@ -44,15 +45,10 @@ export MOST_SWITCHES='-c'
 
 export BROWSER=chromium-browser
 
-# I prefer ^C for copying to clipboard (set in terminal emulator), so interrupting
-# a process needs another key, I choose B as in break
-# stty intr ^B
-# Disabled for now, breaks in tmux, I went back to standard ^C and started copying using only keyboard
-
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.bash_completion ] && source ~/.bash_completion
 
-numlockx on
+[[ -n $DISPLAY ]] && numlockx on
 
 # IPYTHON like history
 bind '"\e[A": history-search-backward';bind '"\e[B": history-search-forward'
@@ -72,7 +68,7 @@ source ~/.bash/tag.bash
 source ~/.bash/paths.bash
 
 # disable caps lock
-setxkbmap -option caps:none
+[[ -n $DISPLAY ]] && setxkbmap -option caps:none
 
 export EDITOR=vim
 export WINEDEBUG=-all
@@ -93,3 +89,4 @@ export OH_VENV_BIN=/home/bartek/.pyenv/versions/oh/bin
 source /home/bartek/workspace/sh/oh/source.me
 
 cdws
+source /home/bartek/workspace/dynamic_term_backgroun_per_folder/dynamic_term_backgroun_per_folder

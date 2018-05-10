@@ -19,3 +19,7 @@ pyc
 cfg
 py
 Gitlab
+auth
+yamllint
+jekyll
+contabo

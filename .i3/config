@@ -191,6 +191,7 @@ assign [class="X-terminal-emulator"] terminal
 assign [class="Jupyter-qtconsole"] jupyter
 assign [class="jupyter-qtconsole"] jupyter
 assign [class="UXTerm"] terminal
+assign [class="st-256-color"] terminal
 assign [title="Developer Tools"] left
 assign [class="google-chrome"] www
 assign [class="Chromium-browser"] www
@@ -198,6 +199,7 @@ assign [class="firefox"] www
 assign [class="pycharm"] code
 assign [class="Sublime_text"] subl
 assign [class="Slack"] slack
+assign [class="Franz"] slack
 assign [class="Thg"] 1
 assign [class="keepassx"] 1
 assign [class="Transmission-gtk"] 1
@@ -208,7 +210,8 @@ for_window [title="(?i).*ws.*"] title_format "<span background='magenta'>%title<
 exec chromium-browser
 exec i3-sensible-terminal
 exec subl
-exec slack
+#exec slack
+exec franz
 exec /usr/local/bin/charm
 exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 
