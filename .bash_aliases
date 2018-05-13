@@ -291,7 +291,7 @@ apt.up () {
 }
 
 packages() {
-    cat ~/packages | xargs sudo apt-get -y install
+    cat ~/packages | grep -v "#" | xargs sudo apt-get -y install
 }
 clean_pip() {
     # https://stackoverflow.com/a/11250821/1472229

@@ -75,7 +75,7 @@ export WINEDEBUG=-all
 export DJANGO_USER_SETTINGS=bartek
 export BRAT_EDITOR=charm
 export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/.brat_sourceme"
-export GITLAB_USER=bartek.rychlicki@gmail.com
+export DEBUG_GITLAB_USER=bartek.rychlicki@gmail.com
 
 export RB_VENV_BIN=/home/bartek/.pyenv/versions/rarebets/bin
 source /home/bartek/workspace/sh/rarebets/source.me
