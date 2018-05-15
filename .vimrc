@@ -63,3 +63,4 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
         exec 'mkspell! ' . fnameescape(d)
     endif
 endfor
+set expandtab       " Expand TABs to spaces

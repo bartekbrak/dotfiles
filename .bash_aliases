@@ -305,3 +305,10 @@ resolve_ssh() {
     ssh -v $1 echo |& grep Authenticating | sed -n "s/.*\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\):\([0-9]\+\) as '\(.*\)'.*/ssh \3@\1 -p \2/1p"
 }
 complete -F _known_hosts resolve_ssh
+pipi() {
+    pip install $1 && pip freeze | grep $1 | tee /dev/fd/2 | xclip -selection clipboard
+    echo "copied to clipboard"
+}
+
+alias ..='cd ..'
+alias g='grep'

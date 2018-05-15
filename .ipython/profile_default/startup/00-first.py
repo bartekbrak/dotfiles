@@ -18,6 +18,7 @@ except ImportError:
     print('no pandas')
 from pprint import pprint
 from decimal import Decimal
+import decimal
 import json
 import string
 import itertools

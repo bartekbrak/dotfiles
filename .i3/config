@@ -157,7 +157,7 @@ bindsym $mod+r mode "resize"
 #    hidden_state hide
 #    tray_output $out
 #    # bottom covers often-used last ine of the terminal
-#    position bottom
+#    position top
 #}
 
 # Custome section below
@@ -196,16 +196,16 @@ assign [title="Developer Tools"] left
 assign [class="google-chrome"] www
 assign [class="Chromium-browser"] www
 assign [class="firefox"] www
-assign [class="pycharm"] code
+#assign [class="pycharm"] code
 assign [class="Sublime_text"] subl
 assign [class="Slack"] slack
 assign [class="Franz"] slack
 assign [class="Thg"] 1
 assign [class="keepassx"] 1
 assign [class="Transmission-gtk"] 1
-for_window [title="(?i).*rarebets.*"] title_format "<span background='blue'>%title</span>"
-for_window [title="(?i).*rfp.*"] title_format "<span background='green'>%title</span>"
-for_window [title="(?i).*ws.*"] title_format "<span background='magenta'>%title</span>"
+#for_window [title="(?i).*rarebets.*"] title_format "<span background='blue'>%title</span>"
+#for_window [title="(?i).*rfp.*"] title_format "<span background='green'>%title</span>"
+#for_window [title="(?i).*ws.*"] title_format "<span background='magenta'>%title</span>"
 
 exec chromium-browser
 exec i3-sensible-terminal
