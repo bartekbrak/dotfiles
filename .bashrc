@@ -38,7 +38,7 @@ export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:."
 
 # git-bash-prompt
 export GIT_SHOW_UNTRACKED_FILES=normal
-GIT_PROMPT_END='\n$ '
+GIT_PROMPT_END=' ${timer_show}s\n$ '
 source /opt/bash-git-prompt/gitprompt.sh
 
 export MOST_SWITCHES='-c'
@@ -90,3 +90,20 @@ source /home/bartek/workspace/sh/oh/source.me
 
 cdws
 source /home/bartek/workspace/dynamic_term_backgroun_per_folder/dynamic_term_backgroun_per_folder
+function timer_start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+}
+
+trap 'timer_start' DEBUG
+
+if [ "$PROMPT_COMMAND" == "" ]; then
+  PROMPT_COMMAND="timer_stop"
+else
+  PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
+

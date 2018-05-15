@@ -27,6 +27,7 @@
     editor = vim
     excludesfile = ~/.globalgitignore
     whitespace = trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
+	quotePath = false
 [merge]
     ff = only
 [advice]

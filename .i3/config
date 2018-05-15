@@ -206,6 +206,7 @@ assign [class="Transmission-gtk"] 1
 #for_window [title="(?i).*rarebets.*"] title_format "<span background='blue'>%title</span>"
 #for_window [title="(?i).*rfp.*"] title_format "<span background='green'>%title</span>"
 #for_window [title="(?i).*ws.*"] title_format "<span background='magenta'>%title</span>"
+for_window [class="^.*"] border pixel 0
 
 exec chromium-browser
 exec i3-sensible-terminal
@@ -214,6 +215,7 @@ exec subl
 exec franz
 exec /usr/local/bin/charm
 exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
+exec compton -b
 
 
 #### Experiments Section
@@ -246,3 +248,5 @@ focus_follows_mouse no
 client.focused          #4c7899 #832e31 #ffffff #2e9ef4   #285577
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676f
 client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
+# https://github.com/chjj/compton/wiki/faqno
+new_window pixel
