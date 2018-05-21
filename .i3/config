@@ -1,39 +1,31 @@
 # Win as mod key
 set $mod Mod4
 
-set $out LVDS1
-set $right HDMI1
-
-# I use these all the times
-workspace www output $out
-workspace terminal output $out
-workspace slack output $out
-workspace python_experiments output $out
-workspace code output $out
-workspace subl output $out
-
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+#font pango:DejaVu Sans Mono 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal, also a root one
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec i3-sensible-terminal -e sudo su
+bindsym $mod+Return exec /usr/local/bin/st
+bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
 
 # kill focused window
 bindsym mod1+F4 kill
 
 bindsym $mod+l exec i3lock
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
+# start dmenu/rofi
+bindsym $mod+d exec "rofi -show run"
+bindsym $mod+Shift+d exec "rofi -show drun"
+bindsym $mod+Tab exec "rofi -show window"
+bindsym $mod+j exec "ls -1 ~/.i3/clip_scripts/ | rofi -dmenu -p 'Affect clipoboard with' | xargs -I{} bash ~/.i3/clip_scripts/{}"
 
+# moves
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -64,13 +56,8 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-# bindsym $mod+a focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
-
-# switch to workspace
+# switch to custom workspace
 bindsym KP_Add workspace terminal
 bindsym KP_Multiply workspace www
 bindsym KP_Subtract workspace code
@@ -78,6 +65,7 @@ bindsym KP_Divide workspace subl
 bindsym KP_Enter workspace slack
 bindsym $mod+KP_Add workspace jupyter
 
+# switch to standard workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -88,12 +76,20 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 
+# use numpad to switch workspaces, when NUMLOCK is on
 bindsym $mod+Mod2+KP_1 workspace 1
 bindsym $mod+Mod2+KP_2 workspace 2
 bindsym $mod+Mod2+KP_3 workspace 3
 bindsym $mod+Mod2+KP_4 workspace 4
 bindsym $mod+Mod2+KP_5 workspace 5
 bindsym $mod+Mod2+KP_6 workspace 6
+# and OFF, does not work :?
+bindsym $mod+KP_1 workspace 1
+bindsym $mod+KP_2 workspace 2
+bindsym $mod+KP_3 workspace 3
+bindsym $mod+KP_4 workspace 4
+bindsym $mod+KP_5 workspace 5
+bindsym $mod+KP_6 workspace 6
 # move focused container to workspace
 # Not sure this makes sense in my static set-up, just bind stuff to
 # one static workspace, don't allow moves
@@ -109,6 +105,15 @@ bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
+
+bindsym $mod+Shift+KP_1 move container to workspace 1
+bindsym $mod+Shift+KP_2 move container to workspace 2
+bindsym $mod+Shift+KP_3 move container to workspace 3
+bindsym $mod+Shift+KP_4 move container to workspace 4
+bindsym $mod+Shift+KP_5 move container to workspace 5
+bindsym $mod+Shift+KP_6 move container to workspace 6
+
+
 
 bindsym $mod+bracketleft move container to output left
 bindsym $mod+bracketright move container to output right
@@ -209,7 +214,7 @@ assign [class="Transmission-gtk"] 1
 for_window [class="^.*"] border pixel 0
 
 exec chromium-browser
-exec i3-sensible-terminal
+exec /usr/local/bin/st
 exec subl
 #exec slack
 exec franz

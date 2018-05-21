@@ -140,6 +140,7 @@ _e()
       ~/.gitconfig
       ~/.hgrc
       ~/.bashrc
+      ~/.bashrc.local
       ~/.i3status.conf
       ~/.vimrc
       ~/.config/sxhkd/sxhkdrc
@@ -209,8 +210,11 @@ fixup() {
     shift
     git ci --fixup $sha "$@"
 }
-alias add='git add .'
+add() {
+    git add ${@:-.}
+}
 alias rebase='git fetch;git rebase -i origin/master'
+alias rebase_root='git fehc;git rebase -i --root'
 alias fetch='git fetch'
 f() {
     # usage
@@ -306,7 +310,7 @@ resolve_ssh() {
 }
 complete -F _known_hosts resolve_ssh
 pipi() {
-    pip install $1 && pip freeze | grep $1 | tee /dev/fd/2 | xclip -selection clipboard
+    pip install $1 && pip freeze | grep -wi ^$1= | tee /dev/fd/2 | xclip -selection clipboard
     echo "copied to clipboard"
 }
 

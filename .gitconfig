@@ -11,11 +11,11 @@
     lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
     authors = log --format='%h| %<(25,trunc)%aN| %ae'
-    pul = pull -vpr
-    pull-changed = ! git whatchanged ..origin && git pull
+    pul = !git fetch && git --no-pager whatchanged ..$(git rev-parse --abbrev-ref --symbolic-full-name @{u}) && git pull -vpr
     rm-local-ALL = ! git branch | grep -v "master" | xargs echo git branch -D
-    rm-remote-merged = ! git branch -r --merged | grep origin | grep -v '>' | grep -v master | xargs -L1 | cut -d"/" -f2- | xargs echo git push origin --delete
     rm-local-merged = ! git branch --merged | egrep -v '(^\\*|master)' | xargs echo git branch -d
+    rm-remote-merged = ! git branch -r --merged | grep origin | grep -v '>' | grep -v master | xargs -L1 | cut -d"/" -f2- | xargs echo git push origin --delete
+    rm-remote-branch = push origin --delete
     ignored = status --ignored
     hard = ! git fetch && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
     mine = ! git commit --amend --author 'Bartek Rychlicki <bartek.rychlicki@gmail.com>'

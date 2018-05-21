@@ -48,10 +48,7 @@ export BROWSER=chromium-browser
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.bash_completion ] && source ~/.bash_completion
 
-[[ -n $DISPLAY ]] && numlockx on
-
-# IPYTHON like history
-bind '"\e[A": history-search-backward';bind '"\e[B": history-search-forward'
+[[ -n $DISPLAY ]] && { numlockx on; xmodmap -e 'keycode 77 = NoSymbol Num_Lock'; }
 
 source ~/.bash/set_pyenv
 # source ~/.bash/set_virtualenvwrapper
@@ -106,4 +103,5 @@ if [ "$PROMPT_COMMAND" == "" ]; then
 else
   PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
 fi
+source ~/.bashrc.local
 
