@@ -208,9 +208,6 @@ assign [class="Franz"] slack
 assign [class="Thg"] 1
 assign [class="keepassx"] 1
 assign [class="Transmission-gtk"] 1
-#for_window [title="(?i).*rarebets.*"] title_format "<span background='blue'>%title</span>"
-#for_window [title="(?i).*rfp.*"] title_format "<span background='green'>%title</span>"
-#for_window [title="(?i).*ws.*"] title_format "<span background='magenta'>%title</span>"
 for_window [class="^.*"] border pixel 0
 
 exec chromium-browser

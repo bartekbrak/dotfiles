@@ -85,7 +85,6 @@ source /home/bartek/workspace/sh/ws/source.me
 export OH_VENV_BIN=/home/bartek/.pyenv/versions/oh/bin
 source /home/bartek/workspace/sh/oh/source.me
 
-cdws
 source /home/bartek/workspace/dynamic_term_backgroun_per_folder/dynamic_term_backgroun_per_folder
 function timer_start {
   timer=${timer:-$SECONDS}
@@ -104,4 +103,3 @@ else
   PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
 fi
 source ~/.bashrc.local
-

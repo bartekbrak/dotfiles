@@ -316,3 +316,7 @@ pipi() {
 
 alias ..='cd ..'
 alias g='grep'
+not_mine() {
+    find -not -user $USER "$@"
+}
+alias rebase_to_root='git rebase -i --root'
