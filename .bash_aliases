@@ -47,7 +47,7 @@ pull() {
   git pull "$@"
 }
 pulldiff() {
-    git fetch 
+    git fetch
     git log ..FETCH_HEAD
     read -p "Press enter to continue"
     git diff ..FETCH_HEAD
@@ -83,7 +83,7 @@ alias localc='localc --norestore'
 alias rm='rm -rf'
 alias apt-get='sudo apt-get'
 alias apt='sudo apt'
-alias dpkg='sudo dpkg' 
+alias dpkg='sudo dpkg'
 
 ### cleaners
 alias diffcruft_delete='find \( -name \*.orig -o -name \*.rej \) -print -delete'
@@ -173,10 +173,10 @@ alias charm_clean='rm ~/.PyCharm2016.?/config/port'
 alias cal='cal -3'
 
 res_16_to_9() {
-  echo 1024x576 
-  echo 1280x720 
-  echo 1366x768 
-  echo 1600x900 
+  echo 1024x576
+  echo 1280x720
+  echo 1366x768
+  echo 1600x900
   echo 1920x1080
 }
 
@@ -214,7 +214,7 @@ add() {
     git add ${@:-.}
 }
 alias rebase='git fetch;git rebase -i origin/master'
-alias rebase_root='git fehc;git rebase -i --root'
+alias rebase_root='git fetch;git rebase -i --root'
 alias fetch='git fetch'
 f() {
     # usage
@@ -320,3 +320,5 @@ not_mine() {
     find -not -user $USER "$@"
 }
 alias rebase_to_root='git rebase -i --root'
+alias hosts='sudo vim /etc/hosts'
+paths() { GREP_COLORS='mt=01;34' egrep --color=always '[/a-zA-Z.]{1}[a-zA-Z0-9_-.]+/[a-zA-Z0-9_-.\/]+|$'; }

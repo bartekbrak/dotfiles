@@ -13,6 +13,7 @@ floating_modifier $mod
 # start a terminal, also a root one
 bindsym $mod+Return exec /usr/local/bin/st
 bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
+bindsym $mod+backslash exec chromium-browser
 
 # kill focused window
 bindsym mod1+F4 kill
@@ -113,8 +114,6 @@ bindsym $mod+Shift+KP_4 move container to workspace 4
 bindsym $mod+Shift+KP_5 move container to workspace 5
 bindsym $mod+Shift+KP_6 move container to workspace 6
 
-
-
 bindsym $mod+bracketleft move container to output left
 bindsym $mod+bracketright move container to output right
 
@@ -192,32 +191,41 @@ workspace_layout default
 hide_edge_borders both
 
 # Application workspace preferences.
-assign [class="X-terminal-emulator"] terminal
 assign [class="Jupyter-qtconsole"] jupyter
 assign [class="jupyter-qtconsole"] jupyter
-assign [class="UXTerm"] terminal
-assign [class="st-256-color"] terminal
-assign [title="Developer Tools"] left
-assign [class="google-chrome"] www
-assign [class="Chromium-browser"] www
-assign [class="firefox"] www
+#assign [class="google-chrome"] www
+#assign [class="Chromium-browser"] www
+#assign [class="firefox"] www
 #assign [class="pycharm"] code
 assign [class="Sublime_text"] subl
 assign [class="Slack"] slack
 assign [class="Franz"] slack
-assign [class="Thg"] 1
-assign [class="keepassx"] 1
-assign [class="Transmission-gtk"] 1
+assign [class="sh/oh"] 1
+assign [class="sh/rb"] 2
+assign [class="sh/ws"] 3
+assign [class="sh/r1"] 4
+assign [title="sh/oh"] 1
+assign [title="sh/rb"] 2
+assign [title="sh/ws"] 3
+assign [title="sh/r1"] 4
 for_window [class="^.*"] border pixel 0
 
-exec chromium-browser
-exec /usr/local/bin/st
+#exec chromium-browser
 exec subl
 #exec slack
 exec franz
-exec /usr/local/bin/charm
-exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
+exec charm
+#exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 exec compton -b
+#exec --no-startup-id st -c sh/oh -e bash -c 'cd ~/workspace/sh/oh && $SHELL'
+#exec --no-startup-id st -c sh/rb -e bash -c 'cd ~/workspace/sh/rb && $SHELL'
+#exec --no-startup-id st -c sh/ws -e bash -c 'cd ~/workspace/sh/ws && $SHELL'
+#exec --no-startup-id st -c sh/r1 -e bash -c 'cd ~/workspace/sh/r1 && $SHELL'
+#exec --no-startup-id i3-msg "workspace 1; exec charm ~/workspace/sh/oh; exec st -e bash -c 'cd ~/workspace/sh/oh && $SHELL'"
+#exec --no-startup-id i3-msg "workspace 2; exec charm ~/workspace/sh/rb; exec st -e bash -c 'cd ~/workspace/sh/rb && $SHELL'"
+#exec --no-startup-id i3-msg "workspace 3; exec charm ~/workspace/sh/ws; exec st -e bash -c 'cd ~/workspace/sh/ws && $SHELL'"
+#exec --no-startup-id i3-msg "workspace 4; exec charm ~/workspace/sh/r1; exec st -e bash -c 'cd ~/workspace/sh/r1 && $SHELL'"
+
 
 
 #### Experiments Section
@@ -252,3 +260,4 @@ client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676f
 client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
 # https://github.com/chjj/compton/wiki/faqno
 new_window pixel
+# Pulse Audio controls

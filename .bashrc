@@ -103,3 +103,5 @@ else
   PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
 fi
 source ~/.bashrc.local
+# surfraw
+export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
