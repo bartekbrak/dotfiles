@@ -1,3 +1,4 @@
+# vim: filetype=sh
 hesitate() {
     read -p "${1}[Enter] / [s]kip / [Ctrl-C]" ret
     [ "$ret" == "s" ] && return 1
@@ -23,7 +24,7 @@ alias cls='printf "\ec"'
 reload_aliases() {
   source ~/.bash_aliases
 }
-alias edit_aliases='vim ~/.bash_aliases -c "set syntax=sh"; reload_aliases; echo aliases reloaded'
+alias edit_aliases='vim ~/.bash_aliases; reload_aliases; echo aliases reloaded'
 alias edit_aliases_subl='subl ~/.bash_aliases'
 
 
@@ -284,7 +285,7 @@ x.merge() {
   xrdb -merge $1
 }
 x.theme() {
-  xrdb -merge ~/iTerm2-Color-Schemes/Xresources/$1 
+  xrdb -merge ~/iTerm2-Color-Schemes/Xresources/$1
 }
 _x()
 {
@@ -295,6 +296,25 @@ _x()
 complete -F _x x.theme
 apt.up () {
     apt-get install $(grep -vE "^\s*#" ~/packages  | tr "\n" " ")
+}
+alias g='grep'
+not_mine() {
+    find -not -user $USER "$@"
+}
+alias rebase_to_root='git rebase -i --root'
+alias hosts='sudo vim /etc/hosts'
+paths() { GREP_COLORS='mt=01;34' egrep --color=always '[/a-zA-Z.]{1}[a-zA-Z0-9_-.]+/[a-zA-Z0-9_-.\/]+|$'; }
+reload_tmux() {
+    tmux source-file ~/.tmux.conf
+}
+# https://www.packtpub.com/mapt/book/hardware_and_creative/9781783985166/2/ch02lvl1sec23/show-options
+tmux.settings() {
+    tmux show-options -g
+}
+alias ..='cd ..'
+pipi() {
+    pip install $1 && pip freeze | grep -wi ^$1= | tee /dev/fd/2 | xclip -selection clipboard
+    echo "copied to clipboard"
 }
 
 packages() {
@@ -312,16 +332,4 @@ resolve_ssh() {
     ssh -v $1 echo |& grep Authenticating | sed -n "s/.*\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\):\([0-9]\+\) as '\(.*\)'.*/ssh \3@\1 -p \2/1p"
 }
 complete -F _known_hosts resolve_ssh
-pipi() {
-    pip install $1 && pip freeze | grep -wi ^$1= | tee /dev/fd/2 | xclip -selection clipboard
-    echo "copied to clipboard"
-}
 
-alias ..='cd ..'
-alias g='grep'
-not_mine() {
-    find -not -user $USER "$@"
-}
-alias rebase_to_root='git rebase -i --root'
-alias hosts='sudo vim /etc/hosts'
-paths() { GREP_COLORS='mt=01;34' egrep --color=always '[/a-zA-Z.]{1}[a-zA-Z0-9_-.]+/[a-zA-Z0-9_-.\/]+|$'; }
