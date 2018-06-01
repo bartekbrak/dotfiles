@@ -257,8 +257,11 @@ where_defined() {
 }
 link_symlinks() {
     # sudo find /etc/ -xtype l -print -delete
-    find symlinks -type f | sed -e "s/symlinks/ /" | xargs sudo rm
-    sudo cp -vrs /home/bartek/symlinks/* /
+    (
+        cd /home/bartek
+        find symlinks -type f | sed -e "s/symlinks/ /" | xargs sudo rm
+        sudo cp -vrs /home/bartek/symlinks/* /
+    )
 }
 bedit() {
     editor $(which $1)
