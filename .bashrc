@@ -69,21 +69,8 @@ source ~/.bash/paths.bash
 
 export EDITOR=vim
 export WINEDEBUG=-all
-export DJANGO_USER_SETTINGS=bartek
 export BRAT_EDITOR=charm
 export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/.brat_sourceme"
-export DEBUG_GITLAB_USER=bartek.rychlicki@gmail.com
-
-export RB_VENV_BIN=/home/bartek/.pyenv/versions/rarebets/bin
-source /home/bartek/workspace/sh/rarebets/source.me
-
-export KI_VENV_BIN=~/.pyenv/versions/kinro/bin/
-
-export WS_VENV_BIN=/home/bartek/.pyenv/versions/ws/bin
-source /home/bartek/workspace/sh/ws/source.me
-
-export OH_VENV_BIN=/home/bartek/.pyenv/versions/oh/bin
-source /home/bartek/workspace/sh/oh/source.me
 
 source /home/bartek/workspace/dynamic_term_backgroun_per_folder/dynamic_term_backgroun_per_folder
 function timer_start {
