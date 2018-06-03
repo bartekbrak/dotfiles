@@ -333,3 +333,13 @@ resolve_ssh() {
 }
 complete -F _known_hosts resolve_ssh
 
+pyenv.new() {
+    pyenv virtualenv 3.6.5 $(basename $(pwd))
+    pyenv local $(basename $(pwd))
+}
+true_color_demo() {
+    for i in {0..255}; do
+        printf "\x1b[38;5;${i}mcolour${i} x1b[38;5;${i} \x1b[0m\n"
+    done
+
+}
