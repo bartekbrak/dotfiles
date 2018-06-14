@@ -343,3 +343,12 @@ true_color_demo() {
     done
 
 }
+tmux.terminal.reset() {
+    tmux send-keys -R \; send-keys C-l \; clear-history
+}
+pipu() {
+    pip install -U pip
+}
+lastkill() {
+    kill %1
+}

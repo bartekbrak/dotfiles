@@ -22,3 +22,4 @@ xterm*VT100.Translations: #override \
 
 ! funny stuff
 UXTerm*pointerShape: pirate
+Xcursor.size: 1

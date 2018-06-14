@@ -31,9 +31,9 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " don't reindent anything while pasting
 set paste
-" colorscheme pablo
+colorscheme pablo
 " http://vi.stackexchange.com/a/357
-set colorcolumn=50,72
+set colorcolumn=50,72,80
 
 " http://vignette3.wikia.nocookie.net/vim/images/1/16/Xterm-color-table.png/revision/latest?cb=20110121055231
 highlight ColorColumn ctermbg=8
@@ -64,3 +64,4 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
     endif
 endfor
 set expandtab       " Expand TABs to spaces
+set textwidth=80    " prefered, not enforced, for reflowing with gq

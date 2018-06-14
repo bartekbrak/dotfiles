@@ -13,7 +13,7 @@ floating_modifier $mod
 # start a terminal, also a root one
 bindsym $mod+Return exec /usr/local/bin/st
 bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
-bindsym $mod+backslash exec chromium-browser
+bindsym $mod+backslash exec firefox
 
 # kill focused window
 bindsym mod1+F4 kill
@@ -214,7 +214,7 @@ for_window [class="^.*"] border pixel 0
 exec subl
 #exec slack
 exec franz
-exec charm
+#exec charm
 #exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 exec compton -b
 #exec --no-startup-id st -c sh/oh -e bash -c 'cd ~/workspace/sh/oh && $SHELL'

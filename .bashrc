@@ -92,3 +92,6 @@ fi
 source ~/.bashrc.local
 # surfraw
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
+export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
+touch ~/last_cd
+cd $(cat ~/last_cd)
