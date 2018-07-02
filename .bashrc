@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# don't inherit any PROMPT_COMMAND, also make sure it exists
+export PROMPT_COMMAND='true'
 # TMUX needs this, I understand very little about the reasons but changing it to 'screen' caused total havoc 
 # in how Ctrl-Left/Right worked in vim so this
 export TERM='xterm-256color'
@@ -29,7 +31,6 @@ shopt -s checkwinsize
 # that is not enabled by default in linux as it is huge security risk
 export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:."
 
-#eval "$(pip --disable-pip-version-check completion --bash)"
 
 # Map keypad del inserts a dot, useful for IPs
 [[ -n $DISPLAY ]] && xmodmap -e "keycode 91 mod2 = KP_Delete period"
@@ -38,25 +39,23 @@ export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:."
 
 # git-bash-prompt
 export GIT_SHOW_UNTRACKED_FILES=normal
-GIT_PROMPT_END=' ${timer_show}s\n$ '
+GIT_PROMPT_END=' ${timer_show}\n$ '
 source /opt/bash-git-prompt/gitprompt.sh
-
-export MOST_SWITCHES='-c'
 
 export BROWSER=chromium-browser
 
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
-[ -f ~/.bash_completion ] && source ~/.bash_completion
+source ~/.bash_aliases
+source ~/.bash_completion
 
-[[ -n $DISPLAY ]] && { numlockx on; xmodmap -e 'keycode 77 = NoSymbol Num_Lock'; }
+[[ -n $DISPLAY ]] && { numlockx on; }
 
 source ~/.bash/set_pyenv
 # source ~/.bash/set_virtualenvwrapper
 
 source ~/.bash_secrets
 
-# highlighter, this is awesome
-[ -f ~/.bash/h.sh ] && source ~/.bash/h.sh
+# https://github.com/paoloantinori/hhighlighter
+source ~/.bash/h.sh
 
 # cat will use this
 tabs -4
@@ -70,15 +69,16 @@ source ~/.bash/paths.bash
 export EDITOR=vim
 export WINEDEBUG=-all
 export BRAT_EDITOR=charm
-export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/.brat_sourceme"
+export PROMPT_COMMAND="$PROMPT_COMMAND;. ~/.brat_sourceme"
 
+[[ -n $DISPLAY ]] && setxkbmap -option kpdl:dot
 source /home/bartek/workspace/dynamic_term_backgroun_per_folder/dynamic_term_backgroun_per_folder
 function timer_start {
   timer=${timer:-$SECONDS}
 }
 
 function timer_stop {
-  timer_show=$(($SECONDS - $timer))
+  timer_show="$(($SECONDS - $timer))s"
   unset timer
 }
 
@@ -94,4 +94,4 @@ source ~/.bashrc.local
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
 export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
 touch ~/last_cd
-cd $(cat ~/last_cd)
+cd "$(cat ~/last_cd)"

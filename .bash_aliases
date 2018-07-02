@@ -352,3 +352,12 @@ pipu() {
 lastkill() {
     kill %1
 }
+alias vb=VBoxManage
+alias dmesg='dmesg -wdT'
+rs() {
+    source ~/source
+}
+# https://askubuntu.com/a/275972/35186
+show_bash_variables() {
+    ( set -o posix ; set ) | less
+}

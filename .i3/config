@@ -164,6 +164,7 @@ bindsym $mod+r mode "resize"
 #    position top
 #}
 
+
 # Custome section below
 
 # Volume control, note `--`, ref: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=686667
@@ -172,6 +173,7 @@ bindsym $mod+F9 exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '-5%'
 bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'
 bindsym $mod+F10 exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'
 bindsym XF86AudioMute        exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+XF86AudioMute exec pavucontrol
 bindsym $mod+F11        exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 #bindsym $mod+Shift+r exec pavucontrol
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
@@ -197,7 +199,7 @@ assign [class="jupyter-qtconsole"] jupyter
 #assign [class="Chromium-browser"] www
 #assign [class="firefox"] www
 #assign [class="pycharm"] code
-assign [class="Sublime_text"] subl
+#assign [class="Sublime_text"] subl
 assign [class="Slack"] slack
 assign [class="Franz"] slack
 assign [class="sh/oh"] 1
@@ -214,6 +216,7 @@ for_window [class="^.*"] border pixel 0
 exec subl
 #exec slack
 exec franz
+exec --no-startup-id redshift -b 0.8:0.6 -l 52.14:21.1 -t 6500:3500 -r
 #exec charm
 #exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 exec compton -b

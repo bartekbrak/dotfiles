@@ -65,3 +65,4 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
 endfor
 set expandtab       " Expand TABs to spaces
 set textwidth=80    " prefered, not enforced, for reflowing with gq
+set relativenumber
