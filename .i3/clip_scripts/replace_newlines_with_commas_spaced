@@ -1,0 +1,2 @@
+#!/bin/bash
+xclip -o | tr '\n' ',' | sed 's|,|, |g' | xclip -i -selection clipboard

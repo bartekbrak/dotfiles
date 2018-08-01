@@ -1,0 +1,2 @@
+#!/bin/bash
+xclip -o | sort | xclip -i -selection clipboard
