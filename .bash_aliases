@@ -361,3 +361,4 @@ rs() {
 show_bash_variables() {
     ( set -o posix ; set ) | less
 }
+alias o=xdg-open

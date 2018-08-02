@@ -21,7 +21,7 @@ bindsym mod1+F4 kill
 bindsym $mod+l exec i3lock
 
 # start dmenu/rofi
-bindsym $mod+d exec "rofi -show run"
+bindsym $mod+d exec "rofi -show run -matching fuzzy -columns 4"
 bindsym $mod+Shift+d exec "rofi -show drun"
 bindsym $mod+Tab exec "rofi -show window"
 bindsym $mod+j exec "ls -1 ~/.i3/clip_scripts/ | rofi -dmenu -p 'Affect clipoboard with' | xargs -I{} bash ~/.i3/clip_scripts/{}"
@@ -195,11 +195,11 @@ hide_edge_borders both
 # Application workspace preferences.
 assign [class="Jupyter-qtconsole"] jupyter
 assign [class="jupyter-qtconsole"] jupyter
-#assign [class="google-chrome"] www
-#assign [class="Chromium-browser"] www
-#assign [class="firefox"] www
-#assign [class="pycharm"] code
-#assign [class="Sublime_text"] subl
+assign [class="google-chrome"] www
+assign [class="Chromium-browser"] www
+assign [class="firefox"] www
+assign [class="pycharm"] code
+assign [class="Sublime_text"] subl
 assign [class="Slack"] slack
 assign [class="Franz"] slack
 assign [class="sh/oh"] 1
@@ -212,12 +212,12 @@ assign [title="sh/ws"] 3
 assign [title="sh/r1"] 4
 for_window [class="^.*"] border pixel 0
 
-#exec chromium-browser
+exec chromium-browser
 exec subl
 #exec slack
 exec franz
 exec --no-startup-id redshift -b 0.8:0.6 -l 52.14:21.1 -t 6500:3500 -r
-#exec charm
+exec charm
 #exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 exec compton -b
 #exec --no-startup-id st -c sh/oh -e bash -c 'cd ~/workspace/sh/oh && $SHELL'
@@ -264,3 +264,4 @@ client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
 # https://github.com/chjj/compton/wiki/faqno
 new_window pixel
 # Pulse Audio controls
+popup_during_fullscreen leave_fullscreen
