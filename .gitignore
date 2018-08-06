@@ -1,2 +1,5 @@
 # Only notice files in the home dir explicitly added 
 *
+# files meant to be local
+/.gitconfig
+/.bashrc.local

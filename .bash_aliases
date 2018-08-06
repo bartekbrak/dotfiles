@@ -33,10 +33,9 @@ alias llo='stat -c "%a %n"'
 alias l='ls -Alh --group-directories-first -d */'
 alias ls='ls --color=auto'
 
-# git/mercurial abstraction layer
-# make this a separate library
 s() {
-  git status "$@"
+  [ -d ".git" ] && git status "$@"
+  [ -d ".hg" ] && hg status "$@"
 }
 dif() {
   git diff "$@"
@@ -123,10 +122,8 @@ ObjectId() {
   python -c "import bson;print bson.ObjectId('$1').generation_time.strftime('%Y.%m.%d %H:%M:%S')"
 }
 
-alias dul='du -h --max-depth=1 | sort -h'
-
-alias disable_touchpad='xinput set-prop 13 "Device Enabled" 0'
-alias enable_touchpad='xinput set-prop 13 "Device Enabled" 1'
+# alias disable_touchpad='xinput set-prop 13 "Device Enabled" 0'
+# alias enable_touchpad='xinput set-prop 13 "Device Enabled" 1'
 
 # default values for apps
 alias time='/usr/bin/time --format "elapsed: %es"'
@@ -169,10 +166,6 @@ kill_django() {
   echo after
   pgrep -f manage.py
 }
-alias charm_clean='rm ~/.PyCharm2016.?/config/port'
-
-alias cal='cal -3'
-
 res_16_to_9() {
   echo 1024x576
   echo 1280x720
@@ -183,10 +176,6 @@ res_16_to_9() {
 
 reload_fonts() {
   fc-cache -f -v
-}
-gwerp_ibus() {
-    export IBUS_ENABLE_SYNC_MODE=1
-    ibus-daemon -d -r
 }
 cdsitepackages() {
     #cd $(python -c 'import site; print(site.getsitepackages()[0])')
@@ -337,6 +326,9 @@ pyenv.new() {
     pyenv virtualenv 3.6.5 $(basename $(pwd))
     pyenv local $(basename $(pwd))
 }
+pyenv.which() {
+    pyenv which python
+}
 true_color_demo() {
     for i in {0..255}; do
         printf "\x1b[38;5;${i}mcolour${i} x1b[38;5;${i} \x1b[0m\n"
@@ -362,3 +354,6 @@ show_bash_variables() {
     ( set -o posix ; set ) | less
 }
 alias o=xdg-open
+backup() {
+    cp -r "$1" "$1.backup"
+}

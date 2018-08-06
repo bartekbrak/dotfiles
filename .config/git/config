@@ -1,6 +1,5 @@
 [user]
-	email = bartekbrak1@gmail.com
-	name = Bartek Brak
+    name = Bartek Brak Rychlicki
     signingkey = 9949A5D1
 [alias]
     co = checkout
@@ -18,7 +17,8 @@
     rm-remote-branch = push origin --delete
     ignored = status --ignored
     hard = ! git fetch && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
-    mine = ! git commit --amend --author 'Bartek Rychlicki <bartek.rychlicki@gmail.com>'
+    mine = ! git commit --amend --author 'Bartek Brak Rychlicki <bartek.rychlicki@regalix-inc.com>'
+    reauthor = ! git commit --amend --author 
 [color]
     ui = auto
 [push]
@@ -50,3 +50,7 @@
     prune = true
 [branch]
     autosetuprebase = always ;  all new branches use rebase on pull
+
+# experiments
+# [includeIf "gitdir:~/workspace/regalix"]
+# 

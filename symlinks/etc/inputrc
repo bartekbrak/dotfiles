@@ -61,3 +61,8 @@ set colored-completion-prefix On
 set menu-complete-display-prefix On
 
 $endif
+
+# zsh like completion:
+# https://superuser.com/questions/288714/bash-autocomplete-like-zsh
+set show-all-if-ambiguous on
+TAB:menu-complete

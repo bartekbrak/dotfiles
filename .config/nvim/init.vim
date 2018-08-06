@@ -1,3 +1,5 @@
+" copy-pasted from .vimrc, probably needs attention, a lot of things in nvim
+" are on by default
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -30,7 +32,7 @@ set whichwrap+=<,>,h,l,[,]
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " don't reindent anything while pasting
-set paste
+" set paste
 colorscheme pablo
 " http://vi.stackexchange.com/a/357
 set colorcolumn=50,72,80
@@ -71,18 +73,9 @@ set relativenumber
 " https://stackoverflow.com/a/40640857
 set modeline
 
-" disable destructive escape sequences sent by terminal for ctrl/alt + left/right
-imap ^[OA <ESC>ki
-imap ^[OB <ESC>ji
-imap ^[OC <ESC>li
-imap ^[OD <ESC>hi
-imap ^[1;5D <ESC>gT
-imap ^[1;5C <ESC>gt
-imap ^[1;3D <ESC>gT
-imap ^[1;3C <ESC>gt
-imap <ESC>oA <ESC>ki
-imap <ESC>oB <ESC>ji
-imap <ESC>oC <ESC>li
-imap <ESC>oD <ESC>hi
-set noesckeys
-" the above DID NOT WORK in so many ways that I moved to neovim
+" tabs are cool
+map <Tab> gt
+
+" use "true color" in the terminal
+" https://github.com/neovim/neovim/wiki/FAQ#how-can-i-use-true-color-in-the-terminal
+set termguicolors

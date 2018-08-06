@@ -13,7 +13,7 @@ floating_modifier $mod
 # start a terminal, also a root one
 bindsym $mod+Return exec /usr/local/bin/st
 bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
-bindsym $mod+backslash exec firefox
+bindsym $mod+backslash exec google-chrome
 
 # kill focused window
 bindsym mod1+F4 kill
@@ -21,10 +21,11 @@ bindsym mod1+F4 kill
 bindsym $mod+l exec i3lock
 
 # start dmenu/rofi
-bindsym $mod+d exec "rofi -show run -matching fuzzy -columns 4"
+bindsym $mod+d exec "rofi -show run -lines 10 -columns 4 -matching fuzzy"
 bindsym $mod+Shift+d exec "rofi -show drun"
 bindsym $mod+Tab exec "rofi -show window"
 bindsym $mod+j exec "ls -1 ~/.i3/clip_scripts/ | rofi -dmenu -p 'Affect clipoboard with' | xargs -I{} bash ~/.i3/clip_scripts/{}"
+bindsym $mod+x exec --no-startup-id bash ~/dmenu.personal | rofi -dmenu -i -matching fuzzy -p type | xargs echo -n | xargs -0 xdotool getactivewindow type --delay 50
 
 # moves
 bindsym $mod+Left focus left
@@ -98,7 +99,7 @@ bindsym $mod+Shift+KP_Add move container to workspace terminal
 bindsym $mod+Shift+KP_Multiply move container to workspace www
 bindsym $mod+Shift+KP_Subtract move container to workspace code
 bindsym $mod+Shift+KP_Divide move container to workspace subl
-bindsym $mod+Shift+9 move container to workspace slack
+bindsym $mod+Shift+KP_Enter move container to workspace slack
 
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -202,14 +203,7 @@ assign [class="pycharm"] code
 assign [class="Sublime_text"] subl
 assign [class="Slack"] slack
 assign [class="Franz"] slack
-assign [class="sh/oh"] 1
-assign [class="sh/rb"] 2
-assign [class="sh/ws"] 3
-assign [class="sh/r1"] 4
-assign [title="sh/oh"] 1
-assign [title="sh/rb"] 2
-assign [title="sh/ws"] 3
-assign [title="sh/r1"] 4
+assign [class="Conky"] 1
 for_window [class="^.*"] border pixel 0
 
 exec chromium-browser
@@ -232,7 +226,6 @@ exec compton -b
 
 
 #### Experiments Section
-bindsym $mod+x exec --no-startup-id bash ~/dmenu.personal | rofi -dmenu -i | xargs echo -n | xargs -0 xdotool getactivewindow type --delay 50
 bindsym $mod+p exec --no-startup-id passmenu --type-user-tab-pass
 bindsym $mod+Shift+p exec --no-startup-id passmenu --type-pass
 
@@ -265,3 +258,5 @@ client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
 new_window pixel
 # Pulse Audio controls
 popup_during_fullscreen leave_fullscreen
+for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating enable

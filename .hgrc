@@ -1,5 +1,5 @@
 [ui]
-username = Bartek Rychlicki <bartek.rychlicki@gmail.com>
+username = Bartek Brak Rychlicki <bartek.rychlicki@regalix-inc.com>
 ignore = ~/.hgignore
 askusername = True
 # https://selenic.com/hg/help/merge-tools:
@@ -14,16 +14,17 @@ graphlog =
 color =
 fetch =
 progress =
-shelve = 
+shelve =
 record =
 # hgcodesmell = ~/hgcodesmell.py
 purge =
 #prompt = ~/opt/hg-prompt/prompt.py
 transplant =
 hgk =
-rebase = 
-histedit = 
-strip = 
+rebase =
+histedit =
+strip =
+#hggit = ~/opt/hg-git/hggit
 
 [diff]
 git = True
@@ -44,11 +45,11 @@ grep = grep --all
 cmd.vdiff =
 #cmd.diff = kdiff3
 
-# This was an attempt to use pycharm for merging, couldn't make it work with multiple files 
+# This was an attempt to use pycharm for merging, couldn't make it work with multiple files
 # First file will go well, second will break
 [merge-tools]
 merge.priority=10
-#charm.args = merge $local $other $base $output 
+#charm.args = merge $local $other $base $output
 #charm.priority = 100
 #charm.premerge = False
 #charm.executable = /usr/local/bin/charm
