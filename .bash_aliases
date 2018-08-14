@@ -357,3 +357,10 @@ alias o=xdg-open
 backup() {
     cp -r "$1" "$1.backup"
 }
+prompt.show() {
+    for i in ${PROMPT_COMMAND//;/ }
+    do
+        echo "$i"
+    done
+
+}
