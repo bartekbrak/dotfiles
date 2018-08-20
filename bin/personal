@@ -1,0 +1,6 @@
+#!/bin/bash
+bash ~/dmenu.personal \
+    | rofi -dmenu -i -matching fuzzy -p type \
+    | sed 's,.*::\s*,,g' \
+    | xargs echo -n \
+    | xargs -0 xdotool getactivewindow type --delay 50

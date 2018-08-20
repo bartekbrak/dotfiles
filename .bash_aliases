@@ -153,6 +153,7 @@ _e()
       ~/.config/greenclip.cfg
       ~/packages
       ~/.Xresources
+      ~/.config/git/config
   "
   COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
   return 0

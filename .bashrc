@@ -36,7 +36,7 @@ export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:."
 # git-bash-prompt
 GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
-GIT_SHOW_UNTRACKED_FILES=all
+GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 GIT_PROMPT_END=' ${timer_show}\n$ '
 GIT_PROMPT_SHOW_UPSTREAM=1
 source /opt/bash-git-prompt/gitprompt.sh

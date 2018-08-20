@@ -9,6 +9,7 @@
     slog = log --pretty=oneline --abbrev-commit
     lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg3 = log --graph --oneline --all
     authors = log --format='%h| %<(25,trunc)%aN| %ae'
     pul = !git fetch && git --no-pager whatchanged ..$(git rev-parse --abbrev-ref --symbolic-full-name @{u}) && git pull -vpr
     rm-local-ALL = ! git branch | grep -v "master" | xargs echo git branch -D
