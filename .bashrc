@@ -20,6 +20,8 @@ shopt -s histappend
 HISTSIZE='infinite'
 HISTFILESIZE='infinite'
 
+HISTTIMEFORMAT="%F %T: "
+
 # update LINES COLUMNS after widnow resize
 shopt -s checkwinsize
 
@@ -69,7 +71,6 @@ export BRAT_EDITOR=charm
 export PROMPT_COMMAND="$PROMPT_COMMAND;. ~/.brat_sourceme"
 
 [[ -n $DISPLAY ]] && setxkbmap -option kpdl:dot
-source /home/bartek/workspace/dynamic_term_backgroun_per_folder/dynamic_term_backgroun_per_folder
 function timer_start {
   # SECONDS: a count of the number of (whole) seconds the shell has been running
   # timer is timer or seconds

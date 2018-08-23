@@ -61,7 +61,7 @@ push() {
 
 alias music='vlc -I ncurses ~/Music'
 
-which_many() {
+which.many() {
     # where in path does exectuable $1 exist
     # example:
     #     which_many python

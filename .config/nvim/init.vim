@@ -33,7 +33,7 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " don't reindent anything while pasting
 " set paste
-colorscheme pablo
+"colorscheme pablo
 " http://vi.stackexchange.com/a/357
 set colorcolumn=50,72,80
 
@@ -78,4 +78,4 @@ map <Tab> gt
 
 " use "true color" in the terminal
 " https://github.com/neovim/neovim/wiki/FAQ#how-can-i-use-true-color-in-the-terminal
-set termguicolors
+"set termguicolors
