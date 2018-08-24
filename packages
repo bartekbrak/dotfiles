@@ -1,0 +1,20 @@
+wmctrl rofi tmux rxvt-unicode
+# pyenv
+make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev
+scrot
+arandr moreutils p7zip-full unrar tree powertop imagemagick sshfs
+htop mc numlockx most httpie nethogs silversearcher-ag
+git gitk
+gimp libreoffice vlc filezilla gparted sqlitebrowser meld
+build-essential cmake linux-headers-generic gcc
+apt-file
+libxcb-util-dev libxcb-keysyms1-dev
+
+# news
+newsboat
+# wifi/eth
+ethtool wavemon wicd-curses
+cmake
+redshift
+# pack
+atool xz-utils unrar rar p7zip-full lzma lzip
