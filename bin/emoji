@@ -1,0 +1,6 @@
+#!/bin/bash
+cat ~/emoji \
+    | rofi -dmenu -i -matching fuzzy -p emoji -columns 6 -lines 20 \
+    | sed 's,.*:\s*,,g' \
+    | xargs echo -n \
+    | xargs -0 xdotool getactivewindow type --delay 50

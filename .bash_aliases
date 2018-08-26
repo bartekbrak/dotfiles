@@ -183,6 +183,7 @@ cdsitepackages() {
     cd $(python -c 'from distutils.sysconfig import get_python_lib; print(get_python_lib())')
 }
 alias d=docker-compose
+alias D=docker
 complete -F _docker_compose d dl
 slugify() {
     echo "$@" | iconv -t ascii//TRANSLIT | sed -r s/[^a-zA-Z0-9]+/_/g | sed -r s/^-+\|-+$//g | tr A-Z a-z
@@ -365,3 +366,11 @@ prompt.show() {
     done
 
 }
+tz ()
+{
+    for x in America/Los_Angeles Europe/Warsaw Asia/Kolkata;
+    do
+        TZ=$x date +"%Z%t%H:%M%t$x" "$@"
+    done
+}
+

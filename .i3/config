@@ -25,7 +25,8 @@ bindsym $mod+d exec "rofi -show run -lines 10 -columns 4 -matching fuzzy"
 bindsym $mod+Shift+d exec "rofi -show drun"
 bindsym $mod+Tab exec "rofi -show window"
 bindsym $mod+j exec "ls -1 ~/.i3/clip_scripts/ | rofi -dmenu -p 'Affect clipoboard with' | xargs -I{} bash ~/.i3/clip_scripts/{}"
-bindsym $mod+x exec --no-startup-id personal
+bindsym $mod+x exec --no-startup-id ~/bin/personal
+bindsym $mod+Shift+x exec --no-startup-id ~/bin/emoji
 
 # moves
 bindsym $mod+Left focus left
