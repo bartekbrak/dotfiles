@@ -2,14 +2,14 @@
 [[ $- != *i* ]] && return
 
 # don't inherit any PROMPT_COMMAND, also make sure it exists
-export PROMPT_COMMAND='true'
-# TMUX needs this, I understand very little about the reasons but changing it to 'screen' caused total havoc
-# in how Ctrl-Left/Right worked in vim so this
-export TERM='xterm-256color'
+export PROMPT_COMMAND=true
+# https://github.com/neovim/neovim/issues/6134
+# tells me that for nvim this is better
+export TERM=screen-256color
 
 # Start tmux on every login shell
 # Don't start tmux if it's already on. tmux takes care of that itself so this might be unnecessary
-export TERMINAL='st'
+export TERMINAL=st
 [[ -z "$TMUX" && -n $DISPLAY ]] && { echo starting tmux; exec tmux;  }
 
 # Ignore space-prepende commands and duplicates
@@ -17,8 +17,8 @@ HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
-HISTSIZE='infinite'
-HISTFILESIZE='infinite'
+HISTSIZE=infinite
+HISTFILESIZE=infinite
 
 HISTTIMEFORMAT="%F %T: "
 
@@ -40,7 +40,6 @@ GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 GIT_PROMPT_END=' ${timer_show}\n$ '
-GIT_PROMPT_SHOW_UPSTREAM=1
 source /opt/bash-git-prompt/gitprompt.sh
 
 export BROWSER=google-chrome
@@ -60,7 +59,14 @@ source ~/bin/h.sh
 # cat will use this
 tabs -4
 
-source ~/bin/tag.bash
+# https://github.com/aykamko/tag
+export GOPATH=/opt/gocode
+export TAG_CMD_FMT_STRING='pycharm {{.Filename}}:{{.LineNumber}}'
+if hash ag 2>/dev/null; then
+  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null; }
+  alias ag='tag --hidden --ignore frontend --ignore .git --ignore node_modules --ignore build --ignore __tests --ignore tests --ignore .hg'
+fi
+
 
 # disable caps lock
 [[ -n $DISPLAY ]] && setxkbmap -option caps:none
@@ -95,3 +101,6 @@ export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
 touch ~/last_cd
 cd "$(cat ~/last_cd)"
 source ~/.bashrc.local
+#export NO_PROXY="localhost,127.0.0.1"
+#export http_proxy=http://localhost:3128
+#export https_proxy=http://localhost:3128

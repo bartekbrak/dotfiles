@@ -38,13 +38,16 @@ s() {
   [ -d ".hg" ] && hg status "$@"
 }
 dif() {
-  git diff "$@"
+  [ -d ".git" ] && git diff "$@"
+  [ -d ".hg" ] && hg diff "$@"
 }
 ci() {
-  git commit "$@"
+  [ -d ".git" ] && git commit "$@"
+  [ -d ".hg" ] && hg commit "$@"
 }
 pull() {
-  git pull "$@"
+  [ -d ".git" ] && git pull "$@"
+  [ -d ".hg" ] && hg pull "$@"
 }
 pulldiff() {
     git fetch
@@ -139,10 +142,7 @@ _e()
       ~/.hgrc
       ~/.bashrc
       ~/.bashrc.local
-      ~/.i3status.conf
       ~/.vimrc
-      ~/.config/sxhkd/sxhkdrc
-      ~/workspace/ls/default/.hg/hgrc
       ~/.ipython/profile_default/startup/00-first.py
       ~/.i3/config
       ~/.tmux.conf
@@ -374,3 +374,4 @@ tz ()
     done
 }
 
+alias autoremove='sudo apt-get autoremove'

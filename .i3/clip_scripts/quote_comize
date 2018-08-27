@@ -1,0 +1,3 @@
+#!/bin/bash
+xclip -o | sed "s|.*|'\0',|" | xclip -i -selection clipboard
+

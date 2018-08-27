@@ -1,0 +1,2 @@
+#!/bin/bash
+xclip -o | fold -w 80 -s - | xclip -i -selection clipboard
