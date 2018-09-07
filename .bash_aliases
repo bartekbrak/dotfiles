@@ -77,6 +77,9 @@ which.many() {
         done
     }
 }
+path() {
+    echo $PATH | sed 's,:,\n,g'
+}
 
 # Let Open Office Spreadsheet not offer restoring documents, I often kill the app and don't care about the things I didn't save
 alias localc='localc --norestore'
@@ -89,9 +92,9 @@ alias apt='sudo apt'
 alias dpkg='sudo dpkg'
 
 ### cleaners
-alias diffcruft_delete='find \( -name \*.orig -o -name \*.rej \) -print -delete'
-alias pyc_delete='find . -name \*.pyc -print -delete'
-alias empty_dirs_delete='find . -type d -empty -print -delete'
+alias delete.diffcruft='find \( -name \*.orig -o -name \*.rej \) -print -delete'
+alias delete.pyc='find . -name \*.pyc -print -delete'
+alias delete.empty_dirs='find . -type d -empty -print -delete'
 alias flatten_dir='find . -type f -exec mv "{}" -t . \;'
 
 orphaned_pyc() {
@@ -99,7 +102,7 @@ orphaned_pyc() {
     find . -name '*.pyc' -exec bash -c 'test ! -e "${1%c}"' -- {} \; -print
 }
 
-orphaned_pyc_delete() {
+delete.orphaned_pyc() {
    find . -name '*.pyc' -exec bash -c 'test ! -e "${1%c}"' -- {} \; -print -delete
 }
 
@@ -325,7 +328,9 @@ resolve_ssh() {
 complete -F _known_hosts resolve_ssh
 
 pyenv.new() {
-    pyenv virtualenv 3.6.5 $(basename $(pwd))
+    echo pyenv virtualenv 3.7.0 $(basename $(pwd))
+    pyenv virtualenv 3.7.0 $(basename $(pwd))
+    echo pyenv local $(basename $(pwd))
     pyenv local $(basename $(pwd))
 }
 pyenv.which() {
@@ -375,3 +380,20 @@ tz ()
 }
 
 alias autoremove='sudo apt-get autoremove'
+alias find='2>/dev/null find'
+cors() {
+    # cors uri host origin
+    # cors http://regalix.tv.lvh.me:8000/api/assets/ regalix.tv.lvh.me:8000 regalix.tv.lvh.me:4200
+    #
+    # The Origin header is the domain the request originates from.
+    # The Host is the domain the request is being sent to. This header was introduced so hosting sites could include multiple domains on a single IP.
+    # https://stackoverflow.com/a/13871912/1472229
+    http \
+        --print=hH \
+        $1 \
+        Origin:$2 \
+        Host:$3 \
+        'Access-Control-Request-Headers: Origin, Accept, Content-Type' \
+        'Access-Control-Request-Method: GET' 
+}
+

@@ -20,6 +20,7 @@
     hard = ! git fetch && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
     mine = ! git commit --amend --author 'Bartek Brak Rychlicki <bartek.rychlicki@regalix-inc.com>'
     reauthor = ! git commit --amend --author 
+    sta = ! git -c color.ui=always status -vv | most
 [color]
     ui = auto
 [push]

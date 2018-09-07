@@ -27,7 +27,7 @@ shopt -s checkwinsize
 
 # . is bold, it allows you to stop prepending ./ to command from the current dir,
 # that is not enabled by default in linux as it is huge security risk
-export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:."
+export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:node_modules/.bin:."
 
 
 # Map keypad del inserts a dot, useful for IPs
@@ -61,10 +61,10 @@ tabs -4
 
 # https://github.com/aykamko/tag
 export GOPATH=/opt/gocode
-export TAG_CMD_FMT_STRING='pycharm {{.Filename}}:{{.LineNumber}}'
+export TAG_CMD_FMT_STRING='vim {{.Filename}} +{{.LineNumber}}'
 if hash ag 2>/dev/null; then
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null; }
-  alias ag='tag --hidden --ignore frontend --ignore .git --ignore node_modules --ignore build --ignore __tests --ignore tests --ignore .hg'
+  alias ag='tag --hidden --ignore .git --ignore node_modules --ignore build --ignore __tests --ignore tests --ignore .hg'
 fi
 
 
@@ -104,3 +104,5 @@ source ~/.bashrc.local
 #export NO_PROXY="localhost,127.0.0.1"
 #export http_proxy=http://localhost:3128
 #export https_proxy=http://localhost:3128
+XTV_VENV_BIN=~/.pyenv/versions/xtv/bin
+source ~/workspace/regalix/xtv/source.me
