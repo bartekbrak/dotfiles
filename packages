@@ -22,3 +22,4 @@ atool xz-utils unrar rar p7zip-full lzma lzip
 xbacklight
 
 maim
+pinentry-qt

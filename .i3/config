@@ -46,7 +46,7 @@ bindsym $mod+j       exec "\
     | rofi -dmenu -p 'Affect clipoboard with' \
     | xargs -I{} bash ~/.i3/clip_scripts/{} \
 "
-bindsym $mod+x       exec --no-startup-id personal
+bindsym $mod+x       exec --no-startup-id ~/bin/personal
 bindsym $mod+p       exec --no-startup-id passmenu --type-user-tab-pass
 bindsym $mod+Shift+p exec --no-startup-id passmenu --type-pass
 bindsym $mod+Shift+x exec --no-startup-id ~/bin/emoji
