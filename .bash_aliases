@@ -397,3 +397,4 @@ cors() {
         'Access-Control-Request-Method: GET' 
 }
 
+alias is_merge_finished="ag '>{3,}|<{3,}|={3,}'"

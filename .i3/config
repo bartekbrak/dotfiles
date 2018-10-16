@@ -10,9 +10,9 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # keys that will rather not change, system and window mgmt
-bindsym $mod+Return       exec i3-sensible-terminal
+bindsym $mod+Return       exec /usr/local/bin/st
 bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
-bindsym $mod+backslash    exec google-chrome
+bindsym $mod+backslash    exec google-chrome 
 bindsym $mod+l            exec i3lock
 bindsym mod1+F4           kill
 bindsym $mod+Shift+c      reload
