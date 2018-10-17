@@ -67,7 +67,7 @@ alias music='vlc -I ncurses ~/Music'
 which.many() {
     # where in path does exectuable $1 exist
     # example:
-    #     which_many python
+    #     which.many python
     #     /home/bartek/.pyenv/shims/python
     #     /usr/bin/python
     test -z $1 && { echo provide arg; } || {
@@ -76,6 +76,9 @@ which.many() {
             test -x "$i/$1" && echo "$i/$1"
         done
     }
+}
+which.rm() {
+    sudo rm $(which $1)
 }
 path() {
     echo $PATH | sed 's,:,\n,g'
@@ -258,7 +261,7 @@ link_symlinks() {
         sudo cp -vrs /home/bartek/symlinks/* /
     )
 }
-bedit() {
+which.edit() {
     editor $(which $1)
 }
 function _executables {
@@ -266,8 +269,7 @@ function _executables {
     local executables=$(compgen -c)
     COMPREPLY=( $(compgen -W "$executables" -- ${COMP_WORDS[COMP_CWORD]}) )
 }
-complete -F _executables bedit
-complete -F _executables which_many
+complete -F _executables which.edit which.many which.rm
 
 gpg.reload_agent() {
     gpg-connect-agent reloadagent /bye
@@ -398,3 +400,8 @@ cors() {
 }
 
 alias is_merge_finished="ag '>{3,}|<{3,}|={3,}'"
+fold.inplace() {
+    target=$1
+    shift
+    fold -s "$target" "$@"  | sponge "$target"
+}
