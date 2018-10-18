@@ -1,3 +1,4 @@
+Algolia
 B2B
 BetAction
 BetActionSerializer
@@ -12,10 +13,12 @@ Gitlab
 GraphQL
 Grappelli
 JIRA
+M2M
 Michał
 Nginx
 NoReverseMatch
 Officebird
+PyCharm
 Rarebets
 SHA
 SQLs
@@ -24,7 +27,6 @@ WIP
 WS
 Wistia
 addon
-api
 api
 ask
 auth
@@ -67,14 +69,16 @@ localhost
 lvh
 npm
 parsable
+pipdeptree
+png
 propTypes
+psycopg2
 py
 pyc
 pytest
 pytestmark
 qa
 rb
-regalix
 regalix
 rfp
 samochwalenia

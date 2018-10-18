@@ -404,4 +404,9 @@ fold.inplace() {
     target=$1
     shift
     fold -s "$target" "$@"  | sponge "$target"
+work_on_sercrets() {
+    export GIT_DIR=.secrets_git
+}
+work_on_sercrets.finish() {
+    unset GIT_DIR
 }
