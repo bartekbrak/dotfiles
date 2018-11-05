@@ -222,8 +222,6 @@ f() {
     shift
     find -name "*$part" $@
 }
-alias notmine='find . \! -user bartek -print'
-
 #### WIP section
 is_tmux() { [ -n "$TMUX" ] && echo You\'re in tmux || echo You are not in tmux; }
 alias reload_xresources='xrdb -merge ~/.Xresources'
@@ -399,7 +397,7 @@ cors() {
         'Access-Control-Request-Method: GET' 
 }
 
-alias is_merge_finished="ag '>{3,}|<{3,}|={3,}'"
+alias is_merge_finished="ag '>>>>>>>|<<<<<<<|======='"
 fold.inplace() {
     target=$1
     shift

@@ -104,5 +104,7 @@ source ~/.bashrc.local
 #export NO_PROXY="localhost,127.0.0.1"
 #export http_proxy=http://localhost:3128
 #export https_proxy=http://localhost:3128
-XTV_VENV_BIN=~/.pyenv/versions/xtv/bin
+export XTV_VENV_BIN=~/.pyenv/versions/xtv/bin
 source ~/workspace/regalix/xtv/source.me
+export PYTHONUNBUFFERED=1
+eval "$(direnv hook bash)"

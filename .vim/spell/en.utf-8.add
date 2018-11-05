@@ -1,8 +1,10 @@
+Aestethic
 Algolia
 B2B
 BetAction
 BetActionSerializer
 Bleh
+BrowsableAPIRenderer
 CORS
 CTO
 Django
@@ -58,6 +60,7 @@ githuba
 gitlab
 heheszki
 init
+inlines
 isort
 jQuery
 jekyll
@@ -67,6 +70,7 @@ legacy
 linkedina
 localhost
 lvh
+nginx
 npm
 parsable
 pipdeptree
@@ -87,6 +91,7 @@ serializer
 serializers
 sql
 station
+thorugh
 topup
 traceback
 tv
@@ -99,4 +104,3 @@ viewsets
 work
 xtv
 yamllint
-Aestethic
