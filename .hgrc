@@ -7,7 +7,7 @@ askusername = True
 #    will fail if there are any conflicts and leave markers in the partially merged
 #    file. Markers will have two sections, one for each side of merge.
 # Find out why just setting priority of this tool isn't enough.
-merge=:merge
+#merge=:merge
 
 [extensions]
 graphlog =
