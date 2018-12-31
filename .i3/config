@@ -171,13 +171,10 @@ assign [class="Franz"]             slack
 for_window [class="^.*"] border pixel 0
 
 exec chromium-browser
-#exec subl
-exec vvsscode
-#exec slack
+exec subl
 exec franz
-#exec --no-startup-id redshift -b 0.8:0.6 -l 52.14:21.1 -t 6500:3500 -r
 exec charm
-#exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
+# exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 # compton dimms unused windows for me
 exec compton -b
 
