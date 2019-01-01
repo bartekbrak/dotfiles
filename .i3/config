@@ -12,7 +12,7 @@ focus_follows_mouse no
 # keys that will rather not change, system and window mgmt
 bindsym $mod+Return       exec /usr/local/bin/st
 bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
-bindsym $mod+backslash    exec google-chrome 
+bindsym $mod+backslash    exec google-chrome
 bindsym $mod+l            exec i3lock
 bindsym mod1+F4           kill
 bindsym $mod+Shift+c      reload
@@ -47,8 +47,8 @@ bindsym $mod+j       exec "\
     | xargs -I{} bash ~/.i3/clip_scripts/{} \
 "
 bindsym $mod+x       exec --no-startup-id ~/bin/personal
-bindsym $mod+p       exec --no-startup-id passmenu --type-user-tab-pass
-bindsym $mod+Shift+p exec --no-startup-id passmenu --type-pass
+bindsym $mod+p       exec --no-startup-id ~/bin/passmenu --type-user-tab-pass
+bindsym $mod+Shift+p exec --no-startup-id ~/bin/passmenu --type-pass
 bindsym $mod+Shift+x exec --no-startup-id ~/bin/emoji
 
 # moves

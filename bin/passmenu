@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob globstar
+
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+case $1 in
+    "--type-pass" )
+        password=$(printf '%s\n' "${password_files[@]}" | grep -v '_old' | rofi -dmenu -i "$@")
+        pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | xdotool type --delay 50 --clearmodifiers --file -;
+        shift;;
+    "--type-user-tab-pass" )
+        password=$(printf '%s\n' "${password_files[@]}" | grep -v '_old' | rofi -dmenu -i "$@")
+        IFS='/' read -r -a array <<< "$password";
+        username="${array[-1]}";
+        xdotool type --delay 50 --clearmodifiers "$username";
+        xdotool key Tab;
+        pass show "$password" | { read -r pass; printf %s "$pass"; } | xdotool type --delay 50 --clearmodifiers --file -;
+        shift;;
+    "--clip" )
+        password=$(printf '%s\n' "${password_files[@]}" | grep -v '_old' | rofi -dmenu -i "$@")
+        pass show -c "$password" 2>/dev/null
+        shift;;
+    "--filter-by-wm-name" )
+        url=$(
+            xprop |
+            grep ^WM_NAME |
+            sed -nE "s|.*https?://(www.)?([^/]+).*|\2|p"
+        )
+        if [ -z $url ]
+        then 
+            url=chuja_nie_ma
+        fi
+        password=$(
+            printf '%s\n' "${password_files[@]}" |
+            grep -v '_old' |
+            grep $url |
+            rofi -p $url -dmenu -i "$@"
+        )
+        shift;;
+    * )
+      echo "--type-pas|--type-user-tab-pass|--clip"
+esac

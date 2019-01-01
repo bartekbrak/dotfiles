@@ -113,3 +113,5 @@ dbdump
 Atlassian
 runserver
 Paweł
+tslint
+deps
