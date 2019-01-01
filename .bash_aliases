@@ -413,3 +413,6 @@ merge.me.into.master() {
     git fetch && git rebase origin/master && git co master && git pull && git merge -
 }
 
+repos.report() {
+    find ~/workspace/ -name .git | sed s,/.git,, | xargs -t -I {} git -C {} status
+}
