@@ -420,20 +420,16 @@ merge.me.into.master() {
 }
 merge.this.into.master() {
   ( set -x
-    git fetch && 
+    git fetch &&
     git checkout $1 &&
-    git rebase origin/master && 
+    git rebase origin/master &&
     git push -f &&
-    git co master && 
-    git pull && 
+    git co master &&
+    git pull &&
     git merge -
   )
 }
 
-<<<<<<< Updated upstream
 repos.report() {
     find ~/workspace/ -name .git | sed s,/.git,, | xargs -t -I {} git -C {} status
 }
-=======
-
->>>>>>> Stashed changes
