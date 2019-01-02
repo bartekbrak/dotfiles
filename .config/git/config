@@ -1,6 +1,9 @@
 [user]
     name = Bartek Brak Rychlicki
+    email = bartek.rychlicki@regalix-inc.com
     signingkey = 9949A5D1
+[includeIf "gitdir:~/workspace/regalix/**"]
+    path = ~/workspace/regalix/.gitconfig
 [alias]
     co = checkout
     ci = commit
@@ -18,8 +21,7 @@
     rm-remote-branch = push origin --delete
     ignored = status --ignored
     hard = ! git fetch && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
-    mine = ! git commit --amend --author 'Bartek Brak Rychlicki <bartek.rychlicki@regalix-inc.com>'
-    reauthor = ! git commit --amend --author 
+    reauthor = ! git commit --amend --author
     sta = ! git -c color.ui=always status -vv | most
     unstage = reset HEAD
 [color]

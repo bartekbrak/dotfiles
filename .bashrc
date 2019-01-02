@@ -107,6 +107,10 @@ source ~/.bashrc.local
 export XTV_VENV_BIN=~/.pyenv/versions/xtv/bin
 export TWIX_VENV_BIN=~/.pyenv/versions/twix/bin
 source ~/workspace/regalix/xtv/source.me
+<<<<<<< Updated upstream
 source ~/workspace/regalix/twix/source.me
+=======
+source /home/bartek/workspace/regalix/twix/source.me
+>>>>>>> Stashed changes
 export PYTHONUNBUFFERED=1
 eval "$(direnv hook bash)"

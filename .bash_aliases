@@ -410,9 +410,30 @@ work_on_sercrets.finish() {
     unset GIT_DIR
 }
 merge.me.into.master() {
-    git fetch && git rebase origin/master && git co master && git pull && git merge -
+  ( set -x
+    git fetch &&
+    git rebase origin/master &&
+    git co master &&
+    git pull &&
+    git merge -
+  )
+}
+merge.this.into.master() {
+  ( set -x
+    git fetch && 
+    git checkout $1 &&
+    git rebase origin/master && 
+    git push -f &&
+    git co master && 
+    git pull && 
+    git merge -
+  )
 }
 
+<<<<<<< Updated upstream
 repos.report() {
     find ~/workspace/ -name .git | sed s,/.git,, | xargs -t -I {} git -C {} status
 }
+=======
+
+>>>>>>> Stashed changes
