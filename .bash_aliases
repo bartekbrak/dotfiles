@@ -89,7 +89,7 @@ alias localc='localc --norestore'
 
 # I'm a grown up, I can su
 # Don't complain on directories, this is bold, I know.
-alias rm='rm -rf'
+alias rm='rm -rfv'
 alias apt-get='sudo apt-get'
 alias apt='sudo apt'
 alias dpkg='sudo dpkg'
@@ -204,9 +204,7 @@ dips () {
 
 alias cont='git rebase --continue'
 fixup() {
-    sha=${1:-HEAD}
-    shift
-    git ci --fixup $sha "$@"
+    git ci --fixup HEAD^1 "$@"
 }
 add() {
     git add ${@:-.}

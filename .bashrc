@@ -110,3 +110,4 @@ source ~/workspace/regalix/xtv/source.me
 source ~/workspace/regalix/twix/source.me
 export PYTHONUNBUFFERED=1
 eval "$(direnv hook bash)"
+export PYTHONWARNINGS=ignore::UserWarning:psycopg2
