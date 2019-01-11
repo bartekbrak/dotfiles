@@ -1,0 +1,14 @@
+Hubspot
+README.md
+Regalix
+SSL
+api.service.ts
+backend
+compose.yml
+dev
+frontend
+hardcoded
+sharedemos
+src
+zajawiam
+checksum_v1 = 4b4620f7912de371ea58f84d1705ecdb
