@@ -62,7 +62,7 @@ push() {
 
 
 
-alias music='vlc -I ncurses ~/Music'
+alias music='vlc -I ncurses ~/music'
 
 which.many() {
     # where in path does exectuable $1 exist
@@ -430,4 +430,8 @@ merge.this.into.master() {
 
 repos.report() {
     find ~/workspace/ -name .git | sed s,/.git,, | xargs -t -I {} git -C {} status
+}
+
+key.fingerprint() {
+  ssh-keygen -E md5 -lf $1
 }
