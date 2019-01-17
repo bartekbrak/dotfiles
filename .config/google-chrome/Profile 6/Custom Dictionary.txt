@@ -1,4 +1,5 @@
 Hubspot
+MessageTemplate
 README.md
 Regalix
 SSL
@@ -11,4 +12,4 @@ hardcoded
 sharedemos
 src
 zajawiam
-checksum_v1 = 4b4620f7912de371ea58f84d1705ecdb
+checksum_v1 = abb54c1bdffa9fcad47d1e1a4f8b0872
