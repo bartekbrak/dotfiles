@@ -114,17 +114,17 @@ stale_pyc() {
     find . -name '*.pyc' -exec bash -c 'test "$1" -ot "${1%c}"' -- {} \; -print
 }
 
-stale_pyc_delete() {
+delete.stale_pyc() {
     find . -name '*.pyc' -exec bash -c 'test "$1" -ot "${1%c}"' -- {} \; -print -delete
 }
 pycache_() {
     find . -name __pycache__ -print -type d -exec rm -rf {} +
 }
 
-pycache_delete() {
+delete.pycache() {
     find . -name __pycache__ -print -type d -exec rm -rf {} +
 }
-pdb_delete() { find -name \*.py | xargs sed -i '/pdb.set_trace()/d'; }
+delete.pdb() { find -name \*.py | xargs sed -i '/pdb.set_trace()/d'; }
 
 # Decode Mongo ObjectId (contains time(
 ObjectId() {
@@ -204,7 +204,7 @@ dips () {
 
 alias cont='git rebase --continue'
 fixup() {
-    git ci --fixup HEAD^1 "$@"
+    git ci --fixup HEAD "$@"
 }
 add() {
     git add ${@:-.}

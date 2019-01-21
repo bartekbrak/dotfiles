@@ -173,7 +173,7 @@ for_window [class="^.*"] border pixel 0
 exec chromium-browser
 exec subl
 exec franz
-exec charm
+exec charm.pro
 # exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
 # compton dimms unused windows for me
 exec compton -b
