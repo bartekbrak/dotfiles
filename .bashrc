@@ -111,3 +111,5 @@ source ~/workspace/regalix/twix/source.me
 export PYTHONUNBUFFERED=1
 eval "$(direnv hook bash)"
 export PYTHONWARNINGS=ignore::UserWarning:psycopg2
+# dont use symbols in pass generate
+export PASSWORD_STORE_CHARACTER_SET=[:alnum:]

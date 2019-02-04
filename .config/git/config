@@ -12,6 +12,7 @@
     log1 = log --pretty=oneline --abbrev-commit
     log2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     log3 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    log4 = log --pretty=oneline --abbrev-commit --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
     dupes = ! git log --pretty=format:%s | sort | uniq -c | egrep -v '^[[:space:]]+1 '
     authors = log --format='%h| %<(25,trunc)%aN| %ae'
     pul = !git fetch && git --no-pager whatchanged ..$(git rev-parse --abbrev-ref --symbolic-full-name @{u}) && git pull -vpr
