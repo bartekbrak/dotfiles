@@ -189,6 +189,8 @@ cdsitepackages() {
     cd $(python -c 'from distutils.sysconfig import get_python_lib; print(get_python_lib())')
 }
 alias d=docker-compose
+alias g=git
+complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
 alias D=docker
 complete -F _docker_compose d dl
 slugify() {
@@ -286,10 +288,6 @@ _x()
   return 0
 }
 complete -F _x x.theme
-apt.up () {
-    apt-get install $(grep -vE "^\s*#" ~/packages  | tr "\n" " ")
-}
-alias g='grep'
 not_mine() {
     find -not -user $USER "$@"
 }

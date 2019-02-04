@@ -39,7 +39,10 @@ export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:node_modules/.bin:.
 GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
-GIT_PROMPT_END=' ${timer_show}\n$ '
+GIT_PROMPT_END=' ${timer_show}\n╰╼ '
+GIT_PROMPT_START='╭────━1━━─━━━━─━━━━────────━─━:─━─━─:─────━─━──━━╯\r╭─────\#─────\A\n┃ \w'
+# {1..$(($(tput cols) - 30))}
+# $(($(tput cols) - 2))
 source /opt/bash-git-prompt/gitprompt.sh
 
 export BROWSER=google-chrome

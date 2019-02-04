@@ -67,7 +67,7 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
 endfor
 set expandtab       " Expand TABs to spaces
 set textwidth=80    " prefered, not enforced, for reflowing with gq
-set relativenumber
+" set relativenumber
 
 " modeline enables per-file configuration
 " https://stackoverflow.com/a/40640857
@@ -85,3 +85,4 @@ map <Tab> gt
 set clipboard+=unnamedplus
 colo pablo
 syntax on
+set nowrap
