@@ -19,6 +19,7 @@ GraphQL
 Grappelli
 JIRA
 M2M
+MacOs
 Michał
 Nginx
 NoReverseMatch
@@ -61,6 +62,7 @@ django
 docstring
 docstrings
 env
+envrc
 fb
 flake8
 front1
@@ -71,6 +73,7 @@ gitconfig
 githuba
 gitlab
 heheszki
+href
 init
 inlines
 io
@@ -119,12 +122,10 @@ url
 urls
 viewset
 viewsets
+wakacje
 work
+wpierdol
 www
 xtv
 yamllint
-href
 æstethic
-wpierdol
-wakacje
-envrc

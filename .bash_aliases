@@ -63,6 +63,7 @@ push() {
 
 
 alias music='vlc -I ncurses ~/music'
+alias play='vlc -I ncurses'
 
 which.many() {
     # where in path does exectuable $1 exist
@@ -117,12 +118,16 @@ stale_pyc() {
 delete.stale_pyc() {
     find . -name '*.pyc' -exec bash -c 'test "$1" -ot "${1%c}"' -- {} \; -print -delete
 }
-pycache_() {
-    find . -name __pycache__ -print -type d -exec rm -rf {} +
+pycache() {
+    find . -name __pycache__ -print -type d
 }
 
 delete.pycache() {
     find . -name __pycache__ -print -type d -exec rm -rf {} +
+}
+delete.pytest_cache() {
+    find . -name .pytest_cache -print -type d -exec rm -rf {} +
+
 }
 delete.pdb() { find -name \*.py | xargs sed -i '/pdb.set_trace()/d'; }
 
@@ -205,8 +210,13 @@ dips () {
 }
 
 alias cont='git rebase --continue'
-fixup() {
+fixup.head() {
     git ci --fixup HEAD "$@"
+}
+fixup.sha() {
+    sha=$1
+    shift
+    git ci --fixup $sha "$@"
 }
 add() {
     git add ${@:-.}
@@ -436,4 +446,9 @@ repos.report() {
 
 key.fingerprint() {
   ssh-keygen -E md5 -lf $1
+}
+checkout.all.branches() {
+  for branch in $(git branch --all | grep '^\s*remotes' | egrep --invert-match '(:?HEAD|master)$'); do
+      echo git branch --track $(echo $branch | sed s,remotes/origin/,,g) "$branch"
+  done
 }
