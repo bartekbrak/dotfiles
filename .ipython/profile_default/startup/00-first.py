@@ -15,7 +15,8 @@ except ImportError:
 try:
     import pandas as pd
 except ImportError:
-    print('no pandas')
+    pass
+    # print('no pandas')
 from pprint import pprint
 from decimal import Decimal
 import decimal
@@ -27,18 +28,16 @@ import math
 try:
     import sh
 except ImportError:
-    print('sh not available')
+    # print('sh not available')
+    pass
 import random
 
 import subprocess
 try: from matplotlib.pyplot import plot
-except ImportError: print('matplotlib not available')
+except ImportError: pass  # print('matplotlib not available')
 
 try: import pytz
 except ImportError: pass
-
-try: import pyperclip
-except ImportError: print('no pyperclip')
 
 try: from dateutil.parser import parse as d
 except: print('no dateutil.parses')
