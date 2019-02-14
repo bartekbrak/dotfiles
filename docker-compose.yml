@@ -1,0 +1,10 @@
+version: '3.6'
+services:
+    squid:
+      container_name: squid
+      image: "datadog/squid"
+      ports:
+        - "3128:3128"
+      volumes:
+        - /home/bartek/squid_cache:/var/spool/squid
+        - /home/bartek/squid_logs:/var/log/squid
