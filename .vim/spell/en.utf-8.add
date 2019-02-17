@@ -18,9 +18,11 @@ Gitlab
 GraphQL
 Grappelli
 JIRA
+LogEntry
 M2M
 MacOs
 Michał
+Mixin
 Nginx
 NoReverseMatch
 Officebird
@@ -31,6 +33,7 @@ Rarebets
 SHA
 SQLs
 Swagatha
+TenantQuerySetMixin
 WHITELIST
 WIP
 WS
