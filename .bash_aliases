@@ -334,10 +334,11 @@ resolve_ssh() {
 complete -F _known_hosts resolve_ssh
 
 pyenv.new() {
-    echo pyenv virtualenv 3.7.0 $(basename $(pwd))
-    pyenv virtualenv 3.7.0 $(basename $(pwd))
-    echo pyenv local $(basename $(pwd))
+   (
+    set -x
+    pyenv virtualenv 3.7.2 $(basename $(pwd))
     pyenv local $(basename $(pwd))
+   )
 }
 pyenv.which() {
     pyenv which python

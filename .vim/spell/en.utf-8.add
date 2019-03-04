@@ -132,3 +132,10 @@ www
 xtv
 yamllint
 æstethic
+UserFixture
+md
+JWT
+TimeStampedModel
+AutoSlugField
+djoser
+DRF
