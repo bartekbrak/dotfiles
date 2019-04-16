@@ -39,8 +39,8 @@ export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:node_modules/.bin:.
 GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
-GIT_PROMPT_END=' ${timer_show}\n$ '
-GIT_PROMPT_START='\n╭────━1━━─━━━━─━━━━────────━─━:─━─━─:─────━─━──━━╯\r╭─────\#─────\A───$(basename ${VIRTUAL_ENV:-no_env})─\n┃ \w'
+GIT_PROMPT_END='\n$ '
+GIT_PROMPT_START='\w \e[1;33m\A\e[0m \e[2;37m${timer_show}\e[0m'
 # {1..$(($(tput cols) - 30))}
 # $(($(tput cols) - 2))
 source /opt/bash-git-prompt/gitprompt.sh
