@@ -91,11 +91,11 @@ output_lines=0
 command_prompt=1
 menubar_visible=0
 free_space=1
-horizontal_split=1
+horizontal_split=0
 vertical_equal=1
 left_panel_size=71
 horizontal_equal=1
-top_panel_size=30
+top_panel_size=13
 
 [Misc]
 timeformat_recent=%b %e %H:%M
@@ -152,6 +152,9 @@ content_whole_words=false
 content_all_charsets=false
 ignore_dirs_enable=true
 ignore_dirs=
+
+[HotlistConfig]
+expanded_view_of_groups=0
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

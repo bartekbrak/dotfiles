@@ -34,19 +34,19 @@ alias l='ls -Alh --group-directories-first -d */'
 alias ls='ls --color=auto'
 
 s() {
-  [ -d ".git" ] && git status "$@"
+  [ -e ".git" ] && git status "$@"
   [ -d ".hg" ] && hg status "$@"
 }
 dif() {
-  [ -d ".git" ] && git diff "$@"
+  [ -e ".git" ] && git diff "$@"
   [ -d ".hg" ] && hg diff "$@"
 }
 ci() {
-  [ -d ".git" ] && git commit "$@"
+  [ -e ".git" ] && git commit "$@"
   [ -d ".hg" ] && hg commit "$@"
 }
 pull() {
-  [ -d ".git" ] && git pull "$@"
+  [ -e ".git" ] && git pull "$@"
   [ -d ".hg" ] && hg pull "$@"
 }
 pulldiff() {

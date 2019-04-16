@@ -12,7 +12,7 @@ focus_follows_mouse no
 # keys that will rather not change, system and window mgmt
 bindsym $mod+Return       exec /usr/local/bin/st
 bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
-bindsym $mod+backslash    exec google-chrome
+bindsym $mod+backslash    exec /home/bartek/bin/internet google-chrome
 bindsym $mod+l            exec i3lock
 bindsym mod1+F4           kill
 bindsym $mod+Shift+c      reload
@@ -170,7 +170,7 @@ assign [class="Slack"]             slack
 assign [class="Franz"]             slack
 for_window [class="^.*"] border pixel 0
 
-exec chromium-browser
+exec /home/bartek/bin/internet google-chrome
 exec subl
 exec franz
 exec charm.pro

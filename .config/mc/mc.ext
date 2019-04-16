@@ -3,7 +3,6 @@ type/^GIF
 	Include=image
 
 type/^JPEG
-	View=%view{ascii} /usr/lib/mc/ext.d/image.sh view jpeg
 	Include=image
 
 type/^PC\ bitmap
@@ -52,5 +51,4 @@ shell/i/.svg
 
 include/image
 	Open=feh %f
-	View=%view{ascii} /usr/lib/mc/ext.d/image.sh view ALL_FORMATS
-
+	View=feh %d
