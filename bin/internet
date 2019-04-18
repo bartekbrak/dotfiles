@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+shopt -s extglob
+sed -i \
+    's,"exit_type":\s*"Crashed","exit_type":"Normal",g' \
+    ~/.config/{google-chrome,chromium}/@(Profile\ ?|Default)/Preferences
+exec "$@"
