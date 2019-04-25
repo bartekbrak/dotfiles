@@ -91,6 +91,7 @@ alias localc='localc --norestore'
 # I'm a grown up, I can su
 # Don't complain on directories, this is bold, I know.
 alias rm='rm -rfv'
+alias mv='mv -v'
 alias apt-get='sudo apt-get'
 alias apt='sudo apt'
 alias dpkg='sudo dpkg'
@@ -252,8 +253,7 @@ alias find_download_crap='find . \
 -o -name Thumbs.db \
 -o -name \*.url \
 -o -name \*trailer\* \
-\)
-'
+\)'
 cycle='unblock; termdown -v pl 1500; i3-msg "workspace www"; block'
 
 

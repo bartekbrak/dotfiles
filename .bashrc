@@ -109,10 +109,13 @@ source ~/.bashrc.local
 #export https_proxy=http://localhost:3128
 export XTV_VENV_BIN=~/.pyenv/versions/xtv/bin
 export TWIX_VENV_BIN=~/.pyenv/versions/twix/bin
-source ~/workspace/regalix/xtv/source.me
-source ~/workspace/regalix/twix/source.me
 export PYTHONUNBUFFERED=1
 eval "$(direnv hook bash)"
 export PYTHONWARNINGS=ignore::UserWarning:psycopg2
 # dont use symbols in pass generate
 export PASSWORD_STORE_CHARACTER_SET=[:alnum:]
+# consider .files normal, for ls and mv
+# http://mywiki.wooledge.org/glob#dotglob
+shopt -s dotglob
+# https://stackoverflow.com/a/14118014
+export GIT_PAGER=cat
