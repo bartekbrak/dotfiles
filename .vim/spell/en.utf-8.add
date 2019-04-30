@@ -1,4 +1,3 @@
-Aestethic
 Algolia
 Atlassian
 AutoSlugField
@@ -37,6 +36,7 @@ Rarebets
 SHA
 SQLs
 Swagatha
+TODO
 TenantQuerySetMixin
 TimeStampedModel
 UserFixture
@@ -73,6 +73,7 @@ docstring
 docstrings
 env
 envrc
+estethic
 fb
 flake8
 front1
@@ -92,6 +93,7 @@ jQuery
 jekyll
 js
 json
+jupyter
 legacy
 linkedina
 localhost
@@ -101,6 +103,7 @@ md
 mgmt
 nginx
 npm
+param
 parsable
 pipdeptree
 png
@@ -117,6 +120,7 @@ regalix
 rfp
 runserver
 samochwalenia
+scipy
 scp
 serializer
 serializers
@@ -131,6 +135,7 @@ unbreak
 unresolve
 url
 urls
+uwsgi
 viewset
 viewsets
 wakacje
