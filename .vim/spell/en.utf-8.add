@@ -1,13 +1,16 @@
 Aestethic
 Algolia
 Atlassian
+AutoSlugField
 B2B
+BeanStalk
 BetAction
 BetActionSerializer
 Bleh
 BrowsableAPIRenderer
 CORS
 CTO
+DRF
 Daria
 Django
 DynamicModelSerializer
@@ -18,6 +21,7 @@ Gitlab
 GraphQL
 Grappelli
 JIRA
+JWT
 LogEntry
 M2M
 MacOs
@@ -34,6 +38,8 @@ SHA
 SQLs
 Swagatha
 TenantQuerySetMixin
+TimeStampedModel
+UserFixture
 WHITELIST
 WIP
 WS
@@ -62,6 +68,7 @@ deps
 diffrently
 dir
 django
+djoser
 docstring
 docstrings
 env
@@ -90,6 +97,7 @@ linkedina
 localhost
 lol
 lvh
+md
 mgmt
 nginx
 npm
@@ -132,10 +140,3 @@ www
 xtv
 yamllint
 æstethic
-UserFixture
-md
-JWT
-TimeStampedModel
-AutoSlugField
-djoser
-DRF
