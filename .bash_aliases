@@ -453,3 +453,18 @@ checkout.all.branches() {
       echo git branch --track $(echo $branch | sed s,remotes/origin/,,g) "$branch"
   done
 }
+asper() {
+    ls -l ~/.ssh/config.d/asper
+}
+asper.on() {
+    chmod 600 ~/.ssh/config.d/asper
+    asper
+}
+asper.off() {
+    chmod 000 ~/.ssh/config.d/asper
+    asper
+}
+usbcache_off() {
+    sudo hdparm -W 0 $1
+}
+alias pkill='pkill -e'
