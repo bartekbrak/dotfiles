@@ -21,6 +21,7 @@
     rm-remote-merged = ! git branch -r --merged | grep origin | grep -v '>' | grep -v master | xargs -L1 | cut -d"/" -f2- | xargs echo git push origin --delete
     rm-remote-branch = push origin --delete
     ignored = status --ignored
+    tracked = ls-tree -r --abbrev=8 --full-name HEAD
     hard = ! git fetch && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
     reauthor = ! git commit --amend --author
     sta = ! git -c color.ui=always status -vv | most

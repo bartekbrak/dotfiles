@@ -454,17 +454,27 @@ checkout.all.branches() {
   done
 }
 asper() {
-    ls -l ~/.ssh/config.d/asper
+    ls -l ~/.ssh/config.d/asper*
 }
 asper.on() {
-    chmod 600 ~/.ssh/config.d/asper
+    mv ~/.ssh/config.d/asper.{disabled,conf}
     asper
 }
 asper.off() {
-    chmod 000 ~/.ssh/config.d/asper
+    mv ~/.ssh/config.d/asper.{conf,disabled}
     asper
 }
 usbcache_off() {
     sudo hdparm -W 0 $1
 }
 alias pkill='pkill -e'
+steal_pycharm() {
+    echo PyCharm should be killed
+    ag evlsprt --silent ~/.PyCharm*/config/options/{other,options}.xml ~/.java/.userPrefs/prefs.xml
+    find  ~/.PyCharm*/ -name \*evaluation.key -delete -print
+    sed --silent -i '/evlsprt/d' ~/.PyCharm*/config/options/{other,options}.xml
+    sed --silent -i '/evlsprt/d' ~/.java/.userPrefs/prefs.xml
+    rm -rfv ~/.java/.userPrefs/jetbrains
+    echo "I think I'm done."
+
+}
