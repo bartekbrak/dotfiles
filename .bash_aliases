@@ -264,9 +264,9 @@ where_defined() {
 link_symlinks() {
     # sudo find /etc/ -xtype l -print -delete
     (
-        cd /home/bartek
+        cd ~
         find symlinks -type f | sed -e "s/symlinks/ /" | xargs sudo rm
-        sudo cp -vrs /home/bartek/symlinks/* /
+        sudo cp -vrs symlinks/* /
     )
 }
 which.edit() {
