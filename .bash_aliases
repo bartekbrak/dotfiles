@@ -442,7 +442,7 @@ merge.this.into.master() {
 }
 
 repos.report() {
-    find ~/workspace/ -name .git | sed s,/.git,, | xargs -t -I {} git -C {} status
+    find . -name .git | sed s,/.git,, | xargs -t -I {} git -C {} status
 }
 
 key.fingerprint() {
