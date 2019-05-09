@@ -468,6 +468,7 @@ usbcache_off() {
     sudo hdparm -W 0 $1
 }
 alias pkill='pkill -e'
+alias killall='killall -v'
 steal_pycharm() {
     echo PyCharm should be killed
     ag evlsprt --silent ~/.PyCharm*/config/options/{other,options}.xml ~/.java/.userPrefs/prefs.xml
