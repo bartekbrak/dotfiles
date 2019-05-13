@@ -174,7 +174,7 @@ exec /home/bartek/bin/internet google-chrome
 exec subl
 exec franz
 exec charm.pro
-# exec /home/bartek/.pyenv/versions/jupyter/bin/jupyter-qtconsole
+exec /home/bartek/.pyenv/versions/jupyter-qtconsole/bin/jupyter-qtconsole
 # compton dimms unused windows for me
 exec compton -b
 
