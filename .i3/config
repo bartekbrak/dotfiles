@@ -20,6 +20,7 @@ bindsym $mod+t            exec --no-startup-id "\
     maim -s /home/bartek/tmp/last.png ; \
     xclip -selection clipboard -t image/png /home/bartek/tmp/last.png\
 "
+bindsym $mod+o            exec /home/bartek/bin/trans_clip
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r      restart

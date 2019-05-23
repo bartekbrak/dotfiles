@@ -9,11 +9,11 @@ password_files=( "${password_files[@]%.gpg}" )
 
 case $1 in
     "--type-pass" )
-        password=$(printf '%s\n' "${password_files[@]}" | grep -v '_old' | rofi -dmenu -i "$@")
+        password=$(printf '%s\n' "${password_files[@]}" | grep -v '^_' | rofi -dmenu -i "$@")
         pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | xdotool type --delay 50 --clearmodifiers --file -;
         shift;;
     "--type-user-tab-pass" )
-        password=$(printf '%s\n' "${password_files[@]}" | grep -v '_old' | rofi -dmenu -i "$@")
+        password=$(printf '%s\n' "${password_files[@]}" | grep -v '^_' | rofi -dmenu -i "$@")
         IFS='/' read -r -a array <<< "$password";
         username="${array[-1]}";
         xdotool type --delay 50 --clearmodifiers "$username";

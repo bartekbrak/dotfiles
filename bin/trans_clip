@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+/home/bartek/bin/trans -b nl:en "$(xclip -o)" | xargs -0 -I % zenity --notification --text="%"

@@ -301,7 +301,7 @@ complete -F _x x.theme
 not_mine() {
     find -not -user $USER "$@"
 }
-alias rebase_to_root='git rebase -i --root'
+
 alias hosts='sudo vim /etc/hosts'
 paths() { GREP_COLORS='mt=01;34' egrep --color=always '[/a-zA-Z.]{1}[a-zA-Z0-9_-.]+/[a-zA-Z0-9_-.\/]+|$'; }
 reload_tmux() {
@@ -442,7 +442,10 @@ merge.this.into.master() {
 }
 
 repos.report() {
-    find . -name .git | sed s,/.git,, | xargs -t -I {} git -C {} status
+    find . -name .git 2>/dev/null \
+        | sort -i \
+        | sed s,/.git,, \
+        | xargs -I % sh -c 'echo "\e[95m%\e[0m"; git -C % -c color.status=always status -sb| sed "s/^/  /"'
 }
 
 key.fingerprint() {
@@ -478,4 +481,8 @@ steal_pycharm() {
     rm -rfv ~/.java/.userPrefs/jetbrains
     echo "I think I'm done."
 
+}
+alias fd='fd --no-ignore-vcs'
+need_to_run() {
+    git co -bwip; git add .; git ci -nmwip; git push
 }

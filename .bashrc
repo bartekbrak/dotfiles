@@ -119,4 +119,4 @@ export PASSWORD_STORE_CHARACTER_SET=[:alnum:]
 shopt -s dotglob
 # https://stackoverflow.com/a/14118014
 export GIT_PAGER=cat
-cd ~/workspace/asper
+cd ~/workspace/asper/ring
