@@ -8,3 +8,12 @@ services:
       volumes:
         - /home/bartek/squid_cache:/var/spool/squid
         - /home/bartek/squid_logs:/var/log/squid
+    # docker exec -it <container_id|container_name> /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P <your_password>
+    db:
+      image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+      environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=SA_PASSWORD
+      ports:
+        - 1433:1433
+

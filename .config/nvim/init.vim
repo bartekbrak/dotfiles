@@ -66,7 +66,6 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
     endif
 endfor
 set expandtab       " Expand TABs to spaces
-set textwidth=80    " prefered, not enforced, for reflowing with gq
 " set relativenumber
 
 " modeline enables per-file configuration

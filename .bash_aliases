@@ -34,7 +34,7 @@ alias l='ls -Alh --group-directories-first -d */'
 alias ls='ls --color=auto'
 
 s() {
-  [ -e ".git" ] && git status "$@"
+  [ -e ".git" ] && git status -sb "$@"
   [ -d ".hg" ] && hg status "$@"
 }
 dif() {
@@ -486,3 +486,8 @@ alias fd='fd --no-ignore-vcs'
 need_to_run() {
     git co -bwip; git add .; git ci -nmwip; git push
 }
+tmp() { cd ~/tmp; }
+function _help() { $1 --help; }
+alias ?='_help'
+alias ??=man
+alias cat=lolcat

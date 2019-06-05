@@ -156,7 +156,7 @@ bindsym $mod+F5               exec xbacklight -inc 20 # increase screen brightne
 # workspace_layout tabbed
 workspace_layout default
 
-# hide_edge_borders both
+hide_edge_borders smart
 
 # Application workspace preferences.
 assign [class="Jupyter-qtconsole"] jupyter
@@ -169,7 +169,8 @@ assign [class="Sublime_text"]      subl
 assign [class="Code"]              subl
 assign [class="Slack"]             slack
 assign [class="Franz"]             slack
-for_window [class="^.*"] border pixel 0
+#for_window [class="^.*"] border pixel 0
+#for_window [tiling] border pixel 1
 
 exec /home/bartek/bin/internet google-chrome
 exec subl
@@ -210,6 +211,8 @@ new_window pixel
 # Pulse Audio controls
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
+# THINK: the default behaviour is ok, and the below is not helpful
+# so commented out
 # The only way I can solve popup windows hiding under fullscreen windows
 # (when the software does not set right X hints)
-popup_during_fullscreen leave_fullscreen
+#popup_during_fullscreen leave_fullscreen

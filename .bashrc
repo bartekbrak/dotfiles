@@ -38,6 +38,7 @@ export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:node_modules/.bin:.
 # git-bash-prompt
 GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
+
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 GIT_PROMPT_END='\n$ '
 GIT_PROMPT_START='\w \e[1;33m\A\e[0m \e[2;37m${timer_show}\e[0m'
@@ -76,8 +77,8 @@ fi
 
 export EDITOR=vim
 export WINEDEBUG=-all
-export BRAT_EDITOR=charm
-export PROMPT_COMMAND="$PROMPT_COMMAND;. ~/.brat_sourceme"
+#export BRAT_EDITOR=charm
+#export PROMPT_COMMAND="$PROMPT_COMMAND;. ~/.brat_sourceme"
 
 [[ -n $DISPLAY ]] && setxkbmap -option kpdl:dot
 function timer_start {
@@ -97,18 +98,16 @@ function timer_stop {
 # before each subsequent command
 trap 'timer_start' DEBUG
 # before each subsequent prompt
-export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
+#export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
 export PROMPT_COMMAND="$PROMPT_COMMAND;timer_stop"
 # surfraw
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
-touch ~/last_cd
-cd "$(cat ~/last_cd)"
+#touch ~/last_cd
+#cd "$(cat ~/last_cd)"
 source ~/.bashrc.local
 #export NO_PROXY="localhost,127.0.0.1"
 #export http_proxy=http://localhost:3128
 #export https_proxy=http://localhost:3128
-export XTV_VENV_BIN=~/.pyenv/versions/xtv/bin
-export TWIX_VENV_BIN=~/.pyenv/versions/twix/bin
 export PYTHONUNBUFFERED=1
 eval "$(direnv hook bash)"
 export PYTHONWARNINGS=ignore::UserWarning:psycopg2
@@ -120,3 +119,12 @@ shopt -s dotglob
 # https://stackoverflow.com/a/14118014
 export GIT_PAGER=cat
 cd ~/workspace/asper/ring
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM="name verbose git"
+export GIT_PS1_STATESEPARATOR=""
+#export PS1='$ '
+# export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/bin/statusbar"
+export FPP_EDITOR=charm.pro
