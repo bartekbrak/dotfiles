@@ -336,7 +336,7 @@ complete -F _known_hosts resolve_ssh
 pyenv.new() {
    (
     set -x
-    pyenv virtualenv 3.7.2 $(basename $(pwd))
+    pyenv virtualenv ${1:-3.7.3} $(basename $(pwd))
     pyenv local $(basename $(pwd))
    )
 }
