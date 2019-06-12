@@ -442,7 +442,7 @@ merge.this.into.master() {
 }
 
 repos.report() {
-    find . -name .git 2>/dev/null \
+    find . -type d -name .git 2>/dev/null \
         | sort -i \
         | sed s,/.git,, \
         | xargs -I % sh -c 'echo "\e[95m%\e[0m"; git -C % -c color.status=always status -sb| sed "s/^/  /"'
