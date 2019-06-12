@@ -20,6 +20,10 @@ bindsym $mod+t            exec --no-startup-id "\
     maim -s /home/bartek/tmp/last.png ; \
     xclip -selection clipboard -t image/png /home/bartek/tmp/last.png\
 "
+# TODO: if clipboard starts with `-`, will not type
+bindsym $mod+s            exec "\
+    rofi -modi 'clipboard:~/bin/greenclip print' -fullscreen -show clipboard -run-command '{cmd}' -theme gruvbox-light -font 'TerminessTTF Nerd Font Mono 32'; sleep 0.5; xdotool type $(xclip -o -selection clipboard) \
+"
 bindsym $mod+o            exec /home/bartek/bin/trans_clip
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -39,12 +43,12 @@ bindsym $mod+r mode "resize"
 
 
 # menus
-bindsym $mod+d       exec "rofi -show run -lines 10 -columns 4 -matching fuzzy"
+bindsym $mod+d       exec "rofi -show run -lines 10 -columns 4 -matching fuzzy -font 'TerminessTTF Nerd Font Mono 32' -theme blue -p 'run:'"
 bindsym $mod+Shift+d exec "rofi -show drun"
-bindsym $mod+Tab     exec "rofi -show window"
+bindsym $mod+Tab     exec "rofi -show window -show-icons -font 'TerminessTTF Nerd Font Mono 32'"
 bindsym $mod+j       exec "\
     ls -1 ~/.i3/clip_scripts/ \
-    | rofi -dmenu -p 'Affect clipoboard with' \
+    | rofi -dmenu -p 'Affect clipoboard with:' -font 'TerminessTTF Nerd Font Mono 32' -theme Indego \
     | xargs -I{} bash ~/.i3/clip_scripts/{} \
 "
 bindsym $mod+x       exec --no-startup-id ~/bin/personal
@@ -66,7 +70,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+h           split h
 bindsym $mod+v           split v
 bindsym $mod+f           fullscreen
-bindsym $mod+s           layout stacking
+#bindsym $mod+s           layout stacking
 bindsym $mod+w           layout tabbed
 bindsym $mod+e           layout toggle split
 bindsym $mod+Shift+space floating toggle
@@ -216,3 +220,4 @@ for_window [class="Pavucontrol"] floating enable
 # The only way I can solve popup windows hiding under fullscreen windows
 # (when the software does not set right X hints)
 #popup_during_fullscreen leave_fullscreen
+exec --no-startup-id ~/bin/greenclip daemon

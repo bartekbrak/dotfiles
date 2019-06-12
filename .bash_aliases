@@ -491,3 +491,10 @@ function _help() { $1 --help; }
 alias ?='_help'
 alias ??=man
 alias cat=lolcat
+which_vga_driver_am_i_using() {
+    # both can't be loaded
+    lsmod | egrep 'nvidia|nouveau'
+    # better
+    lspci -k | grep -A 2 -E "(VGA|3D)"
+}
+alias urldecode='python3 -c "import sys, html; print(html.unescape(sys.argv[1]))"'
