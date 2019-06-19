@@ -20,9 +20,11 @@ bindsym $mod+t            exec --no-startup-id "\
     maim -s /home/bartek/tmp/last.png ; \
     xclip -selection clipboard -t image/png /home/bartek/tmp/last.png\
 "
-# TODO: if clipboard starts with `-`, will not type
 bindsym $mod+s            exec "\
-    rofi -modi 'clipboard:~/bin/greenclip print' -fullscreen -show clipboard -run-command '{cmd}' -theme gruvbox-light -font 'TerminessTTF Nerd Font Mono 32'; sleep 0.5; xdotool type $(xclip -o -selection clipboard) \
+    rofi \
+        -modi 'clipboard:~/bin/greenclip print' \
+        -show clipboard -run-command '{cmd}' \
+        -theme gruvbox-light -font 'TerminessTTF Nerd Font Mono 32'; \
 "
 bindsym $mod+o            exec /home/bartek/bin/trans_clip
 

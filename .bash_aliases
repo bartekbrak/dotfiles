@@ -250,6 +250,7 @@ alias find_download_crap='find . \
 -o -name \*.nfo \
 -o -name Downloaded\ From\* \
 -o -name VISIT\* \
+-o -name www.\*jpg \
 -o -name Thumbs.db \
 -o -name \*.url \
 -o -name \*trailer\* \

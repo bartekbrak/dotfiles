@@ -128,3 +128,5 @@ export GIT_PS1_STATESEPARATOR=""
 #export PS1='$ '
 # export PROMPT_COMMAND="$PROMPT_COMMAND;source ~/bin/statusbar"
 export FPP_EDITOR=charm.pro
+alias t=todo.sh
+complete -F _todo t
