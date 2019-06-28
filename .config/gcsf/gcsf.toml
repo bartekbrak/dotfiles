@@ -1,0 +1,53 @@
+### This is the configuration file that GCSF uses.
+### It should be placed in $XDG_CONFIG_HOME/gcsf/gcsf.toml, which is usually
+### defined as $HOME/.config/gcsf/gcsf.toml
+
+# Show additional logging info?
+debug = false
+
+# Perform a mount check and fail early if it fails. Disable this if you
+# encounter this error:
+#
+#     fuse: attempt to remount on active mount point: [...]
+#     Could not mount to [...]: Undefined error: 0 (os error 0)
+mount_check = true
+
+# How long to cache the contents of a file after it has been accessed.
+cache_max_seconds = 300
+
+# How how many files to cache.
+cache_max_items = 10
+
+# How long to cache the size and capacity of the file system. These are the
+# values reported by `df`.
+cache_statfs_seconds = 60
+
+# How many seconds to wait before checking for remote changes and updating them
+# locally.
+sync_interval = 10
+
+# Mount options
+mount_options = [
+    "fsname=GCSF",
+    # Allow file system access to root. This only works if `user_allow_other`
+    # is set in /etc/fuse.conf
+    "allow_root",
+    "big_writes",
+    "max_write=131072",
+    "nonempty"
+]
+
+# If set to true, Google Drive will provide a code after logging in and
+# authorizing GCSF. This code must be copied and pasted into GCSF in order to
+# complete the process. Useful for running GCSF on a remote server.
+#
+# If set to false, Google Drive will attempt to communicate with GCSF directly.
+# This is usually faster and more convenient.
+authorize_using_code = false
+
+# If set to true, all files with identical name will get an increasing number attached to the suffix.
+rename_identical_files = false
+
+# If set to true, deleted files will remove them permanently instead of moving them to Trash.
+# Deleting trashed files always removes them permanently.
+skip_trash = true

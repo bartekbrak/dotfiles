@@ -27,7 +27,7 @@ shopt -s checkwinsize
 
 # . is bold, it allows you to stop prepending ./ to command from the current dir,
 # that is not enabled by default in linux as it is huge security risk
-export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:node_modules/.bin:."
+export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:~/.cargo/bin:node_modules/.bin:."
 
 
 # Map keypad del inserts a dot, useful for IPs
@@ -130,3 +130,5 @@ export GIT_PS1_STATESEPARATOR=""
 export FPP_EDITOR=charm.pro
 alias t=todo.sh
 complete -F _todo t
+export XDG_CONFIG_HOME=$HOME/.config
+complete -C /home/bartek/bin/terraform terraform

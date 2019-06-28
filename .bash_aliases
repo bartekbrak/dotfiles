@@ -33,21 +33,38 @@ alias llo='stat -c "%a %n"'
 alias l='ls -Alh --group-directories-first -d */'
 alias ls='ls --color=auto'
 
+exists_somewhere_up() {
+  # find file/dit/symlink in this and parent directories
+  # usage: exists_somewhere_up .git && git status
+  # todo assert $1
+  local needle="$1"
+  local root="${2:-$PWD}"
+  while ! [[ "$root" =~ ^//[^/]*$ ]]; do
+    if [ -e "${root}/${needle}" ]; then
+      # echo "${root}/${needle}"
+      return 0
+    fi
+    [ -n "$root" ] || break
+    root="${root%/*}"
+  done
+  return 1
+}
+
 s() {
-  [ -e ".git" ] && git status -sb "$@"
-  [ -d ".hg" ] && hg status "$@"
+  exists_somewhere_up .git && git status -sb "$@"
+  exists_somewhere_up .hg && hg status "$@"
 }
 dif() {
-  [ -e ".git" ] && git diff "$@"
-  [ -d ".hg" ] && hg diff "$@"
+  exists_somewhere_up .git && git diff "$@"
+  exists_somewhere_up .hg && hg diff "$@"
 }
 ci() {
-  [ -e ".git" ] && git commit "$@"
-  [ -d ".hg" ] && hg commit "$@"
+  exists_somewhere_up .git && git commit "$@"
+  exists_somewhere_up .hg && hg commit "$@"
 }
 pull() {
-  [ -e ".git" ] && git pull "$@"
-  [ -d ".hg" ] && hg pull "$@"
+  exists_somewhere_up .git && git pull "$@"
+  exists_somewhere_up .hg && hg pull "$@"
 }
 pulldiff() {
     git fetch
@@ -266,8 +283,8 @@ link_symlinks() {
     # sudo find /etc/ -xtype l -print -delete
     (
         cd ~
-        find symlinks -type f | sed -e "s/symlinks/ /" | xargs sudo rm
-        sudo cp -vrs symlinks/* /
+        find symlinks -type f | sed -e "s/symlinks/ /" | xargs -I% sudo rm "%"
+        sudo cp -vrs ~/symlinks/* /
     )
 }
 which.edit() {
@@ -457,16 +474,11 @@ checkout.all.branches() {
       echo git branch --track $(echo $branch | sed s,remotes/origin/,,g) "$branch"
   done
 }
-asper() {
-    ls -l ~/.ssh/config.d/asper*
-}
 asper.on() {
     mv ~/.ssh/config.d/asper.{disabled,conf}
-    asper
 }
 asper.off() {
     mv ~/.ssh/config.d/asper.{conf,disabled}
-    asper
 }
 usbcache_off() {
     sudo hdparm -W 0 $1
@@ -491,7 +503,6 @@ tmp() { cd ~/tmp; }
 function _help() { $1 --help; }
 alias ?='_help'
 alias ??=man
-alias cat=lolcat
 which_vga_driver_am_i_using() {
     # both can't be loaded
     lsmod | egrep 'nvidia|nouveau'
@@ -499,3 +510,11 @@ which_vga_driver_am_i_using() {
     lspci -k | grep -A 2 -E "(VGA|3D)"
 }
 alias urldecode='python3 -c "import sys, html; print(html.unescape(sys.argv[1]))"'
+alias wttr='http wttr.in/Warsaw'
+alias mkdir='mkdir -vp'
+alias ring='cd ~/workspace/asper/ring'
+alias unfocus='/usr/bin/i3-msg bar mode invisible; rm /dev/shm/focus'
+alias refocus='/usr/bin/i3-msg bar mode dock;date +%s > /dev/shm/focus'
+alias decomment="sed '/^#/d'"
+alias yt-mp3-dl='youtube-dl -x --audio-format mp3'
+alias można_teraz_bezpiecznie_wyłączyć_komputer='sudo shutdown now'
