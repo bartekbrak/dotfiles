@@ -167,3 +167,5 @@ enum
 BOOL
 Instalatie
 Weechat
+lxml
+FastAPI
