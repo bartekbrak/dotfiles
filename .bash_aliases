@@ -267,6 +267,7 @@ alias find_download_crap='find . \
 -o -name \*.nfo \
 -o -name Downloaded\ From\* \
 -o -name VISIT\* \
+-o -iname Downloaded\ from\*.txt \
 -o -name www.\*jpg \
 -o -name Thumbs.db \
 -o -name \*.url \
@@ -331,7 +332,7 @@ tmux.settings() {
 }
 alias ..='cd ..'
 pipi() {
-    pip install $1 && pip freeze | grep -wi ^$1= | tee /dev/fd/2 | xclip -selection clipboard
+    pip install $1 && pip freeze | grep -wi ^$1= | tr -d '\n' | tee /dev/fd/2 | xclip -selection clipboard
     echo "copied to clipboard"
 }
 
@@ -402,7 +403,7 @@ prompt.show() {
 }
 tz ()
 {
-    for x in America/Los_Angeles Europe/Warsaw Asia/Kolkata;
+    for x in America/Los_Angeles Europe/Warsaw Asia/Kolkata Australia/Sydney;
     do
         TZ=$x date +"%Z%t%H:%M%t$x" "$@"
     done
@@ -463,7 +464,11 @@ repos.report() {
     find . -type d -name .git 2>/dev/null \
         | sort -i \
         | sed s,/.git,, \
-        | xargs -I % sh -c 'echo "\e[95m%\e[0m"; git -C % -c color.status=always status -sb| sed "s/^/  /"'
+        | xargs -I % sh -c '
+              echo "\e[95m%\e[0m"
+              git -C % -c color.status=always status -sb | sed "s/^/  /"
+              git -C % -c color.status=always branch -rvvv
+          '
 }
 
 key.fingerprint() {
@@ -512,9 +517,25 @@ which_vga_driver_am_i_using() {
 alias urldecode='python3 -c "import sys, html; print(html.unescape(sys.argv[1]))"'
 alias wttr='http wttr.in/Warsaw'
 alias mkdir='mkdir -vp'
-alias ring='cd ~/workspace/asper/ring'
+alias ring='cd ~/work/ring'
 alias unfocus='/usr/bin/i3-msg bar mode invisible; rm /dev/shm/focus'
 alias refocus='/usr/bin/i3-msg bar mode dock;date +%s > /dev/shm/focus'
 alias decomment="sed '/^#/d'"
 alias yt-mp3-dl='youtube-dl -x --audio-format mp3'
 alias można_teraz_bezpiecznie_wyłączyć_komputer='sudo shutdown now'
+alias clean_journal='sudo journalctl --vacuum-time=2d'
+alias cal='ncal -Mw'
+add() {
+  if [ "$#" -ne 3 ]; then
+      echo "add title hour duration"
+      echo "EVENT_COLOR: lavender, sage, grape, flamingo, banana, tangerine, peacock, graphite, blueberry, basil, tomato"
+      return 1;
+  fi
+  title=$1
+  shift
+  when=$1
+  shift
+  duration=$1
+  shift
+  echo gcalcli add --title "$title" --duration $duration --when $when --noprompt  
+}

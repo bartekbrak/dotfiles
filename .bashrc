@@ -98,12 +98,12 @@ function timer_stop {
 # before each subsequent command
 trap 'timer_start' DEBUG
 # before each subsequent prompt
-#export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
+export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
 export PROMPT_COMMAND="$PROMPT_COMMAND;timer_stop"
 # surfraw
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
-#touch ~/last_cd
-#cd "$(cat ~/last_cd)"
+touch ~/last_cd
+cd "$(cat ~/last_cd)"
 source ~/.bashrc.local
 #export NO_PROXY="localhost,127.0.0.1"
 #export http_proxy=http://localhost:3128
@@ -118,7 +118,6 @@ export PASSWORD_STORE_CHARACTER_SET=[:alnum:]
 shopt -s dotglob
 # https://stackoverflow.com/a/14118014
 export GIT_PAGER=cat
-cd ~/workspace/asper/ring
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
@@ -132,3 +131,4 @@ alias t=todo.sh
 complete -F _todo t
 export XDG_CONFIG_HOME=$HOME/.config
 complete -C /home/bartek/bin/terraform terraform
+date +%Y%m%d_%H%M >> ~/trace

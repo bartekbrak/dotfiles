@@ -1,6 +1,6 @@
 [user]
-    name = Bartek Brak Rychlicki
-    email = bartek.rychlicki@gmail.com
+    name = Bartek Brak
+    email = bartek@brak.dev
     signingkey = 9949A5D1
 [includeIf "gitdir:~/workspace/regalix/**"]
     path = ~/workspace/regalix/.gitconfig

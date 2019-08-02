@@ -1,3 +1,4 @@
 tmp
 bartek.py
 .pytest_cache
+.~lock*

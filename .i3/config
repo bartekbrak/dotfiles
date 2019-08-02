@@ -214,5 +214,5 @@ for_window [class="Pavucontrol"] floating enable
 # so commented out
 # The only way I can solve popup windows hiding under fullscreen windows
 # (when the software does not set right X hints)
-#popup_during_fullscreen leave_fullscreen
+popup_during_fullscreen leave_fullscreen
 exec --no-startup-id ~/bin/greenclip daemon
