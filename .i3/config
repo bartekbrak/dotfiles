@@ -127,7 +127,7 @@ bindsym $mod+Shift+bracketleft  move workspace to output left
 bindsym $mod+Shift+bracketright move workspace to output right
 
 bar {
-    status_command /home/bartek/bin/focus
+    #status_command /home/bartek/bin/focus
     font pango:TerminessTTF Nerd Font Mono 32
     workspace_buttons no
     mode dock
@@ -144,11 +144,15 @@ bar {
 # Volume control, note `--`, ref: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=686667
 bindsym XF86AudioLowerVolume  exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '-5%'
 bindsym XF86AudioRaiseVolume  exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '+5%'
-bindsym $mod+F9               exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '-5%'
-bindsym $mod+F10              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '+5%'
-bindsym $mod+F11              exec /usr/bin/pactl -- set-sink-mute   @DEFAULT_SINK@ toggle
 bindsym XF86AudioMute         exec /usr/bin/pactl -- set-sink-mute   @DEFAULT_SINK@ toggle
+
+bindsym $mod+F9               exec /usr/bin/pactl -- set-sink-mute   @DEFAULT_SINK@ toggle
+bindsym $mod+F10              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '-5%'
+bindsym $mod+F11              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '+5%'
+
 bindsym $mod+XF86AudioMute    exec pavucontrol
+bindsym $mod+F12              exec pavucontrol
+
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 bindsym XF86MonBrightnessUp   exec xbacklight -inc 20 # increase screen brightness
 bindsym $mod+F4               exec xbacklight -dec 20 # decrease screen brightness

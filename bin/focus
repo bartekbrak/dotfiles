@@ -4,7 +4,7 @@ import time, sys, os
 
 FILE = '/dev/shm/focus'
 INTERVAL=1
-DUR=1500
+DUR=3600
 
 def remove():
     if os.path.isfile(FILE):

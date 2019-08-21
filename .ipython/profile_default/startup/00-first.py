@@ -3,6 +3,7 @@ Import some very common, non-conflicting and not-surprising modules
 
 """
 from __future__ import division
+import csv
 import os
 import sys
 from collections import *
@@ -39,7 +40,7 @@ except ImportError: pass  # print('matplotlib not available')
 try: import pytz
 except ImportError: pass
 
-try: from dateutil.parser import parse as d
+try: from dateutil.parser import parse
 except: print('no dateutil.parse')
 
 print('Config %r read.' % __file__)
@@ -49,3 +50,5 @@ def snake_case(name):
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
 from enum import Enum
+import pandas as pd
+from pandas import read_csv

@@ -132,3 +132,4 @@ complete -F _todo t
 export XDG_CONFIG_HOME=$HOME/.config
 complete -C /home/bartek/bin/terraform terraform
 date +%Y%m%d_%H%M >> ~/trace
+eval $(dircolors -b $HOME/.dircolors)

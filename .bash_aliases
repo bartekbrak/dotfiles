@@ -525,7 +525,7 @@ alias yt-mp3-dl='youtube-dl -x --audio-format mp3'
 alias można_teraz_bezpiecznie_wyłączyć_komputer='sudo shutdown now'
 alias clean_journal='sudo journalctl --vacuum-time=2d'
 alias cal='ncal -Mw'
-add() {
+cadd() {
   if [ "$#" -ne 3 ]; then
       echo "add title hour duration"
       echo "EVENT_COLOR: lavender, sage, grape, flamingo, banana, tangerine, peacock, graphite, blueberry, basil, tomato"
@@ -539,3 +539,4 @@ add() {
   shift
   echo gcalcli add --title "$title" --duration $duration --when $when --noprompt  
 }
+alias http='http --print=hHbB'
