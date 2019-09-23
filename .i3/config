@@ -125,17 +125,8 @@ bindsym $mod+Shift+KP_6 move container to workspace 6
 bindsym $mod+bracketleft        move container to output left
 bindsym $mod+Shift+bracketleft  move workspace to output left
 bindsym $mod+Shift+bracketright move workspace to output right
-
 bar {
-    #status_command /home/bartek/bin/focus
-    font pango:TerminessTTF Nerd Font Mono 32
-    workspace_buttons no
-    mode dock
-    position top
-    colors {
-        background #aa0000
-        statusline #ffffff
-    }
+    status_command i3status
 }
 
 
