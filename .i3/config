@@ -45,7 +45,7 @@ bindsym $mod+r mode "resize"
 
 
 # menus
-bindsym $mod+d       exec "rofi -show run -lines 10 -columns 4 -matching fuzzy -font 'TerminessTTF Nerd Font Mono 32' -theme blue -p 'run:'"
+bindsym $mod+d       exec "rofi -show run -lines 10 -columns 4 -matching regex -font 'TerminessTTF Nerd Font Mono 32' -theme blue -p 'run:'"
 bindsym $mod+Shift+d exec "rofi -show drun"
 bindsym $mod+Tab     exec "rofi -show window -show-icons -font 'TerminessTTF Nerd Font Mono 32'"
 bindsym $mod+j       exec "\
@@ -81,10 +81,8 @@ bindsym $mod+space       focus mode_toggle
 # switch to custom workspace
 bindsym KP_Add      workspace terminal
 bindsym KP_Multiply workspace www
-#bindsym Shift+KP_Multiply exec --no-startup-id ~/bin/if_not_focused i3-msg workspace www2
 bindsym KP_Subtract workspace code
 bindsym KP_Divide   workspace subl
-#bindsym KP_Enter    exec --no-startup-id ~/bin/if_not_focused i3-msg workspace chat
 bindsym KP_Enter    workspace chat
 bindsym $mod+KP_Add workspace jupyter
 # switch to standard workspace

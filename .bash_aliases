@@ -109,6 +109,7 @@ alias localc='localc --norestore'
 # Don't complain on directories, this is bold, I know.
 alias rm='rm -rfv'
 alias mv='mv -v'
+alias cp='cp -v'
 alias apt-get='sudo apt-get'
 alias apt='sudo apt'
 alias dpkg='sudo dpkg'
@@ -518,8 +519,6 @@ alias urldecode='python3 -c "import sys, html; print(html.unescape(sys.argv[1]))
 alias wttr='http wttr.in/Warsaw'
 alias mkdir='mkdir -vp'
 alias ring='cd ~/work/ring'
-alias unfocus='/usr/bin/i3-msg bar mode invisible; rm /dev/shm/focus'
-alias refocus='/usr/bin/i3-msg bar mode dock;date +%s > /dev/shm/focus'
 alias decomment="sed '/^#/d'"
 alias yt-mp3-dl='youtube-dl -x --audio-format mp3'
 alias można_teraz_bezpiecznie_wyłączyć_komputer='sudo shutdown now'

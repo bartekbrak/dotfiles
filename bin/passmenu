@@ -11,14 +11,15 @@ case $1 in
     "--type-pass" )
         password=$(
             printf '%s\n' "${password_files[@]}" | 
-            grep -v '^_' | 
+            grep -v '^_' |
             rofi \
                  -dmenu -i \
                  -theme sidebar \
                  -columns 2 \
-                 -matching fuzzy \
+                 -matching regex \
                  -font "TerminessTTF Nerd Font Mono 32" \
                  -p "type password:" \
+                 -filter asper\  \
                  "$@"
         )
         if [[ "$password" ]]
@@ -29,14 +30,17 @@ case $1 in
     "--type-user-tab-pass" )
         password=$(
             printf '%s\n' "${password_files[@]}" | 
-            grep -v '^_' | 
+            grep -v '^_' |
             rofi \
                 -dmenu -i \
-                -theme lb \
-                -columns 2 \
-                -matching fuzzy \
+                -theme Paper \
+                -columns 3 \
+                -matching regex \
+                -sync \
+                -fake-transparency \
                 -font "TerminessTTF Nerd Font Mono 32" \
-                 -p "user<TAB>password:" \
+                -p "user<TAB>password:" \
+                -filter asper\  \
                 "$@"
         )
         if [[ "$password" ]]
