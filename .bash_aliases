@@ -331,7 +331,6 @@ reload_tmux() {
 tmux.settings() {
     tmux show-options -g
 }
-alias ..='cd ..'
 pipi() {
     pip install $1 && pip freeze | grep -wi ^$1= | tr -d '\n' | tee /dev/fd/2 | xclip -selection clipboard
     echo "copied to clipboard"
@@ -375,9 +374,6 @@ color_bash_demo() {
 }
 tmux.terminal.reset() {
     tmux send-keys -R \; send-keys C-l \; clear-history
-}
-pipu() {
-    pip install -U pip
 }
 lastkill() {
     kill %1
@@ -539,3 +535,7 @@ cadd() {
   echo gcalcli add --title "$title" --duration $duration --when $when --noprompt  
 }
 alias http='http --print=hHbB'
+history.merge() {
+    # https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
+    history -a; history -c; history -r;
+}
