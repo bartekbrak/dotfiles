@@ -539,3 +539,8 @@ history.merge() {
     # https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
     history -a; history -c; history -r;
 }
+cpo() {
+    cp $1 $2;
+    sudo chown bartek:bartek $2
+}
+alias diff='diff -y --suppress-common-lines'
