@@ -10,8 +10,9 @@ password_files=( "${password_files[@]%.gpg}" )
 case $1 in
     "--type-pass" )
         password=$(
-            printf '%s\n' "${password_files[@]}" | 
+            printf '%s\n' "${password_files[@]}" |
             grep -v '^_' |
+            grep -v '/_' |
             rofi \
                  -dmenu -i \
                  -theme sidebar \
@@ -29,8 +30,9 @@ case $1 in
         shift;;
     "--type-user-tab-pass" )
         password=$(
-            printf '%s\n' "${password_files[@]}" | 
+            printf '%s\n' "${password_files[@]}" |
             grep -v '^_' |
+            grep -v '/_' |
             rofi \
                 -dmenu -i \
                 -theme Paper \
@@ -63,7 +65,7 @@ case $1 in
             sed -nE "s|.*https?://(www.)?([^/]+).*|\2|p"
         )
         if [ -z $url ]
-        then 
+        then
             url=chuja_nie_ma
         fi
         password=$(

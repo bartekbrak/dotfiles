@@ -332,8 +332,7 @@ tmux.settings() {
     tmux show-options -g
 }
 pipi() {
-    pip install $1 && pip freeze | grep -wi ^$1= | tr -d '\n' | tee /dev/fd/2 | xclip -selection clipboard
-    echo "copied to clipboard"
+    pip install $1 && pip freeze | grep -wi ^$1= | tr -d '\n' | tee | xclip -selection clipboard
 }
 
 packages() {
