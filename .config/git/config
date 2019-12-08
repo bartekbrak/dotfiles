@@ -62,3 +62,5 @@
 # experiments
 # [includeIf "gitdir:~/workspace/regalix"]
 # 
+[checkout]
+    defaultRemote = origin
