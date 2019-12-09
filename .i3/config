@@ -195,8 +195,8 @@ bindsym $mod+k mode "$mode_system"
 bindsym $mod+b border toggle
 # https://i3wm.org/docs/userguide.html#_changing_colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #832e31 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676f
+client.focused          #ffffff #ffffff #000000 #00ffff   #285577
+client.focused_inactive #000000 #000000 #ffffff #484e50   #5f676f
 client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
 # disable titlebars completely
 new_window pixel

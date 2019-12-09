@@ -2,8 +2,6 @@
     name = Bartek Brak
     email = bartek@brak.dev
     signingkey = 9949A5D1
-[includeIf "gitdir:~/workspace/regalix/**"]
-    path = ~/workspace/regalix/.gitconfig
 [alias]
     co = checkout
     ci = commit
@@ -58,9 +56,5 @@
     prune = true
 [branch]
     autosetuprebase = always ;  all new branches use rebase on pull
-
-# experiments
-# [includeIf "gitdir:~/workspace/regalix"]
-# 
 [checkout]
     defaultRemote = origin
