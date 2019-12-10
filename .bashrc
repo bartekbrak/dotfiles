@@ -135,3 +135,4 @@ date +%Y%m%d_%H%M >> ~/trace
 eval $(dircolors -b $HOME/.dircolors)
 # https://github.com/ranger/ranger/blob/master/ranger/config/rc.conf<Paste>
 export RANGER_LOAD_DEFAULT_RC=False
+eval "$(gopass completion bash)"
