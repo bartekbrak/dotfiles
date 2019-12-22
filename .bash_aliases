@@ -354,12 +354,15 @@ complete -F _known_hosts resolve_ssh
 pyenv.new() {
    (
     set -x
-    pyenv virtualenv ${1:-3.7.3} $(basename $(pwd))
+    pyenv virtualenv ${1:-3.8.0} $(basename $(pwd))
     pyenv local $(basename $(pwd))
    )
+   pyenv.which
 }
 pyenv.which() {
-    pyenv which python
+    pyenv which python | tee /dev/stderr | xclip -selection clipboard
+    echo 'in your clipboard now'
+
 }
 true_color_demo() {
     for i in {0..255}; do

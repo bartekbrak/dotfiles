@@ -124,7 +124,7 @@ bindsym $mod+bracketleft        move container to output left
 bindsym $mod+Shift+bracketleft  move workspace to output left
 bindsym $mod+Shift+bracketright move workspace to output right
 bar {
-    status_command i3status
+    status_command exec /home/bartek/bin/net-speed.sh
 }
 
 
@@ -164,7 +164,7 @@ assign [class="Sublime_text"]      subl
 assign [class="Slack"]             chat
 assign [class="Franz"]             chat
 
-exec /home/bartek/bin/internet google-chrome
+# exec /home/bartek/bin/internet google-chrome
 exec subl
 #exec franz
 exec charm.pro

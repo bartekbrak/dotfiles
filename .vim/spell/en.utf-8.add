@@ -185,3 +185,4 @@ yml
 zipcodes
 deduplicate
 Papertrail
+SQLAlchemy
