@@ -17,8 +17,9 @@ bindsym $mod+l            exec i3lock
 bindsym mod1+F4           kill
 bindsym $mod+Shift+c      reload
 bindsym $mod+t            exec --no-startup-id "\
-    maim -s /home/bartek/tmp/last.png ; \
-    xclip -selection clipboard -t image/png /home/bartek/tmp/last.png\
+    maim -s /home/bartek/tmp/last.png; \
+    xclip -selection clipboard -t image/png /home/bartek/tmp/last.png; \
+    cp /home/bartek/tmp/last.png /home/bartek/tmp/screen/$(date +%Y%m%d_%H%M%S)\
 "
 bindsym $mod+s            exec "\
     rofi \
