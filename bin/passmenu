@@ -18,7 +18,7 @@ case $1 in
                  -theme sidebar \
                  -columns 2 \
                  -matching regex \
-                 -font "TerminessTTF Nerd Font Mono 32" \
+                 -font "JetBrains Mono 32" \
                  -p "type password:" \
                  "$@"
         )
@@ -39,7 +39,7 @@ case $1 in
                 -matching regex \
                 -sync \
                 -fake-transparency \
-                -font "TerminessTTF Nerd Font Mono 32" \
+                -font "JetBrains Mono 32" \
                 -p "user<TAB>password:" \
                 "$@"
         )

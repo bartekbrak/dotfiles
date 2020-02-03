@@ -19,13 +19,13 @@ bindsym $mod+Shift+c      reload
 bindsym $mod+t            exec --no-startup-id "\
     maim -s /home/bartek/tmp/last.png; \
     xclip -selection clipboard -t image/png /home/bartek/tmp/last.png; \
-    cp /home/bartek/tmp/last.png /home/bartek/tmp/screen/$(date +%Y%m%d_%H%M%S)\
+    cp /home/bartek/tmp/last.png /home/bartek/tmp/screen/$(date +%Y%m%d_%H%M%S).png\
 "
 bindsym $mod+s            exec "\
     rofi \
         -modi 'clipboard:~/bin/greenclip print' \
         -show clipboard -run-command '{cmd}' \
-        -theme gruvbox-light -font 'TerminessTTF Nerd Font Mono 32'; \
+        -theme gruvbox-light -font 'JetBrains Mono 32'; \
 "
 bindsym $mod+o            exec /home/bartek/bin/trans_clip
 
@@ -46,12 +46,12 @@ bindsym $mod+r mode "resize"
 
 
 # menus
-bindsym $mod+d       exec "rofi -show run -lines 10 -columns 4 -matching regex -font 'TerminessTTF Nerd Font Mono 32' -theme blue -p 'run:'"
+bindsym $mod+d       exec "rofi -show run -lines 10 -columns 4 -matching regex -font 'JetBrains Mono 32' -theme blue -p 'run:'"
 bindsym $mod+Shift+d exec "rofi -show drun"
-bindsym $mod+Tab     exec "rofi -show window -show-icons -font 'TerminessTTF Nerd Font Mono 32'"
+bindsym $mod+Tab     exec "rofi -show window -show-icons -font 'JetBrains Mono 32'"
 bindsym $mod+j       exec "\
     ls -1 ~/.i3/clip_scripts/ \
-    | rofi -dmenu -p 'Affect clipoboard with:' -font 'TerminessTTF Nerd Font Mono 32' -theme Indego \
+    | rofi -dmenu -p 'Affect clipoboard with:' -font 'JetBrains Mono 32' -theme Indego \
     | xargs -I{} bash ~/.i3/clip_scripts/{} \
 "
 bindsym $mod+x       exec --no-startup-id ~/bin/personal

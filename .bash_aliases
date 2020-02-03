@@ -269,6 +269,7 @@ alias find_download_crap='find . \
 -o -name Downloaded\ From\* \
 -o -name VISIT\* \
 -o -iname Downloaded\ from\*.txt \
+-o -iname \*Downloaded\*.txt \
 -o -name www.\*jpg \
 -o -name Thumbs.db \
 -o -name \*.url \
@@ -546,3 +547,13 @@ cpo() {
     sudo chown bartek:bartek $2
 }
 alias diff='diff -y --suppress-common-lines'
+mount_clones() {
+    rclone mount --daemon --allow-non-empty gdrive: ~/gdrive/
+    rclone mount --daemon mega: ~/mega
+    rclone mount --daemon photos: ~/photos
+}
+
+alarm='paplay /usr/share/sounds/ubuntu/stereo/phone-incoming-call.ogg'
+usb_cache_off() {
+    sudo hdparm -W 0 /dev/sdc*
+}

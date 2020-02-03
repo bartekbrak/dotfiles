@@ -2,7 +2,7 @@
 bash ~/dmenu.personal \
     | rofi -dmenu -i -matching fuzzy \
         -p personal: \
-        -font 'TerminessTTF Nerd Font Mono 32' \
+        -font 'JetBrains Mono 32' \
         -theme sidebar -theme-str "#window { location: east; anchor: east; }" \
     | sed 's,.*::\s*,,g' \
     | xargs echo -n \
