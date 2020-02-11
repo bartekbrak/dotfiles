@@ -557,3 +557,4 @@ alarm='paplay /usr/share/sounds/ubuntu/stereo/phone-incoming-call.ogg'
 usb_cache_off() {
     sudo hdparm -W 0 /dev/sdc*
 }
+alias fd=fdfind
