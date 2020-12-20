@@ -1,0 +1,28 @@
+#!/bin/bash
+
+countdown()
+{
+    ( IFS=:;
+    set -- $*;
+    secs=$(( ${1#0} * 3600 + ${2#0} * 60 + ${3#0} ));
+    while [ $secs -gt 0 ]; do
+        sleep 1 & printf "\r%02d:%02d:%02d" $((secs/3600)) $(( (secs/60)%60)) $((secs%60));
+        secs=$(( $secs - 1 ));
+        wait;
+    done;
+    echo )
+}
+
+breaknow ()
+{
+    i3lock --image ~/tmp/break.png --til --nofork
+}
+
+
+while true
+do
+    echo "[$(date +"%H:%M:%S")] break ended, start working"
+    countdown "00:52:00"
+    echo "[$(date +"%H:%M:%S")] work ended,  take a break"
+    breaknow
+done

@@ -10,6 +10,7 @@ general {
         colors = true
         interval = 5
         separator = " "
+        markup = "pango"
 }
 
 order += "cpu_temperature all"
@@ -18,9 +19,10 @@ order += "ethernet _first_"
 order += "disk /"
 order += "load"
 order += "memory"
-order += "battery 1"
 order += "volume master"
 order += "tztime local"
+order += "time"
+order += "tztime oz"
 
 wireless _first_ {
         format_up = "W: (%quality at %essid) %ip"
@@ -44,12 +46,12 @@ battery 1 {
 }
 
 disk "/" {
-        format = "%avail"
+        format = "%avail free"
         prefix_type = "decimal"
 }
 
 load {
-        format = "%1min"
+        format = "<span color='#006a4e'>%1min</span>"
 }
 
 memory {
@@ -59,14 +61,23 @@ memory {
 }
 
 tztime local {
-        format = "%Y-%m-%d %H:%M:%S"
+        format = "<span foreground='#ff6600'> %time </span>"
+        format_time = "%d %B"
+}
+time {
+    format = '🇵🇱 %H:%M:%S'
+}
+tztime oz {
+        format = "<span foreground='#FFCD00' background='#00843D'> %time </span>"
+        format_time = "🇦🇺 %H:%M"
+        timezone = "Australia/Sydney"
 }
 cpu_temperature all {
     format = "(%degrees°C)"
     path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input"
 }
 volume master {
-    format = "♪: %volume"
+    format = "<span color='#1da237'>♪: %volume</span>"
     format_muted = "♪: muted (%volume)"
     device = "default"
     mixer = "Master"

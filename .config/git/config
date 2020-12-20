@@ -1,6 +1,5 @@
 [user]
     name = Bartek Brak Rychlicki
-    email = bartek.rychlicki@15five.com
     signingkey = 9949A5D1
 [alias]
     co = checkout
@@ -26,8 +25,7 @@
     sta = ! git -c color.ui=always status -vv | most
     unstage = reset HEAD
     pushf = push --force-with-lease
-    newbranch = "! git checkout -b $1 ${2:-origin/dev} && git push -u;"
-    destroy-branch = "! git fetch && git checkout origin/dev; git push origin --delete $1; git branch -D $1;"
+    last-commit-on-all-branches = ! git for-each-ref --sort=committerdate refs/remotes/origin/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 [color]
     ui = auto
 [push]

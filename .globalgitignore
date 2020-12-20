@@ -8,3 +8,4 @@ bartek.py
 *.swp
 .vimrc
 tags
+.python-version

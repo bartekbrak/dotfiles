@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-[ -f /dev/shm/focus ] && {
-    echo DID NOT EXEC "$@" > /home/bartek/.if_not_focused.log
-} || {
-    $@
-    echo EXEC "$@" > /home/bartek/.if_not_focused.log
-}

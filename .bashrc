@@ -27,7 +27,7 @@ shopt -s checkwinsize
 
 # . is bold, it allows you to stop prepending ./ to command from the current dir,
 # that is not enabled by default in linux as it is huge security risk
-export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:~/.cargo/bin:node_modules/.bin:."
+export PATH="$PATH:/usr/lib/go-1.9/bin:/opt/gocode/bin:~/bin:~/.cargo/bin:node_modules/.bin:~/.yarn/bin/:."
 
 
 # Map keypad del inserts a dot, useful for IPs
@@ -62,10 +62,10 @@ tabs -4
 
 # https://github.com/aykamko/tag
 export GOPATH=/opt/gocode
-export TAG_CMD_FMT_STRING='charm {{.Filename}}:{{.LineNumber}}'
+export TAG_CMD_FMT_STRING='webstorm {{.Filename}}:{{.LineNumber}}'
 if hash ag 2>/dev/null; then
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null; }
-  alias ag='tag --hidden --ignore .git --ignore node_modules --ignore build --ignore __tests --ignore tests --ignore .hg'
+  alias ag='tag --hidden --ignore .git --ignore node_modules --ignore build --ignore __tests --ignore tests --ignore .hg --ignore .idea'
 fi
 
 
@@ -93,14 +93,13 @@ function timer_stop {
 }
 
 # before each subsequent command
-#trap 'timer_start' DEBUG
+trap 'timer_start' DEBUG
 # before each subsequent prompt
-#export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
-#export PROMPT_COMMAND="$PROMPT_COMMAND;timer_stop"
+export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
+export PROMPT_COMMAND="$PROMPT_COMMAND;timer_stop"
 # surfraw
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
 touch ~/last_cd
-cd "$(cat ~/last_cd)"
 export PYTHONUNBUFFERED=1
 eval "$(direnv hook bash)"
 # dont use symbols in pass generate
@@ -121,3 +120,19 @@ export XDG_CONFIG_HOME=$HOME/.config
 eval $(dircolors -b $HOME/.LS_COLORS )
 #eval "$(gopass completion bash)"
 source ~/.bashrc.local
+cd "$(cat ~/last_cd)"
+source ~/xref/files/source.me
+
+pidof -q clipnotify || {
+  while clipnotify; do
+       notify-send "📋 copied" "$(xclip -selection clipboard -o)" -u low;
+  done &
+}
+
+
+# mbankcli
+PATH="/home/bartek/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/bartek/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/bartek/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/bartek/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/bartek/perl5"; export PERL_MM_OPT;

@@ -52,3 +52,11 @@ shell/i/.svg
 include/image
 	Open=feh %f
 	View=feh %d
+
+
+# PDF
+type/^PDF
+    Open=(see %f &)
+    #Open=(acroread %f &)
+    #Open=(ghostview %f &)
+    View=%view{ascii} pdftotext %f -

@@ -1,23 +1,5 @@
 # vim: filetype=sh
-hesitate() {
-    read -p "${1}[Enter] / [s]kip / [Ctrl-C]" ret
-    [ "$ret" == "s" ] && return 1
-    return 0
-}
-
-tabtitle() {
-    echo -ne "\033]0;${@}\007"
-}
-
-titlebar() {
-    # usage: titlebar color_string_or_var text_to_print, eg:
-    #     titlebar COLOR 'Name of the section' &&
-    [[ $# -eq 2 ]] || echo "titlebar takes two args";
-    char='█'
-    echo -en "${1}"
-    for i in $(eval echo {1..$(tput cols)}); do echo -n ${char}; done
-    echo -e "\r\t\t ${2} ${R}"
-}
+# indent 2 spaces
 
 alias cls='printf "\ec"'
 
@@ -29,7 +11,6 @@ alias edit_aliases_subl='subl ~/.bash_aliases'
 
 
 alias ll='ls -Alh --group-directories-first'
-alias llo='stat -c "%a %n"'
 alias l='ls -Alh --group-directories-first -d */'
 alias ls='ls --color=auto'
 
@@ -49,20 +30,17 @@ exists_somewhere_up() {
   done
   return 1
 }
+#       -s, --short
+#           Give the output in the short-format.
+#       -b, --branch
+#           Show the branch and tracking info even in short-format.
 alias s='git status -sb'
-alias ss='git status -vv'
+alias sv='git status -vv'
 alias dif='git diff'
 alias ci='git commit'
 alias pull='git pull'
 alias push='git push'
 alias br='git branch'
-pulldiff() {
-    git fetch
-    git log ..FETCH_HEAD
-    read -p "Press enter to continue"
-    git diff ..FETCH_HEAD
-    git pull $@
-}
 
 alias music='vlc -I ncurses ~/music'
 alias play='vlc -I ncurses'
@@ -133,15 +111,11 @@ delete.pytest_cache() {
     find . -name .pytest_cache -print -type d -exec rm -rf {} +
 
 }
-delete.pdb() { find -name \*.py | xargs sed -i '/pdb.set_trace()/d'; }
 
 # Decode Mongo ObjectId (contains time(
 ObjectId() {
   python -c "import bson;print bson.ObjectId('$1').generation_time.strftime('%Y.%m.%d %H:%M:%S')"
 }
-
-# alias disable_touchpad='xinput set-prop 13 "Device Enabled" 0'
-# alias enable_touchpad='xinput set-prop 13 "Device Enabled" 1'
 
 # default values for apps
 alias time='/usr/bin/time --format "elapsed: %es"'
@@ -150,25 +124,34 @@ alias tree='tree -I \*.pyc'
 
 # This is a trick to short cut editing most common, files by e<Tab>
 alias e=vim
+_often_used_config_files="
+  ~/.gitconfig
+  ~/.bashrc
+  ~/.vimrc
+  ~/.ipython/profile_default/startup/00-first.py
+  ~/.config/i3/config
+  ~/.config/i3status/config
+  ~/.tmux.conf
+  ~/dmenu.personal
+  ~/.pypirc
+  ~/.ssh/config
+  ~/.config/greenclip.cfg
+  ~/packages
+  ~/.Xresources
+  ~/.config/git/config
+"
+ee() {
+  for word in $_often_used_config_files
+  do
+    echo $word;
+  done \
+    | fzf --height 40% --reverse --border --color=dark -q $1 \
+    | sed "s,~,$HOME,g" \
+    | xargs vim
+}
 _e()
 {
-  local opts="
-      ~/.gitconfig
-      ~/.hgrc
-      ~/.bashrc
-      ~/.vimrc
-      ~/.ipython/profile_default/startup/00-first.py
-      ~/.config/i3/config
-      ~/.tmux.conf
-      ~/dmenu.personal
-      ~/.pypirc
-      ~/.ssh/config
-      ~/.config/greenclip.cfg
-      ~/packages
-      ~/.Xresources
-      ~/.config/git/config
-  "
-  COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
+  COMPREPLY=($(compgen -W "${_often_used_config_files}" -- ${COMP_WORDS[COMP_CWORD]}))
   return 0
 }
 complete -F _e e
@@ -238,8 +221,6 @@ f() {
 #### WIP section
 is_tmux() { [ -n "$TMUX" ] && echo You\'re in tmux || echo You are not in tmux; }
 alias reload_xresources='xrdb -merge ~/.Xresources'
-alias suspend='sudo pm-suspend'
-alias hibernate='sudo systemctl hibernate'
 
 # better write this in python
 alias find_download_crap='find . \
@@ -276,7 +257,7 @@ link_symlinks() {
     )
 }
 which.edit() {
-    editor $(which $1)
+    sudo editor $(which $1)
 }
 function _executables {
     local exclude=$(compgen -abkA function | sort)
@@ -288,22 +269,6 @@ complete -F _executables which.edit which.many which.rm
 gpg.reload_agent() {
     gpg-connect-agent reloadagent /bye
 }
-x.load() {
-  xrdb -load $1
-}
-x.merge() {
-  xrdb -merge $1
-}
-x.theme() {
-  xrdb -merge ~/iTerm2-Color-Schemes/Xresources/$1
-}
-_x()
-{
-  local opts="$(ls ~/iTerm2-Color-Schemes/Xresources/)"
-  COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
-  return 0
-}
-complete -F _x x.theme
 not_mine() {
     find -not -user $USER "$@"
 }
@@ -346,7 +311,7 @@ complete -F _known_hosts resolve_ssh
 pyenv.new() {
    (
     set -x
-    pyenv virtualenv ${1:-3.8.1} $(basename $(pwd))
+    pyenv virtualenv ${1:-3.7.9} $(basename $(pwd))
     pyenv local $(basename $(pwd))
    )
    pyenv.which
@@ -396,28 +361,48 @@ prompt.show() {
 }
 tz ()
 {
-    for x in America/Los_Angeles Europe/Warsaw Asia/Kolkata Australia/Sydney;
+  # tz
+  # tz -d 10:00GMT
+    local tzs="
+      GMT
+      Europe/Warsaw
+      Australia/Sydney
+    "
+      # America/Los_Angeles
+      # Asia/Kolkata
+    for x in $tzs
     do
         TZ=$x date +"%Z%t%H:%M%t$x" "$@"
-    done
+    done | column -t
 }
 
 alias autoremove='sudo apt-get autoremove'
 alias find='2>/dev/null find'
 cors() {
-    # cors uri host origin
-    # cors http://regalix.tv.lvh.me:8000/api/assets/ regalix.tv.lvh.me:8000 regalix.tv.lvh.me:4200
+    # NAME
+    #        cors - simulate a call from A to B, from origin to host
+    # SYNOPSIS
+    #        cors uri Origin [Host]
+    #        cors http://regalix.tv.lvh.me:8000/api/assets/ regalix.tv.lvh.me:4200 regalix.tv.lvh.me:8000
     #
     # The Origin header is the domain the request originates from.
     # The Host is the domain the request is being sent to. This header was introduced so hosting sites could include multiple domains on a single IP.
     # https://stackoverflow.com/a/13871912/1472229
-    http \
+    #
+    # Host defaults to $1, changing it will confuse servers, cloudflare will serve 403,
+    # Skip it, if you must, read https://stackoverflow.com/questions/43156023/what-is-http-host-header
+    #
+    # if the response contains Access-Control-Allow-Origin: YOUR_ORIGIN_HERE
+    # then all is well
+    \http \
         --print=hH \
+        --follow \
         $1 \
         Origin:$2 \
         Host:$3 \
         'Access-Control-Request-Headers: Origin, Accept, Content-Type' \
         'Access-Control-Request-Method: GET'
+
 }
 
 alias is_merge_finished="ag '>>>>>>>|<<<<<<<|======='"
@@ -469,22 +454,17 @@ repos.report() {
               echo "\e[95m%\e[0m"
               git -C % -c color.status=always status -sb | sed "s/^/  /"
               git -C % -c color.status=always branch -vvv
-          '          
+          '
 }
 
 key.fingerprint() {
+  ssh-keygen        -lf $1
   ssh-keygen -E md5 -lf $1
 }
 checkout.all.branches() {
   for branch in $(git branch --all | grep '^\s*remotes' | egrep --invert-match '(:?HEAD|master)$'); do
       echo git branch --track $(echo $branch | sed s,remotes/origin/,,g) "$branch"
   done
-}
-asper.on() {
-    mv ~/.ssh/config.d/asper.{disabled,conf}
-}
-asper.off() {
-    mv ~/.ssh/config.d/asper.{conf,disabled}
 }
 usbcache_off() {
     sudo hdparm -W 0 $1
@@ -501,7 +481,6 @@ steal_pycharm() {
     echo "I think I'm done."
 
 }
-alias fd='fd --no-ignore-vcs'
 need_to_run() {
     git co -bwip; git add .; git ci -nmwip; git push
 }
@@ -518,26 +497,13 @@ which_vga_driver_am_i_using() {
 alias urldecode='python3 -c "import sys, html; print(html.unescape(sys.argv[1]))"'
 alias wttr='http wttr.in/Warsaw'
 alias mkdir='mkdir -vp'
-alias ring='cd ~/work/ring'
-alias decomment="sed '/^#/d'"
 alias yt-mp3-dl='youtube-dl -x --audio-format mp3'
-alias można_teraz_bezpiecznie_wyłączyć_komputer='sudo shutdown now'
+alias można_teraz_bezpiecznie_wyłączyć_komputer='history.merge; sudo shutdown now'
+alias suspend='history.merge; sudo pm-suspend'
+alias hibernate='history.merge; sudo systemctl hibernate'
+
 alias clean_journal='sudo journalctl --vacuum-time=2d'
 alias cal='ncal -Mw'
-cadd() {
-  if [ "$#" -ne 3 ]; then
-      echo "add title hour duration"
-      echo "EVENT_COLOR: lavender, sage, grape, flamingo, banana, tangerine, peacock, graphite, blueberry, basil, tomato"
-      return 1;
-  fi
-  title=$1
-  shift
-  when=$1
-  shift
-  duration=$1
-  shift
-  echo gcalcli add --title "$title" --duration $duration --when $when --noprompt
-}
 alias http='http --print=hHbB'
 history.merge() {
     # https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
@@ -569,8 +535,8 @@ rebase_all() {
     local onto=${1:-origin/dev}
     for local_branch in $(git for-each-ref --format='%(refname:short)' refs/heads/ | grep -v ^dev$)
     do
-        local status=$(git status --untracked-files=no --porcelain) 
-        if [ -z "$status" ] 
+        local status=$(git status --untracked-files=no --porcelain)
+        if [ -z "$status" ]
         then
             echo -e "\033[92mREBASE $local_branch \033[0m"
             git checkout $local_branch
@@ -587,8 +553,8 @@ track_all() {
     local onto=${1:-origin/dev}
     for local_branch in $(git for-each-ref --format='%(refname:short)' refs/heads/ | grep -v ^dev$)
     do
-        local status=$(git status --untracked-files=no --porcelain) 
-        if [ -z "$status" ] 
+        local status=$(git status --untracked-files=no --porcelain)
+        if [ -z "$status" ]
         then
             echo -e "\033[92mSET UPSTREAM $local_branch \033[0m"
             git checkout $local_branch
@@ -598,11 +564,12 @@ track_all() {
             echo "action required: $status"
             break
         fi
-    done   
+    done
 }
 rm_gone() {
-    # not revised
+    # Remove tracking branches no longer on remote
     # https://stackoverflow.com/a/33548037/1472229
+    # not revised
     git fetch -p && for branch in `git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'`; do git branch -D $branch; done
 
 }
@@ -630,12 +597,156 @@ countdown()
 breaknow() {
     i3lock -i ~/tmp/break.png -t
 }
-pr() {
-    gh pr view -w
+alias sync='sync && beep -r 3'
+alias repo='gh repo view --web'
+# calling sudo with alias will work now
+# https://askubuntu.com/a/22043/35186
+alias sudo='sudo '
+alias mic_loop='    pactl   load-module module-loopback'
+alias mic_loop_off='pactl unload-module module-loopback'
+alias what_changed1="git log --oneline --name-status ORIG_HEAD.."
+alias what_changed2="git diff --name-status ORIG_HEAD.."
+alias chrome_glitches="pkill -f 'chrome \-\-type=gpu-process'"
+alias pipu="pip install -U pip"
+
+_gcalcli_complete()
+{
+  local opts="list search edit delete agenda updates calw calm quick add import remind"
+  COMPREPLY=($(compgen -W "${opts}" -- ${COMP_WORDS[COMP_CWORD]}))
+  return 0
 }
-pr.create() {
-    gh pr create --reviewer pawmarkor1 --reviewer pypetey --fill --label backend --label squad-reporting
+alias gcal=gcalcli
+complete -F _gcalcli_complete gcalcli gcal
+function pyenv.uppip() {
+  base=$(pyenv versions --bare | grep -v /envs/)
+  for a_python in $base
+  do
+    pyenv shell $a_python
+    echo switched to $a_python
+    pip install -U pip
+    pyenv shell -
+  done
 }
-hooks() {
-    pre-commit run --files ff/mods/reporting/**/*.py
+alias dir='fd --type directory'  # shadows useless dir, poor ls copycat
+alias en="cambrinary -w"
+alias pl="trans -brief -t pl"
+word() {
+  echo -e "\e[93mΔ $@\e[0m"
+  pl $1
+  # strip US pronunciation
+  # strip UK marker (with colour)
+  en $(echo $@ | sed s,\ ,-,g) \
+    | sed 's,US.*,,g' \
+    | sed 's, \x1b\[0;34;49mUK\x1b\[0m,,g'
+  # store in
+  echo "$@" >> ~/words
+  echo '~/words:' $(wc -l ~/words | awk '{ print $1 }') collected
+}
+
+work() {
+  if [[ "$*" == *--help* ]]
+  # https://superuser.com/a/186304/160379
+  then
+    echo -e "\e[1mNAME\e[0m\n\twork - record starting to work in Google Calendar"
+    echo -e "\e[1mSYNOPSIS\e[0m\n\twork [when[ duration[ under what title]]]"
+    echo -e "\twork 06:00"
+    echo -e "\twork 06:00 120"
+    echo -e "\twork 06:00 120 two hours of straight coding"
+  else
+    when=${1:-now}
+    shift
+    duration=${1:-240}
+    shift
+    title=${@:-work}
+    gcal add --noprompt \
+      --when $when \
+      --duration $duration \
+      --title "$title"
+  fi
+
+}
+
+lyrics() {
+  if [[ "$*" == *--help* ]]
+  # https://superuser.com/a/186304/160379
+  then
+    echo -e "\e[1mNAME\e[0m\n\tlyrics - fetch lyrics from makeitpersonal.co"
+    echo -e "\e[1mSYNOPSIS\e[0m\n\tlyrics author name of the song"
+    echo -e "\tlyrics sting shape of my heart"
+    echo -e "\tlyrics 'Michael Jackson' thriller"
+  else
+    author=$1
+    shift
+    title="$@"
+    set -x
+    wget -q -O - "http://makeitpersonal.co/lyrics?artist=$author&title=$title"
+    set +x
+  fi
+}
+
+ag.quiet() {
+  \ag \
+    --nobreak \
+    --nocolor \
+    --nofilename \
+    --nogroup \
+    --nonumbers \
+    "$@"
+}
+
+complete -F _secret_complete secret
+base64url() {
+    # Don't wrap, make URL-safe, delete trailer.
+    base64 -w 0 | tr '+/' '-_' | tr -d '='
+}
+
+jwt() {
+  # https://stackoverflow.com/a/55389212/1472229
+  # https://gist.github.com/rlipscombe/ada19c6b2abaabcef21500c3c56db482
+  #
+  # JWT is base64url, not base64, "-" and "_" are illegal
+  #   in jq: gsub("-";"+") | gsub("_";"/")
+  #   in sh: tr '+/' '-_'
+  if [ "$#" -eq 2 ]; then
+    secret_key=$2
+    echo "sig provided, $secret_key"
+  fi
+
+  base64url() {
+      # Don't wrap, make URL-safe, delete trailer.
+      base64 -w 0 | tr '+/' '-_' | tr -d '='
+  }
+
+
+  local jwt_claims=$(jq -R 'gsub("-";"+") | gsub("_";"/") | split(".") | .[1] | @base64d | fromjson' <<< "$1")
+  local jwt_header=$(jq -R 'gsub("-";"+") | gsub("_";"/") | split(".") | .[0] | @base64d | fromjson' <<< "$1")
+  echo $jwt_claims
+  local jwt_signature=$(echo -n "${jwt_header}.${jwt_claims}" | openssl dgst -sha256 -hmac "$secret_key" -binary | base64url)
+  local part2=$(  jq -R 'gsub("-";"+") | gsub("_";"/") | split(".") | .[2] | @base64d ' <<< "$1")
+  local exp=$(echo $jwt_claims | jq '.exp')
+  local orig_iat=$(echo $jwt_claims | jq '.orig_iat')
+  local exp_decoded=$(date -d @$exp)
+  local orig_iat_decoded=$(date -d @$orig_iat)
+
+  # https://unix.stackexchange.com/a/45954/25780
+  # sed cannot use \e or \033 directly,
+  local esc=$(printf '\033')
+  echo $jwt_header | jq -C
+  echo $jwt_claims | jq -C \
+    | sed -E "s/($exp)/\1,  $esc[2;37;40m# $exp_decoded$esc[0m/" \
+    | sed -E "s/($orig_iat)/\1,  $esc[2;37;40m# $orig_iat_decoded$esc[0m/"
+  echo $part2 | jq -C
+  echo $jwt_signature
+}
+
+c() {
+  echo "$@" | bc -l
+}
+
+szukaj() {
+  local igla=$1
+  shift
+  local rozszerzenie=$1
+  shift
+  ag $igla -G "$rozszerzenie$" "$@"
 }

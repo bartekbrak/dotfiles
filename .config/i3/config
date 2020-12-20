@@ -2,19 +2,23 @@
 # .bashrc was not read when i3 was started though, so put
 # things like TERMINAL=st in /etc/profile
 #
+# more info: $ xmodmap -pm
 # Mod4 - Win
 # mod1 - alt
 # Win as mod key
-set $mod Mod4
-floating_modifier $mod
+set                 $mod Mod4
+set                 $alt Mod1
+set                 $num Mod2
+floating_modifier   $mod
 focus_follows_mouse no
+
 
 # keys that will rather not change, system and window mgmt
 bindsym $mod+Return       exec /usr/local/bin/st
 bindsym $mod+Shift+Return exec /usr/local/bin/st -e sudo su
 bindsym $mod+backslash    exec /home/bartek/bin/internet google-chrome
 bindsym $mod+l            exec i3lock
-bindsym mod1+F4           kill
+bindsym $alt+F4           kill
 bindsym $mod+Shift+c      reload
 bindsym $mod+t            exec --no-startup-id "\
     killall compton; \
@@ -69,14 +73,15 @@ bindsym $mod+Shift+p exec --no-startup-id ~/bin/passmenu --type-pass
 bindsym $mod+Shift+x exec --no-startup-id ~/bin/emoji
 
 # moves
-bindsym $mod+Left  focus left
-bindsym $mod+Down  focus down
-bindsym $mod+Up    focus up
-bindsym $mod+Right focus right
-bindsym $mod+Shift+Left  move left
-bindsym $mod+Shift+Down  move down
-bindsym $mod+Shift+Up    move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Left         focus left
+bindsym $mod+Down         focus down
+bindsym $mod+Up           focus up
+bindsym $mod+Right        focus right
+bindsym $mod+Shift+Left   move  left
+bindsym $mod+Shift+Down   move  down
+bindsym $mod+Shift+Up     move  up
+bindsym $mod+Shift+Right  move  right
+
 
 # layout, splits
 bindsym $mod+h           split h
@@ -88,48 +93,42 @@ bindsym $mod+e           layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space       focus mode_toggle
 
-# switch to custom workspace
-bindsym KP_Add      workspace terminal
-bindsym KP_Multiply workspace www
-bindsym KP_Subtract workspace code
-bindsym KP_Divide   workspace subl
-bindsym KP_Enter    workspace chat
-bindsym Pause       workspace zoom
-bindsym $mod+KP_Add workspace jupyter
+# switch to custom         workspace
+bindsym KP_Add             workspace terminal
+bindsym KP_Multiply        workspace www
+bindsym KP_Subtract        workspace code
+bindsym $num+KP_9          workspace webstorm
+bindsym $mod+$num+KP_9     workspace webstorm
+bindsym KP_Prior           workspace webstorm
+bindsym KP_Divide          workspace subl
+bindsym KP_Enter           workspace chat
+bindsym Pause              workspace zoom
+
 # switch to standard workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 
-# use numpad to switch workspaces, when NUMLOCK is on
-bindsym $mod+Mod2+KP_1 workspace 1
-bindsym $mod+Mod2+KP_2 workspace 2
-bindsym $mod+Mod2+KP_3 workspace 3
-# and OFF, does not work :?
-bindsym $mod+KP_1 workspace 1
-bindsym $mod+KP_2 workspace 2
-bindsym $mod+KP_3 workspace 3
 
 # move focused container to workspace
-bindsym $mod+Shift+KP_Add      move container to workspace terminal
-bindsym $mod+Shift+KP_Multiply move container to workspace www
-bindsym $mod+Shift+KP_Subtract move container to workspace code
-bindsym $mod+Shift+KP_Divide   move container to workspace subl
-bindsym $mod+Shift+KP_Enter    move container to workspace chat
-bindsym $mod+Shift+Pause       move container to workspace zoom
+bindsym $mod+Shift+KP_Add       move container to workspace terminal
+bindsym $mod+Shift+KP_Multiply  move container to workspace www
+bindsym $mod+Shift+KP_Subtract  move container to workspace code
+bindsym $mod+$num+Shift+KP_9    move container to workspace webstorm
+bindsym $mod+Shift+KP_Prior     move container to workspace webstorm
+bindsym $mod+$numShift+KP_Prior     move container to workspace webstorm
+bindsym $mod+Shift+KP_Divide    move container to workspace subl
+bindsym $mod+Shift+KP_Enter     move container to workspace chat
+bindsym $mod+Shift+Pause        move container to workspace zoom
 
-bindsym $mod+Shift+1    move container to workspace 1
-bindsym $mod+Shift+2    move container to workspace 2
-bindsym $mod+Shift+3    move container to workspace 3
-bindsym $mod+Shift+4    move container to workspace 4
-bindsym $mod+Shift+5    move container to workspace 5
-bindsym $mod+Shift+6    move container to workspace 6
-bindsym $mod+Shift+KP_1 move container to workspace 1
-bindsym $mod+Shift+KP_2 move container to workspace 2
-bindsym $mod+Shift+KP_3 move container to workspace 3
-bindsym $mod+Shift+KP_4 move container to workspace 4
-bindsym $mod+Shift+KP_5 move container to workspace 5
-bindsym $mod+Shift+KP_6 move container to workspace 6
+bindsym $mod+Shift+1            move container to workspace 1
+bindsym $mod+Shift+2            move container to workspace 2
+bindsym $mod+Shift+3            move container to workspace 3
+bindsym $mod+Shift+4            move container to workspace 4
+bindsym $mod+Shift+5            move container to workspace 5
+bindsym $mod+Shift+6            move container to workspace 6
+
+
 
 # multi monitor
 bindsym $mod+bracketleft        move container to output left
@@ -138,7 +137,7 @@ bindsym $mod+Shift+bracketright move workspace to output right
 bar {
 #    status_command exec /home/bartek/bin/net-speed.sh
     status_command i3status
-    font pango:JetBrains Mono ExtraBold 14
+    font pango:JetBrains Mono ExtraBold 20
 }
 
 
@@ -152,6 +151,14 @@ bindsym XF86AudioMute         exec /usr/bin/pactl -- set-sink-mute   @DEFAULT_SI
 bindsym $mod+F9               exec /usr/bin/pactl -- set-sink-mute   @DEFAULT_SINK@ toggle
 bindsym $mod+F10              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '-5%'
 bindsym $mod+F11              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SINK@ '+5%'
+
+# XF86AudioStop reintended as "toggle like" for streamkeys, control youtube music
+# https://chrome.google.com/webstore/detail/streamkeys/ekpipjofdicppbepocohdlgenahaneen
+bindsym --release $mod+F5 exec --no-startup-id "xdotool key --clearmodifiers XF86AudioStop; notify-send '👍 liked'"
+bindsym --release $mod+F6 exec --no-startup-id xdotool key --clearmodifiers XF86AudioPrev
+bindsym --release $mod+F7 exec --no-startup-id xdotool key --clearmodifiers XF86AudioPlay
+bindsym --release $mod+F8 exec --no-startup-id xdotool key --clearmodifiers XF86AudioNext
+
 
 bindsym $mod+XF86AudioMute    exec pavucontrol
 bindsym $mod+F12              exec pavucontrol
@@ -168,20 +175,17 @@ workspace_layout default
 hide_edge_borders smart
 
 # Application workspace preferences.
-assign [class="Jupyter-qtconsole"] jupyter
-assign [class="jupyter-qtconsole"] jupyter
 assign [class="google-chrome"]     www
 assign [class="Chromium-browser"]  www
 assign [class="firefox"]           www
 assign [class="pycharm"]           code
+assign [class="webstorm"]          webstorm
 assign [class="Sublime_text"]      subl
 assign [class="Slack"]             chat
-assign [class="zoom"]             zoom
+assign [class="zoom"]              www
 
-# exec /home/bartek/bin/internet google-chrome
+exec /home/bartek/bin/internet google-chrome
 exec subl
-exec charm
-exec /home/bartek/.pyenv/versions/jupyter-qtconsole/bin/jupyter-qtconsole
 # compton dimms unused windows for me
 exec compton -b
 
@@ -205,7 +209,6 @@ mode "$mode_system" {
 }
 bindsym $mod+k mode "$mode_system"
 
-
 bindsym $mod+b border toggle
 # https://i3wm.org/docs/userguide.html#_changing_colors
 # class                 border  backgr. text    indicator child_border
@@ -213,13 +216,22 @@ client.focused          #ffffff #ffffff #000000 #00ffff   #285577
 client.focused_inactive #000000 #000000 #ffffff #484e50   #5f676f
 client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
 # disable titlebars completely
-new_window pixel
-# Pulse Audio controls
+# title_format pango will only work if 'font pango...' directive is also used
+for_window [class="charm" title="^xref"        ]              title_format "🔲 <span background='green'  foreground='white'>MAIN</span>"
+for_window [class="charm" title="auth.xref.com"]              title_format "🔵 <span background='blue'   foreground='white'>AUTH</span>"
+for_window [class="charm" title="questionnaire.xref.com"]     title_format "🔵 <span background='yellow' foreground='black'>QNR</span>"
+for_window [class="charm" title="login.xref.com"]             title_format "🔵 <span background='orange' foreground='white'>LOGIN</span>"
+for_window [class="charm" title="api-questionnaire.xref.com"] title_format "⭕ <span background='yellow' foreground='black'>API-QNR</span>"
+for_window [class="charm" title="id.xref.com"]                title_format "⭕ <span background='red'    foreground='white'>ID</span>"
+for_window [class="charm"] layout tabbed
+for_window [class="st"] border pixel 10
+for_window [class=".*"] border none
+title_align center
 for_window [class="Arandr"] floating enable
-for_window [class="Pavucontrol"] floating enable
-# THINK: the default behaviour is ok, and the below is not helpful
-# so commented out
+font pango: JetBrains Mono 16
 # The only way I can solve popup windows hiding under fullscreen windows
 # (when the software does not set right X hints)
 popup_during_fullscreen leave_fullscreen
 exec --no-startup-id ~/bin/greenclip daemon
+for_window [class="Pavucontrol"] floating disable
+
