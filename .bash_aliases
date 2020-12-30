@@ -694,7 +694,6 @@ ag.quiet() {
     "$@"
 }
 
-complete -F _secret_complete secret
 base64url() {
     # Don't wrap, make URL-safe, delete trailer.
     base64 -w 0 | tr '+/' '-_' | tr -d '='
@@ -750,3 +749,7 @@ szukaj() {
   shift
   ag $igla -G "$rozszerzenie$" "$@"
 }
+fullpath() {
+  readlink -f "$@" | tr -d '\n' | xclip -selection clipboard
+}
+alias grace='i3-msg [class="."] kill'

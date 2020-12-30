@@ -11,8 +11,6 @@ build-essential cmake linux-headers-generic gcc
 apt-file
 libxcb-util-dev libxcb-keysyms1-dev
 
-# news
-newsboat
 # wifi/eth
 ethtool wavemon wicd-curses
 cmake
@@ -47,3 +45,5 @@ apt-transport-https gnupg-agent  # docker
 autossh
 ncdu
 compton
+
+golang
