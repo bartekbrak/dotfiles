@@ -471,12 +471,18 @@ usbcache_off() {
 }
 alias pkill='pkill -e'
 alias killall='killall -v'
-steal_pycharm() {
+steal_jetbrains() {
     echo PyCharm should be killed
-    ag evlsprt --silent ~/.PyCharm*/config/options/{other,options}.xml ~/.java/.userPrefs/prefs.xml
-    find  ~/.PyCharm*/ -name \*evaluation.key -delete -print
-    sed --silent -i '/evlsprt/d' ~/.PyCharm*/config/options/{other,options}.xml
-    sed --silent -i '/evlsprt/d' ~/.java/.userPrefs/prefs.xml
+    ag evlsprt --silent \
+      ~/.{PyCharm,WebStorm}*/config/options/{other,options}.xml \
+      ~/.config/JetBrains/{PyCharm,WebStorm}*/options/other.xml \
+      ~/.java/.userPrefs/prefs.xml
+    find  ~/.{PyCharm,WebStorm}*/ ~/.config/JetBrains/{PyCharm,WebStorm}* -name \*evaluation.key -print -delete
+    sed --silent -i '/evlsprt/d' \
+      ~/.{PyCharm,WebStorm}*/config/options/{other,options}.xml \
+      ~/.config/JetBrains/{PyCharm,WebStorm}*/options/other.xml \
+      ~/.java/.userPrefs/prefs.xml
+
     rm -rfv ~/.java/.userPrefs/jetbrains
     echo "I think I'm done."
 
@@ -752,4 +758,4 @@ szukaj() {
 fullpath() {
   readlink -f "$@" | tr -d '\n' | xclip -selection clipboard
 }
-alias grace='i3-msg [class="."] kill'
+alias grace_shutdown='i3-msg [class="."] kill'
