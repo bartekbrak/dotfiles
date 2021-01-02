@@ -97,9 +97,6 @@ bindsym $mod+space       focus mode_toggle
 bindsym KP_Add             workspace terminal
 bindsym KP_Multiply        workspace www
 bindsym KP_Subtract        workspace code
-bindsym $num+KP_9          workspace webstorm
-bindsym $mod+$num+KP_9     workspace webstorm
-bindsym KP_Prior           workspace webstorm
 bindsym KP_Divide          workspace subl
 bindsym KP_Enter           workspace chat
 bindsym Pause              workspace zoom
@@ -114,9 +111,6 @@ bindsym $mod+3 workspace 3
 bindsym $mod+Shift+KP_Add       move container to workspace terminal
 bindsym $mod+Shift+KP_Multiply  move container to workspace www
 bindsym $mod+Shift+KP_Subtract  move container to workspace code
-bindsym $mod+$num+Shift+KP_9    move container to workspace webstorm
-bindsym $mod+Shift+KP_Prior     move container to workspace webstorm
-bindsym $mod+$numShift+KP_Prior     move container to workspace webstorm
 bindsym $mod+Shift+KP_Divide    move container to workspace subl
 bindsym $mod+Shift+KP_Enter     move container to workspace chat
 bindsym $mod+Shift+Pause        move container to workspace zoom
@@ -179,7 +173,6 @@ assign [class="google-chrome"]     www
 assign [class="Chromium-browser"]  www
 assign [class="firefox"]           www
 assign [class="pycharm"]           code
-assign [class="webstorm"]          webstorm
 assign [class="Sublime_text"]      subl
 assign [class="Slack"]             chat
 assign [class="zoom"]              www
