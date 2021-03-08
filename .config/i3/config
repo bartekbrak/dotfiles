@@ -210,21 +210,20 @@ client.focused_inactive #000000 #000000 #ffffff #484e50   #5f676f
 client.unfocused        #333333 #222222 #ffffff #292d2e   #222222
 # disable titlebars completely
 # title_format pango will only work if 'font pango...' directive is also used
-for_window [class="charm" title="^xref"        ]              title_format "🔲 <span background='green'  foreground='white'>MAIN</span>"
-for_window [class="charm" title="auth.xref.com"]              title_format "🔵 <span background='blue'   foreground='white'>AUTH</span>"
-for_window [class="charm" title="questionnaire.xref.com"]     title_format "🔵 <span background='yellow' foreground='black'>QNR</span>"
-for_window [class="charm" title="login.xref.com"]             title_format "🔵 <span background='orange' foreground='white'>LOGIN</span>"
-for_window [class="charm" title="api-questionnaire.xref.com"] title_format "⭕ <span background='yellow' foreground='black'>API-QNR</span>"
-for_window [class="charm" title="id.xref.com"]                title_format "⭕ <span background='red'    foreground='white'>ID</span>"
+#for_window [class="charm" title="^xref"        ]              title_format "🔲 <span background='green'  foreground='white'>MAIN</span>"
+#for_window [class="charm" title="auth.xref.com"]              title_format "🔵 <span background='blue'   foreground='white'>AUTH</span>"
+#for_window [class="charm" title="questionnaire.xref.com"]     title_format "🔵 <span background='yellow' foreground='black'>QNR</span>"
+#for_window [class="charm" title="login.xref.com"]             title_format "🔵 <span background='orange' foreground='white'>LOGIN</span>"
+#for_window [class="charm" title="api-questionnaire.xref.com"] title_format "⭕ <span background='yellow' foreground='black'>API-QNR</span>"
+#for_window [class="charm" title="id.xref.com"]                title_format "⭕ <span background='red'    foreground='white'>ID</span>"
 for_window [class="charm"] layout tabbed
-for_window [class="st"] border pixel 10
 for_window [class=".*"] border none
-title_align center
 for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating disable
 font pango: JetBrains Mono 16
 # The only way I can solve popup windows hiding under fullscreen windows
 # (when the software does not set right X hints)
 popup_during_fullscreen leave_fullscreen
 exec --no-startup-id ~/bin/greenclip daemon
-for_window [class="Pavucontrol"] floating disable
+title_align center
 

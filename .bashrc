@@ -40,7 +40,7 @@ GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
 
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
-GIT_PROMPT_END='\n$ '
+GIT_PROMPT_END='\n\e[1;36;44m$ \e[0m'
 GIT_PROMPT_START='$? \w \e[1;33m\A\e[0m \e[2;37m${timer_show}\e[0m'
 # {1..$(($(tput cols) - 30))}
 # $(($(tput cols) - 2))
@@ -62,7 +62,7 @@ tabs -4
 
 # https://github.com/aykamko/tag
 export GOPATH=/opt/gocode
-export TAG_CMD_FMT_STRING='webstorm {{.Filename}}:{{.LineNumber}}'
+export TAG_CMD_FMT_STRING='charm {{.Filename}}:{{.LineNumber}}'
 if hash ag 2>/dev/null; then
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null; }
   alias ag='tag --hidden --ignore .git --ignore node_modules --ignore build --ignore __tests --ignore tests --ignore .hg --ignore .idea'
@@ -97,6 +97,9 @@ trap 'timer_start' DEBUG
 # before each subsequent prompt
 export PROMPT_COMMAND="$PROMPT_COMMAND;pwd > ~/last_cd"
 export PROMPT_COMMAND="$PROMPT_COMMAND;timer_stop"
+# if terminal closes abruptly, history has no time to sync and vanishes
+export PROMPT_COMMAND="$PROMPT_COMMAND;history -a; history -n"
+
 # surfraw
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:/usr/local/etc/xdg
 touch ~/last_cd
@@ -136,3 +139,5 @@ PERL5LIB="/home/bartek/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LI
 PERL_LOCAL_LIB_ROOT="/home/bartek/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/bartek/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/bartek/perl5"; export PERL_MM_OPT;
+GPG_TTY=$(tty)
+export GPG_TTY

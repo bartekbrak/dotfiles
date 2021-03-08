@@ -32,7 +32,7 @@
     default = current ; http://stackoverflow.com/a/13148313/1472229
 [core]
     editor = vim
-    excludesfile = ~/.globalgitignore
+    #excludesfile = ~/.globalgitignore
     whitespace = trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
     quotePath = false
 [merge]

@@ -380,10 +380,14 @@ alias autoremove='sudo apt-get autoremove'
 alias find='2>/dev/null find'
 cors() {
     # NAME
-    #        cors - simulate a call from A to B, from origin to host
+    #        cors - simulate a call from A        to B,
+    #                               from origin   to host,
+    #                               from frontend to backend,
     # SYNOPSIS
     #        cors uri Origin [Host]
+    #        cors $1  $2     $3
     #        cors http://regalix.tv.lvh.me:8000/api/assets/ regalix.tv.lvh.me:4200 regalix.tv.lvh.me:8000
+    #        cors https://auth.xref.com/aws/healthcheck     https://dupa.com
     #
     # The Origin header is the domain the request originates from.
     # The Host is the domain the request is being sent to. This header was introduced so hosting sites could include multiple domains on a single IP.
@@ -394,15 +398,31 @@ cors() {
     #
     # if the response contains Access-Control-Allow-Origin: YOUR_ORIGIN_HERE
     # then all is well
+    if [[ $2 == */ ]]
+    then
+      local warn="⚠ Origin should not end with slash."
+      echo $warn
+      echo
+    fi
+    output=$(
     \http \
         --print=hH \
         --follow \
+        --pretty all \
         $1 \
         Origin:$2 \
         Host:$3 \
         'Access-Control-Request-Headers: Origin, Accept, Content-Type' \
         'Access-Control-Request-Method: GET'
-
+    )
+    echo "$output" | sed 's,Access-Control-Allow-Origin,\x1b[1;37;41m\0\x1b[0m,g'
+    if [[ "$output" =~ "Access-Control-Allow-Origin" ]]; then
+       echo "🆗 Access-Control-Allow-Origin present"
+       echo $warn
+    else
+       echo "🔴 Access-Control-Allow-Origin missing"
+       echo $warn
+    fi
 }
 
 alias is_merge_finished="ag '>>>>>>>|<<<<<<<|======='"
@@ -634,20 +654,27 @@ function pyenv.uppip() {
   done
 }
 alias dir='fd --type directory'  # shadows useless dir, poor ls copycat
-alias en="cambrinary -w"
-alias pl="trans -brief -t pl"
+alias enen="cambrinary -w"
+alias enpl="trans -brief -t pl"
 word() {
   echo -e "\e[93mΔ $@\e[0m"
-  pl $1
+  enpl $1
   # strip US pronunciation
   # strip UK marker (with colour)
-  en $(echo $@ | sed s,\ ,-,g) \
+  enen $(echo $@ | sed s,\ ,-,g) \
     | sed 's,US.*,,g' \
     | sed 's, \x1b\[0;34;49mUK\x1b\[0m,,g'
   # store in
   echo "$@" >> ~/words
   echo '~/words:' $(wc -l ~/words | awk '{ print $1 }') collected
 }
+espl() {
+  trans -brief -s es -t pl "$@"
+}
+espl_() {
+  trans -s es -t pl "$@"
+}
+
 
 work() {
   if [[ "$*" == *--help* ]]
@@ -759,3 +786,39 @@ fullpath() {
   readlink -f "$@" | tr -d '\n' | xclip -selection clipboard
 }
 alias grace_shutdown='i3-msg [class="."] kill'
+alias detox_here='detox -v -r $(readlink -f .)'
+examples() {
+  # find files named $1 in $2, sort by date
+  # find $2 -name $1 | xargs -I^ -n1 date +%Y.%m.%d\ ^ -r ^ | sort
+  # https://stackoverflow.com/a/9612232/1472229
+  find $2 -name $1 -print0 |
+    while IFS= read -r -d '' line; do
+        (
+          cd $(dirname $line)
+          git log -1 --date=short --format=%cd\ $line $line
+        )
+    done | sort
+}
+trans_clip_primary() {
+  pidof -q clipnotify_primary || {
+    while clipnotify_primary; do
+          /home/bartek/bin/trans_clip
+    done &
+  }
+}
+
+
+
+who_missing_subs() {
+  ls {1,2}* -1 | rev | cut -f 2- -d '.' | rev | uniq -c | grep -v "      2 "
+}
+movie_name() {
+  filebot -rename --format '{y}.{n.space(".")}.{director.space(".")}.{genre.space(".")}' --db TheMovieDB -non-strict "$@"
+}
+
+
+make_pass_work_for_other_users() {
+  # decryption failed: No secret key
+  # https://stackoverflow.com/a/63131875/1472229
+  xhost +local:
+}
