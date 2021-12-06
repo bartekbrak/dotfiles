@@ -485,6 +485,10 @@ checkout.all.branches() {
   for branch in $(git branch --all | grep '^\s*remotes' | egrep --invert-match '(:?HEAD|master)$'); do
       echo git branch --track $(echo $branch | sed s,remotes/origin/,,g) "$branch"
   done
+  echo copy and paste now
+}
+branches.last_commit_dates() {
+  git for-each-ref --sort=committerdate refs/heads/ --format='%(color:red)%(objectname:short)%(color:reset) %(HEAD) %(color:yellow)%(refname:short)%(color:reset) -  %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 }
 usbcache_off() {
     sudo hdparm -W 0 $1
@@ -783,7 +787,11 @@ szukaj() {
   ag $igla -G "$rozszerzenie$" "$@"
 }
 fullpath() {
-  readlink -f "$@" | tr -d '\n' | xclip -selection clipboard
+  local where="${1:-$PWD}"
+  shift
+  ret=$(readlink -f "$where" "$@" | tr -d '\n')
+  echo -n "$ret" | xclip -selection clipboard
+  echo CLIPBOARD: "$ret" 
 }
 alias grace_shutdown='i3-msg [class="."] kill'
 alias detox_here='detox -v -r $(readlink -f .)'

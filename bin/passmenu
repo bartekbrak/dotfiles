@@ -1,26 +1,33 @@
 #!/usr/bin/env bash
+# last_update 2021.04.12
 
 shopt -s nullglob globstar
 
-prefix=${PASSWORD_STORE_DIR-~/.password-store}
+prefix=${PASSWORD_STORE_DIR-~/.password-store/esm}
+prefix=~/.password-store/esm
 password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
+echo
+
 case $1 in
     "--type-pass" )
         password=$(
-            printf '%s\n' "${password_files[@]}" |
+            printf '<span foreground="cyan">%s</span>\n' "${password_files[@]}" |
             grep -v '^_' |
             grep -v '/_' |
             rofi \
                  -dmenu -i \
                  -theme sidebar \
                  -columns 2 \
+                 -markup-rows \
                  -matching regex \
                  -font "JetBrains Mono 32" \
                  -p "type password:" \
-                 "$@"
+                 "$@" |
+            sed 's,<[^>]*>,,g' \
+
         )
         if [[ "$password" ]]
         then
@@ -56,6 +63,8 @@ case $1 in
         password=$(printf '%s\n' "${password_files[@]}" | grep -v '_old' | rofi -dmenu -i "$@")
         pass show -c "$password" 2>/dev/null
         shift;;
+    # Nie pamiętam na czym stanęło, ale stanęło, że się nie da, zostawiam jako notatkę do siebie ale pewnie do skawowania
+    # Cel był taki, żeby sczytywać z tytułu okna np stronę na której się jest i filtrowac pod to, albo chociaż zakolorować
     "--filter-by-wm-name" )
         url=$(
             xprop |
@@ -74,5 +83,5 @@ case $1 in
         )
         shift;;
     * )
-      echo "--type-pas|--type-user-tab-pass|--clip"
+      echo "--type-pass|--type-user-tab-pass|--clip"
 esac

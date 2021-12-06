@@ -40,7 +40,7 @@ GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
 
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
-GIT_PROMPT_END='\n\e[1;36;44m$ \e[0m'
+GIT_PROMPT_END='\nb$ '
 GIT_PROMPT_START='$? \w \e[1;33m\A\e[0m \e[2;37m${timer_show}\e[0m'
 # {1..$(($(tput cols) - 30))}
 # $(($(tput cols) - 2))
