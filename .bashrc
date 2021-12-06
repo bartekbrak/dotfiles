@@ -40,7 +40,7 @@ GIT_PROMPT_SHOW_UPSTREAM=1
 GIT_PROMPT_ONLY_IN_REPO=1
 
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
-GIT_PROMPT_END='\nb$ '
+GIT_PROMPT_END='\n$ '
 GIT_PROMPT_START='$? \w \e[1;33m\A\e[0m \e[2;37m${timer_show}\e[0m'
 # {1..$(($(tput cols) - 30))}
 # $(($(tput cols) - 2))
@@ -124,7 +124,6 @@ eval $(dircolors -b $HOME/.LS_COLORS )
 #eval "$(gopass completion bash)"
 source ~/.bashrc.local
 cd "$(cat ~/last_cd)"
-source ~/xref/files/source.me
 
 pidof -q clipnotify || {
   while clipnotify; do
@@ -141,3 +140,4 @@ PERL_MB_OPT="--install_base \"/home/bartek/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/bartek/perl5"; export PERL_MM_OPT;
 GPG_TTY=$(tty)
 export GPG_TTY
+source /home/bartek/work/main/estorecontent/gloria/esm.sourceme.bash

@@ -1,6 +1,7 @@
 [user]
-    name = Bartek Brak Rychlicki
+	name = Bartek Brak
     signingkey = 9949A5D1
+	email = bartek.rychlicki@gmail.com
 [alias]
     co = checkout
     ci = commit
