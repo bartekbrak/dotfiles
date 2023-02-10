@@ -42,8 +42,7 @@ alias pull='git pull'
 alias push='git push'
 alias br='git branch'
 
-alias music='vlc -I ncurses ~/music'
-alias play='vlc -I ncurses'
+alias music='mocp -T ~/mocp_theme ~/music.clean'
 
 which.many() {
     # where in path does exectuable $1 exist
@@ -132,8 +131,7 @@ _often_used_config_files="
   ~/.config/i3/config
   ~/.config/i3status/config
   ~/.tmux.conf
-  ~/dmenu.personal
-  ~/.pypirc
+  ~/scan_store/dmenu.personal
   ~/.ssh/config
   ~/.config/greenclip.cfg
   ~/packages
@@ -222,12 +220,10 @@ f() {
 is_tmux() { [ -n "$TMUX" ] && echo You\'re in tmux || echo You are not in tmux; }
 alias reload_xresources='xrdb -merge ~/.Xresources'
 
-# better write this in python
-alias find_download_crap='find . \
+alias find_download_crap='find . -type f \
 \( \
 -name WWW*jpg \
 -o -name Demonoid* \
--o -name Cover.jpg \
 -o -name Torrent\* \
 -o -iname \*SHARE\*txt \
 -o -name Uwaga\* \
@@ -238,8 +234,14 @@ alias find_download_crap='find . \
 -o -iname \*Downloaded\*.txt \
 -o -name www.\*jpg \
 -o -name Thumbs.db \
+-o -name folder.jpg \
+-o -name YTS*txt \
+-o -name YIF*txt \
+-o -name \*Torrenting\* \
 -o -name \*.url \
 -o -name \*trailer\* \
+-o -name RARBG.txt \
+-o -iname \*Read\*This\* \
 \)'
 cycle='unblock; termdown -v pl 1500; i3-msg "workspace www"; block'
 
@@ -495,25 +497,21 @@ usbcache_off() {
 }
 alias pkill='pkill -e'
 alias killall='killall -v'
-steal_jetbrains() {
-    echo PyCharm should be killed
-    ag evlsprt --silent \
-      ~/.{PyCharm,WebStorm}*/config/options/{other,options}.xml \
-      ~/.config/JetBrains/{PyCharm,WebStorm}*/options/other.xml \
-      ~/.java/.userPrefs/prefs.xml
-    find  ~/.{PyCharm,WebStorm}*/ ~/.config/JetBrains/{PyCharm,WebStorm}* -name \*evaluation.key -print -delete
-    sed --silent -i '/evlsprt/d' \
-      ~/.{PyCharm,WebStorm}*/config/options/{other,options}.xml \
-      ~/.config/JetBrains/{PyCharm,WebStorm}*/options/other.xml \
-      ~/.java/.userPrefs/prefs.xml
+# steal_jetbrains() {
+#     echo PyCharm should be killed
+#     ag evlsprt --silent \
+#       ~/.{PyCharm,WebStorm}*/config/options/{other,options}.xml \
+#       ~/.config/JetBrains/{PyCharm,WebStorm}*/options/other.xml \
+#       ~/.java/.userPrefs/prefs.xml
+#     find  ~/.{PyCharm,WebStorm}*/ ~/.config/JetBrains/{PyCharm,WebStorm}* -name \*evaluation.key -print -delete
+#     sed --silent -i '/evlsprt/d' \
+#       ~/.{PyCharm,WebStorm}*/config/options/{other,options}.xml \
+#       ~/.config/JetBrains/{PyCharm,WebStorm}*/options/other.xml \
+#       ~/.java/.userPrefs/prefs.xml
 
-    rm -rfv ~/.java/.userPrefs/jetbrains
-    echo "I think I'm done."
+#     rm -rfv ~/.java/.userPrefs/jetbrains
+#     echo "I think I'm done."
 
-}
-need_to_run() {
-    git co -bwip; git add .; git ci -nmwip; git push
-}
 tmp() { cd ~/tmp; }
 function _help() { $1 --help; }
 alias ?='_help'
@@ -527,7 +525,14 @@ which_vga_driver_am_i_using() {
 alias urldecode='python3 -c "import sys, html; print(html.unescape(sys.argv[1]))"'
 alias wttr='http wttr.in/Warsaw'
 alias mkdir='mkdir -vp'
-alias yt-mp3-dl='youtube-dl -x --audio-format mp3'
+alias yt-mp3-dl='youtube-dl -x --keep-video --audio-format mp3 --no-playlist'
+alias yt-mp3-dl='yt-dlp -x --keep-video --audio-format mp3 --no-playlist'
+tomp3() {
+    # https://stackoverflow.com/a/14703709/1472229
+    ffmpeg -i $1 "${1%.*}.mp3" &&
+    rm $1
+}
+alias vlcinterm='vlc --intf ncurses'
 alias można_teraz_bezpiecznie_wyłączyć_komputer='history.merge; sudo shutdown now'
 alias suspend='history.merge; sudo pm-suspend'
 alias hibernate='history.merge; sudo systemctl hibernate'
@@ -824,9 +829,99 @@ movie_name() {
   filebot -rename --format '{y}.{n.space(".")}.{director.space(".")}.{genre.space(".")}' --db TheMovieDB -non-strict "$@"
 }
 
-
 make_pass_work_for_other_users() {
   # decryption failed: No secret key
   # https://stackoverflow.com/a/63131875/1472229
   xhost +local:
 }
+disable_bell() {
+  # po restarcie wróci
+  sudo rmmod pcspkr
+}
+
+#!/bin/bash
+function oo() {
+  if [ "$#" -lt 1 ]; then
+    echo "You must enter 1 or more command line arguments";
+  elif [ "$#" -eq 1 ]; then
+    xdg-open "$1" > /dev/null & disown;
+  else
+    for file in "$@"; do
+      xdg-open "$file" > /dev/null & disown;
+    done
+  fi
+}
+
+reset_permissions() {
+    find -type d -print0 | xargs -0 -I % sudo chmod 700 "%"
+    find -type d -print0 | xargs -0 -I % sudo chown esm:esm "%"
+    find -type f -print0 | xargs -0 -I % sudo chmod 600 "%"
+}
+
+
+status_code() {
+    \http --print=h $1 | grep HTTP
+}
+
+
+# jedyny istotny
+alias ctrlc='xclip -selection c'
+alias ctrlv='xclip -selection c -o'
+# to feed into clipoard
+# date | xclip -selection c -o
+alias napisy='subliminal download -sl en '
+json_prettify() {
+    if [[ "$@" == *"--help"* ]] || [[ $# -eq 0 ]]; then
+      type json_prettify
+      return
+    fi
+
+    for var in "$@"
+    do
+        echo "processing $var"
+        python -m json.tool "$var" | sponge "$var"
+    done
+}
+subs() {
+    # subs -slen Muerte\ de\ un\ ciclista.avi
+    # subs -len -les Muerte\ de\ un\ ciclista.avi
+    subliminal \
+    --opensubtitles bartekbrak WGhak3FwHE5u7MEytVuYQlG4F \
+    --omdb a1055bb5 \
+    --addic7ed bartek.rychlicki@gmail.com m40rx5ZbMhlYh8zuJlrMYv7iq \
+     --legendastv bartek.rychlicki@gmail.com tLyJ0B0m0C0w8Y9akNcUjpOUW \
+     download "$@"
+}
+postgres.logs.on() {
+    sudo mv /etc/postgresql/9.5/main/conf.d/log_statement_all.conf.off /etc/postgresql/9.5/main/conf.d/log_statement_all.conf \
+        && sudo service postgresql reload \
+        && cat /etc/postgresql/9.5/main/conf.d/log_statement_all.conf \
+        && sudo tail -f /var/log/postgresql/postgresql-9.5-main.log
+}
+postgres.logs.off() {
+    sudo mv /etc/postgresql/9.5/main/conf.d/log_statement_all.conf /etc/postgresql/9.5/main/conf.d/log_statement_all.conf.off \
+        && sudo service postgresql reload \
+        && echo off
+}
+
+alias vpn='sudo openvpn --config ~/work/files/bartosz.brak.ovpn --askpass ~/vpnpass'
+alias vpn_home='sudo openvpn --config ~/work/files/bartosz.brak_home.ovpn --askpass ~/vpnpass_home'
+
+alias pi.mount='sshfs -p 22 -o reconnect root@pi:/storage ~/pi'
+alias pi.mount.ro='sshfs -p 22 -o ro,reconnect root@pi:/storage ~/pi'
+alias pi.mount.local='sshfs -p 22 -o reconnect root@192.168.0.25:/storage ~/pi'
+alias pi.mount.local.ro='sshfs -p 22 -o ro,reconnect root@192.168.0.25:/storage ~/pi'
+
+makemine() {
+    file=$1; shift
+    username=$(whoami)
+    set -x
+    sudo chmod 600 $file
+    sudo chown $username:$username $file
+    set +x
+}
+
+alias odani='rsync --progress --recursive --exclude=node_modules --exclude=lib --exclude=venv --exclude=.idea --delete anna@192.168.101.5:/home/anna/work/beeploma/ ~/work/beeploma/'
+alias doani='rsync --progress --recursive --exclude=node_modules --exclude=lib --exclude=venv --exclude=.idea ~/work/beeploma/ anna@192.168.101.5:/home/anna/work/beeploma/'
+alias bee='cd ~/work/beeploma/backend/lambda_api/'
+

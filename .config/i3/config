@@ -129,9 +129,13 @@ bindsym $mod+bracketleft        move container to output left
 bindsym $mod+Shift+bracketleft  move workspace to output left
 bindsym $mod+Shift+bracketright move workspace to output right
 bar {
-#    status_command exec /home/bartek/bin/net-speed.sh
     status_command i3status
     font pango:JetBrains Mono ExtraBold 20
+#    status_command py3status -c ~/py3status.config
+    output $main
+    # don't scroll through desktops
+    bindsym button4 nop
+    bindsym button5 nop
 }
 
 
@@ -148,10 +152,16 @@ bindsym $mod+F11              exec /usr/bin/pactl -- set-sink-volume @DEFAULT_SI
 
 # XF86AudioStop reintended as "toggle like" for streamkeys, control youtube music
 # https://chrome.google.com/webstore/detail/streamkeys/ekpipjofdicppbepocohdlgenahaneen
-bindsym --release $mod+F5 exec --no-startup-id "xdotool key --clearmodifiers XF86AudioStop; notify-send '👍 liked'"
-bindsym --release $mod+F6 exec --no-startup-id xdotool key --clearmodifiers XF86AudioPrev
-bindsym --release $mod+F7 exec --no-startup-id xdotool key --clearmodifiers XF86AudioPlay
-bindsym --release $mod+F8 exec --no-startup-id xdotool key --clearmodifiers XF86AudioNext
+#bindsym --release $mod+F5 exec --no-startup-id "xdotool key --clearmodifiers XF86AudioStop; notify-send '👍 liked'"
+#bindsym --release $mod+F6 exec --no-startup-id xdotool key --clearmodifiers XF86AudioPrev
+#bindsym --release $mod+F7 exec --no-startup-id xdotool key --clearmodifiers XF86AudioPlay
+#bindsym --release $mod+F8 exec --no-startup-id xdotool key --clearmodifiers XF86AudioNext
+
+bindsym $mod+F5 exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym $mod+F6 exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+bindsym $mod+F7 exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym $mod+F8 exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
 
 
 bindsym $mod+XF86AudioMute    exec pavucontrol
@@ -159,8 +169,8 @@ bindsym $mod+F12              exec pavucontrol
 
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 bindsym XF86MonBrightnessUp   exec xbacklight -inc 20 # increase screen brightness
-bindsym $mod+F4               exec xbacklight -dec 20 # decrease screen brightness
-bindsym $mod+F5               exec xbacklight -inc 20 # increase screen brightness
+#bindsym $mod+F4               exec xbacklight -dec 20 # decrease screen brightness
+#bindsym $mod+F5               exec xbacklight -inc 20 # increase screen brightness
 
 # default layout
 # workspace_layout tabbed
@@ -169,8 +179,9 @@ workspace_layout default
 hide_edge_borders smart
 
 # Application workspace preferences.
-assign [class="google-chrome"]     www
-assign [class="Chromium-browser"]  www
+#assign [class="google-chrome"]     www
+#assign [class="Chromium-browser"]  www
+#assign [class="Brave-browser"]  www
 assign [class="firefox"]           www
 assign [class="pycharm"]           code
 assign [class="Sublime_text"]      subl

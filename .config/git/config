@@ -1,7 +1,7 @@
 [user]
-	name = Bartek Brak
-    signingkey = 9949A5D1
-	email = bartek.rychlicki@gmail.com
+    name = Bartek Brak Rychlicki
+    email = bartek.rychlicki@gmail.com
+    # signingkey = 9949A5D1
 [alias]
     co = checkout
     ci = commit
@@ -31,11 +31,14 @@
     ui = auto
 [push]
     default = current ; http://stackoverflow.com/a/13148313/1472229
+    autoSetupRemote = true
 [core]
     editor = vim
-    #excludesfile = ~/.globalgitignore
+    excludesfile = ~/.globalgitignore
     whitespace = trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
     quotePath = false
+    pager = less -r
+    autocrlf = input
 [merge]
     ff = only
 [advice]
@@ -63,4 +66,4 @@
 [checkout]
     defaultRemote = origin
 [log]
-     #mailmap = true
+     mailmap = true

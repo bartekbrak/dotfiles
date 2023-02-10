@@ -4,8 +4,8 @@ bartek.py
 .~lock*
 *.egg-info/
 .envrc
-
 *.swp
 .vimrc
-tags
 .python-version
+.idea
+do.py

@@ -10,7 +10,7 @@ export PROMPT_COMMAND=true
 # Start tmux on every login shell
 # Don't start tmux if it's already on. tmux takes care of that itself so this might be unnecessary
 export TERMINAL=st
-[[ -z "$TMUX" && -n $DISPLAY ]] && { echo starting tmux; exec tmux;  }
+[[ -z "$TMUX" && -n $DISPLAY ]] && command -v tmux && { echo starting tmux; exec tmux;  }
 
 # Ignore space-prepende commands and duplicates
 HISTCONTROL=ignoreboth
@@ -74,8 +74,6 @@ fi
 
 export EDITOR=vim
 export WINEDEBUG=-all
-#export BRAT_EDITOR=charm
-#export PROMPT_COMMAND="$PROMPT_COMMAND;. ~/.brat_sourceme"
 
 [[ -n $DISPLAY ]] && setxkbmap -option kpdl:dot
 function timer_start {
@@ -118,7 +116,7 @@ export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="name verbose git"
 export GIT_PS1_STATESEPARATOR=""
-export FPP_EDITOR=charm.pro
+export FPP_EDITOR=charm
 export XDG_CONFIG_HOME=$HOME/.config
 eval $(dircolors -b $HOME/.LS_COLORS )
 #eval "$(gopass completion bash)"
@@ -131,13 +129,8 @@ pidof -q clipnotify || {
   done &
 }
 
-
-# mbankcli
-PATH="/home/bartek/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/bartek/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/bartek/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/bartek/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/bartek/perl5"; export PERL_MM_OPT;
 GPG_TTY=$(tty)
 export GPG_TTY
-source /home/bartek/work/main/estorecontent/gloria/esm.sourceme.bash
+source "$HOME/.cargo/env"
+
+eval `ssh-agent -s`
